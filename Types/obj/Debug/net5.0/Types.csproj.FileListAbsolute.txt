@@ -1,0 +1,12 @@
+C:\src\OnboardingProject\Types\bin\Debug\net5.0\Types.deps.json
+C:\src\OnboardingProject\Types\bin\Debug\net5.0\Types.dll
+C:\src\OnboardingProject\Types\bin\Debug\net5.0\ref\Types.dll
+C:\src\OnboardingProject\Types\bin\Debug\net5.0\Types.pdb
+C:\src\OnboardingProject\Types\obj\Debug\net5.0\Types.GeneratedMSBuildEditorConfig.editorconfig
+C:\src\OnboardingProject\Types\obj\Debug\net5.0\Types.AssemblyInfoInputs.cache
+C:\src\OnboardingProject\Types\obj\Debug\net5.0\Types.AssemblyInfo.cs
+C:\src\OnboardingProject\Types\obj\Debug\net5.0\Types.csproj.CoreCompileInputs.cache
+C:\src\OnboardingProject\Types\obj\Debug\net5.0\Types.dll
+C:\src\OnboardingProject\Types\obj\Debug\net5.0\ref\Types.dll
+C:\src\OnboardingProject\Types\obj\Debug\net5.0\Types.pdb
+C:\src\OnboardingProject\Types\obj\Debug\net5.0\Types.csproj.AssemblyReference.cache

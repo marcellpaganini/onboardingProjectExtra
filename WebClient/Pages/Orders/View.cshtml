@@ -1,0 +1,14 @@
+@page "{id:Guid?}"
+
+@{
+    ViewData["Title"] = "View Order";
+    var id = @ViewContext.RouteData.Values["id"];
+}
+
+<script src="~/js/Orders/OrderViewer.js"></script>
+
+<h1>View</h1>
+
+<a href="~/Orders">Go Back</a>
+
+<order-viewer order-id=@id></order-viewer>

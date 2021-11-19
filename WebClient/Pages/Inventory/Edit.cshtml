@@ -1,0 +1,14 @@
+@page "{id:Guid?}"
+
+@{
+    ViewData["Title"] = "Edit Inventory";
+    var id = @ViewContext.RouteData.Values["id"];
+}
+
+<script src="~/js/Inventory/InventoryEditor.js"></script>
+
+<h1>Edit</h1>
+
+<a href="~/Inventory">Go Back</a>
+
+<inventory-editor item-id=@id></inventory-editor>
