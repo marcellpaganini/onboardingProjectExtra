@@ -25,4 +25,16 @@ export const saveInventoryItem = async (item: IInventoryItem) => {
     });
 
     return InventoryItem.create(await response.json());
+};
+
+export const deleteInventoryItem = async (item: IInventoryItem) => {
+    const response = await fetch(`${AppBasePath}/api/inventory`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(getSnapshot(item))
+    });
+
+    return InventoryItem.create(await response.json());
 }

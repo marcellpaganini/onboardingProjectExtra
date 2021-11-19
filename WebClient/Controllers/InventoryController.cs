@@ -31,7 +31,7 @@ namespace OrderManagement.WebClient.Controllers
         public async Task<InventoryItem> Post(InventoryItem item) =>
             await inventoryService.Save(item);
 
-        [HttpPost]
+        [HttpDelete]
         public async Task<InventoryItem> Delete(InventoryItem item) =>
             await inventoryService.Delete(item);
     }
