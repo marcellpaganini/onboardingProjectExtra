@@ -8579,14 +8579,14 @@
         enumerable: true,
         configurable: true,
         writable: true,
-        value: function(postProcessor) {
+        value: function(postProcessor2) {
           var currentPostprocessor = _this.postProcessor;
           if (!currentPostprocessor)
-            return _this.cloneAndEnhance({ postProcessor });
+            return _this.cloneAndEnhance({ postProcessor: postProcessor2 });
           else
             return _this.cloneAndEnhance({
               postProcessor: function(snapshot) {
-                return postProcessor(currentPostprocessor(snapshot));
+                return postProcessor2(currentPostprocessor(snapshot));
               }
             });
         }
@@ -8934,9 +8934,9 @@
       configurable: true,
       writable: true,
       value: function(snapshot) {
-        var postProcessor = this.postProcessor;
-        if (postProcessor)
-          return postProcessor.call(null, snapshot);
+        var postProcessor2 = this.postProcessor;
+        if (postProcessor2)
+          return postProcessor2.call(null, snapshot);
         return snapshot;
       }
     });
@@ -10418,8 +10418,14 @@
     snapshotProcessor
   };
 
+  // src/common/recordPostProcessor.ts
+  var postProcessor = (snapshot) => ({
+    ...snapshot,
+    id: snapshot.id || void 0
+  });
+
   // src/inventory/InventoryItem.ts
-  var InventoryItem = types.model("InventoryItem", {
+  var BaseInventoryItem = types.model("InventoryItem", {
     id: types.optional(types.identifier, ""),
     name: types.string,
     price: types.number
@@ -10431,6 +10437,7 @@
       self2.price = price;
     }
   }));
+  var InventoryItem = types.snapshotProcessor(BaseInventoryItem, { postProcessor });
 
   // src/inventory/inventoryApi.ts
   var getInventoryItems = async () => {

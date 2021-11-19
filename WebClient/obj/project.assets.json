@@ -1134,11 +1134,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\src\\OnboardingProject\\webclient\\WebClient.csproj",
+      "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\webclient\\WebClient.csproj",
       "projectName": "WebClient",
-      "projectPath": "C:\\src\\OnboardingProject\\webclient\\WebClient.csproj",
+      "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\webclient\\WebClient.csproj",
       "packagesPath": "C:\\Users\\mtanure\\.nuget\\packages\\",
-      "outputPath": "C:\\src\\OnboardingProject\\webclient\\obj\\",
+      "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\webclient\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mtanure\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1153,14 +1153,14 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\src\\OnboardingProject\\Data\\Data.csproj": {
-              "projectPath": "C:\\src\\OnboardingProject\\Data\\Data.csproj"
+            "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj": {
+              "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj"
             },
-            "C:\\src\\OnboardingProject\\Services\\Services.csproj": {
-              "projectPath": "C:\\src\\OnboardingProject\\Services\\Services.csproj"
+            "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Services\\Services.csproj": {
+              "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Services\\Services.csproj"
             },
-            "C:\\src\\OnboardingProject\\Types\\Types.csproj": {
-              "projectPath": "C:\\src\\OnboardingProject\\Types\\Types.csproj"
+            "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj": {
+              "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj"
             }
           }
         }

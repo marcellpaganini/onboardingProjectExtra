@@ -8591,14 +8591,14 @@
         enumerable: true,
         configurable: true,
         writable: true,
-        value: function(postProcessor) {
+        value: function(postProcessor2) {
           var currentPostprocessor = _this.postProcessor;
           if (!currentPostprocessor)
-            return _this.cloneAndEnhance({ postProcessor });
+            return _this.cloneAndEnhance({ postProcessor: postProcessor2 });
           else
             return _this.cloneAndEnhance({
               postProcessor: function(snapshot) {
-                return postProcessor(currentPostprocessor(snapshot));
+                return postProcessor2(currentPostprocessor(snapshot));
               }
             });
         }
@@ -8946,9 +8946,9 @@
       configurable: true,
       writable: true,
       value: function(snapshot) {
-        var postProcessor = this.postProcessor;
-        if (postProcessor)
-          return postProcessor.call(null, snapshot);
+        var postProcessor2 = this.postProcessor;
+        if (postProcessor2)
+          return postProcessor2.call(null, snapshot);
         return snapshot;
       }
     });
@@ -10430,8 +10430,14 @@
     snapshotProcessor
   };
 
+  // src/common/recordPostProcessor.ts
+  var postProcessor = (snapshot) => ({
+    ...snapshot,
+    id: snapshot.id || void 0
+  });
+
   // src/inventory/InventoryItem.ts
-  var InventoryItem = types.model("InventoryItem", {
+  var BaseInventoryItem = types.model("InventoryItem", {
     id: types.optional(types.identifier, ""),
     name: types.string,
     price: types.number
@@ -10443,6 +10449,7 @@
       self2.price = price;
     }
   }));
+  var InventoryItem = types.snapshotProcessor(BaseInventoryItem, { postProcessor });
 
   // src/orders/OrderItem.ts
   var BaseOrderItem = types.model("OrderItem", {
@@ -10498,13 +10505,7 @@
       return self2.items.reduce((total, item) => total === void 0 ? void 0 : item?.totalPrice === void 0 ? total : total + item.totalPrice, 0);
     }
   }));
-  var postProcessSnapshot2 = (snapshot) => ({
-    ...snapshot,
-    id: snapshot.id || void 0
-  });
-  var Order = types.snapshotProcessor(BaseOrder, {
-    postProcessor: postProcessSnapshot2
-  });
+  var Order = types.snapshotProcessor(BaseOrder, { postProcessor });
 
   // src/orders/ordersApi.ts
   var saveOrder = async (order) => {
