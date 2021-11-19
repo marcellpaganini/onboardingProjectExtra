@@ -36,7 +36,7 @@ namespace OrderManagement.Data.Inventory
             return item;
         }
 
-        public async Task<InventoryItem?> Delete(InventoryItem item)
+        public async Task<InventoryItem> Delete(InventoryItem item)
         {
             context.Remove(item);
             await context.SaveChangesAsync();
