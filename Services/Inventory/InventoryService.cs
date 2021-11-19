@@ -21,5 +21,8 @@ namespace OrderManagement.Services.Inventory
 
         public async Task<InventoryItem> Save(InventoryItem item) =>
             await inventoryItemRepository.Save(item);
+
+        public async Task<InventoryItem> Delete(InventoryItem item) =>
+            await inventoryItemRepository.Delete(item);
     }
 }

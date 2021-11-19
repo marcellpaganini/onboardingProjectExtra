@@ -9,5 +9,6 @@ namespace OrderManagement.Types.Inventory
         Task<IEnumerable<InventoryItem>> Get();
         Task<InventoryItem?> Get(Guid? id);
         Task<InventoryItem> Save(InventoryItem item);
+        Task<InventoryItem> Delete(InventoryItem item);
     }
 }
