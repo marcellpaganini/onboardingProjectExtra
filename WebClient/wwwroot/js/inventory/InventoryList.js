@@ -10448,7 +10448,8 @@
 
   // src/inventory/InventoryListStore.ts
   var InventoryListStore = types.model("InventoryListStore", {
-    items: types.maybe(types.array(InventoryItem))
+    items: types.maybe(types.array(InventoryItem)),
+    item: types.maybe(InventoryItem)
   }).actions((self2) => ({
     load: flow3(function* () {
       self2.items = yield getInventoryItems();

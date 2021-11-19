@@ -1,5 +1,5 @@
 import { flow, types } from 'mobx-state-tree';
-import { getInventoryItem, saveInventoryItem, deleteInventoryItem } from './inventoryApi';
+import { deleteInventoryItem, getInventoryItem, saveInventoryItem } from './inventoryApi';
 import { InventoryItem } from './InventoryItem';
 
 const defaultInventoryItem = {
@@ -30,8 +30,8 @@ export const InventoryEditorStore = types
         }),
 
         delete: flow(function* () {
-            if (self.item) {
-                self.item = yield deleteInventoryItem(self.item);
+            if (InventoryItem) {
+                self.item = yield deleteInventoryItem(self.item!);
             }
         })
     }));

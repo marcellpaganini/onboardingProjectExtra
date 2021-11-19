@@ -5,7 +5,7 @@ import { handlePropChange, handleSubmit } from '../common/formTools';
 import { InventoryEditorStore } from './InventoryEditorStore';
 import { IInventoryItem } from './InventoryItem';
 
-const itemEditor = (item: IInventoryItem, onSave: () => {}) =>
+const itemEditor = (item: IInventoryItem, onSave: () => {}, onDelete: () => {}) =>
     html`
     <form @submit=${handleSubmit(() => onSave())}>
         <label>
@@ -20,8 +20,8 @@ const itemEditor = (item: IInventoryItem, onSave: () => {}) =>
             item.setPrice(Number(val) ?? 0.01))}
             required />
         </label>
+        <button>Submit</button> <button type="button" @click=${onDelete} >Delete</button>
     
-        <button>Submit</button>
     </form>
     `;
 
@@ -41,8 +41,13 @@ export class InventoryEditor extends MobxLitElement {
         alert('Item saved successfully.');
     }
 
+    deleteItem = async () => {
+        await this.store.delete();
+        confirm('Are you sure?.');
+    }
+
     render = () =>
         (this.store.item)
-            ? itemEditor(this.store.item, this.saveItem)
+            ? itemEditor(this.store.item, this.saveItem, this.deleteItem)
             : 'Now loading...';
 }

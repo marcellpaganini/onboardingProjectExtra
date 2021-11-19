@@ -10513,14 +10513,14 @@
       }
     }),
     delete: flow3(function* () {
-      if (self2.item) {
+      if (InventoryItem) {
         self2.item = yield deleteInventoryItem(self2.item);
       }
     })
   }));
 
   // src/inventory/InventoryEditor.ts
-  var itemEditor = (item, onSave) => p`
+  var itemEditor = (item, onSave, onDelete) => p`
     <form @submit=${handleSubmit(() => onSave())}>
         <label>
             <p>Name</p>
@@ -10533,8 +10533,8 @@
             <input type="number" step="0.01" min="0.01" .value=${item.price.toString()} @change=${handlePropChange(item, (item2, val) => item2.setPrice(Number(val) ?? 0.01))}
             required />
         </label>
+        <button>Submit</button> <button type="button" @click=${onDelete} >Delete</button>
     
-        <button>Submit</button>
     </form>
     `;
   var InventoryEditor = class extends MobxLitElement {
@@ -10547,7 +10547,11 @@
       await this.store.save();
       alert("Item saved successfully.");
     };
-    render = () => this.store.item ? itemEditor(this.store.item, this.saveItem) : "Now loading...";
+    deleteItem = async () => {
+      await this.store.delete();
+      confirm("Are you sure?.");
+    };
+    render = () => this.store.item ? itemEditor(this.store.item, this.saveItem, this.deleteItem) : "Now loading...";
   };
   __decorateClass([
     e4({ attribute: "item-id" })

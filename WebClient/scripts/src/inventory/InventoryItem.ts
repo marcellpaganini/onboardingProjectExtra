@@ -1,4 +1,4 @@
-import { Instance, types } from 'mobx-state-tree';
+import { flow, Instance, types } from 'mobx-state-tree';
 import { postProcessor } from '../common/recordPostProcessor';
 
 const BaseInventoryItem = types
