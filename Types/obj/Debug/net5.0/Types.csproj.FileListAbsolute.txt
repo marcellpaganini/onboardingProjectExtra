@@ -22,3 +22,15 @@ C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\obj\Debug\net5.0\Type
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\obj\Debug\net5.0\Types.dll
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\obj\Debug\net5.0\ref\Types.dll
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\obj\Debug\net5.0\Types.pdb
+C:\src\MissingLink\onboardingProjectExtra\Types\bin\Debug\net5.0\Types.deps.json
+C:\src\MissingLink\onboardingProjectExtra\Types\bin\Debug\net5.0\Types.dll
+C:\src\MissingLink\onboardingProjectExtra\Types\bin\Debug\net5.0\ref\Types.dll
+C:\src\MissingLink\onboardingProjectExtra\Types\bin\Debug\net5.0\Types.pdb
+C:\src\MissingLink\onboardingProjectExtra\Types\obj\Debug\net5.0\Types.csprojAssemblyReference.cache
+C:\src\MissingLink\onboardingProjectExtra\Types\obj\Debug\net5.0\Types.GeneratedMSBuildEditorConfig.editorconfig
+C:\src\MissingLink\onboardingProjectExtra\Types\obj\Debug\net5.0\Types.AssemblyInfoInputs.cache
+C:\src\MissingLink\onboardingProjectExtra\Types\obj\Debug\net5.0\Types.AssemblyInfo.cs
+C:\src\MissingLink\onboardingProjectExtra\Types\obj\Debug\net5.0\Types.csproj.CoreCompileInputs.cache
+C:\src\MissingLink\onboardingProjectExtra\Types\obj\Debug\net5.0\Types.dll
+C:\src\MissingLink\onboardingProjectExtra\Types\obj\Debug\net5.0\ref\Types.dll
+C:\src\MissingLink\onboardingProjectExtra\Types\obj\Debug\net5.0\Types.pdb
