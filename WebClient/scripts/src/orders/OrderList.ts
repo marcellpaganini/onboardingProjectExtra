@@ -20,9 +20,9 @@ const ordersRow = ({id, customerName, totalPrice}: IOrder) =>
 
 const ordersTable = (orders: IOrder[] = []) =>
     html`
-    <table style="border: solid 1px black">
+    <table>
         <thead>
-            <tr style="background:silver;">
+            <tr>
             <th>Customer Name</th>
             <th>Total</th>
             <th></th>

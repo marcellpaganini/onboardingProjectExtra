@@ -50,9 +50,9 @@ export const orderItemsEditor = (
     html`
     <button type="button" @click=${()=> order.addItem()}>Add Item</button>
     
-    <table style="border: solid 1px black">
+    <table>
         <thead>
-            <tr style="background:silver;">
+            <tr>
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Price(per item)</th>

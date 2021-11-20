@@ -24,9 +24,9 @@ const orderViewer = (
 	
     <br />
 
-    <table style="border: solid 1px black">
+    <table>
         <thead>
-            <tr style="background:silver;">
+            <tr>
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Price(per item)</th>

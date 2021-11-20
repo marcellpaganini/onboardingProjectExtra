@@ -10536,9 +10536,9 @@
     </tr>
     `;
   var ordersTable = (orders = []) => p`
-    <table style="border: solid 1px black">
+    <table>
         <thead>
-            <tr style="background:silver;">
+            <tr>
             <th>Customer Name</th>
             <th>Total</th>
             <th></th>
