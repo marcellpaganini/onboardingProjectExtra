@@ -27,7 +27,7 @@ export const orderDetailsEditor = (
 
     <label>
         <p>Email Address</p>
-        <input type="text" .value=${order.emailAddress} @change=${handlePropChange(order, (order, val) => order.setEmailAddress(val))}
+        <input type="text" .value=${order.emailAddress!} @change=${handlePropChange(order, (order, val) => order.setEmailAddress(val))}
                 required></input>
     </label>
     `;

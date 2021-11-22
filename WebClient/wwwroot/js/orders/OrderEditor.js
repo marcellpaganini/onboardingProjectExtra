@@ -10502,8 +10502,8 @@
     id: types.optional(types.identifier, ""),
     customerName: types.optional(types.string, ""),
     deliveryAddress: types.optional(types.string, ""),
-    phoneNumber: types.optional(types.string, ""),
-    emailAddress: types.optional(types.string, ""),
+    phoneNumber: types.optional(types.refinement(types.string, (p2) => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p2)), ""),
+    emailAddress: types.optional(types.refinement(types.string, (e5) => /^$|\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(e5)), ""),
     items: types.array(OrderItem)
   }).actions((self2) => ({
     setCustomerName(customerName) {
@@ -10718,6 +10718,12 @@
     saveOrder = async () => {
       if (this.store.order.items.length === 0) {
         alert("There are no items in this order.");
+        return;
+      } else if (!this.store.order.emailAddress) {
+        alert("Please add a valid email address.");
+        return;
+      } else if (!this.store.order.phoneNumber) {
+        alert("Please add a valid phone number.");
         return;
       } else if (this.store.order.items.some((item) => item.inventoryItemId === void 0)) {
         alert("Please select a product for the added item.");

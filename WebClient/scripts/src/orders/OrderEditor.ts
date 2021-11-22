@@ -45,6 +45,12 @@ export class OrderEditor extends MobxLitElement {
         if (this.store.order.items.length === 0){
             alert('There are no items in this order.');
             return;
+        } else if ((!this.store.order.emailAddress)){ 
+            alert('Please add a valid email address.');
+            return;
+        } else if ((!this.store.order.phoneNumber)){ 
+            alert('Please add a valid phone number.');
+            return;
         } else if (this.store.order.items.some(item => item.inventoryItemId === undefined)){ 
             alert('Please select a product for the added item.');
             return;

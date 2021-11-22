@@ -10503,8 +10503,8 @@
     id: types.optional(types.identifier, ""),
     customerName: types.optional(types.string, ""),
     deliveryAddress: types.optional(types.string, ""),
-    phoneNumber: types.optional(types.string, ""),
-    emailAddress: types.optional(types.string, ""),
+    phoneNumber: types.optional(types.refinement(types.string, (p2) => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p2)), ""),
+    emailAddress: types.optional(types.refinement(types.string, (e5) => /^$|\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(e5)), ""),
     items: types.array(OrderItem)
   }).actions((self2) => ({
     setCustomerName(customerName) {
