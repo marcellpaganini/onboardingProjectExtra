@@ -7,6 +7,8 @@ export const BaseOrder = types
         id: types.optional(types.identifier, ""),
         customerName: types.optional(types.string, ""),
         deliveryAddress: types.optional(types.string, ""),
+        phoneNumber: types.optional(types.string, ""),
+        emailAddress: types.optional(types.string, ""),
         items: types.array(OrderItem)
     })
     .actions(self => ({
@@ -16,6 +18,14 @@ export const BaseOrder = types
 
         setDeliveryAddress(deliveryAddress: string) {
             self.deliveryAddress = deliveryAddress;
+        },
+
+        setPhoneNumber(phoneNumber: string) {
+            self.phoneNumber = phoneNumber;
+        },
+
+        setEmailAddress(emailAddress: string) {
+            self.emailAddress = emailAddress;
         },
 
         addItem() {

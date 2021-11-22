@@ -10503,6 +10503,8 @@
     id: types.optional(types.identifier, ""),
     customerName: types.optional(types.string, ""),
     deliveryAddress: types.optional(types.string, ""),
+    phoneNumber: types.optional(types.string, ""),
+    emailAddress: types.optional(types.string, ""),
     items: types.array(OrderItem)
   }).actions((self2) => ({
     setCustomerName(customerName) {
@@ -10510,6 +10512,12 @@
     },
     setDeliveryAddress(deliveryAddress) {
       self2.deliveryAddress = deliveryAddress;
+    },
+    setPhoneNumber(phoneNumber) {
+      self2.phoneNumber = phoneNumber;
+    },
+    setEmailAddress(emailAddress) {
+      self2.emailAddress = emailAddress;
     },
     addItem() {
       self2.items.push(OrderItem.create({}));
@@ -10616,6 +10624,16 @@
     <label>
         <p><strong>Delivery Address</strong></p>
         <p>${order.deliveryAddress}</p>
+    </label>
+
+    <label>
+        <p><strong>Phone Number</strong></p>
+        <p>${order.phoneNumber}</p>
+    </label>
+
+    <label>
+        <p><strong>Email Address</strong></p>
+        <p>${order.emailAddress}</p>
     </label>
 	
     <br />

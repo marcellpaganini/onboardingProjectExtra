@@ -18,4 +18,16 @@ export const orderDetailsEditor = (
         <textarea rows="2" cols="40" .value=${order.deliveryAddress} @change=${handlePropChange(order, (order, val) => order.setDeliveryAddress(val))}
                 required></textarea>
     </label>
+
+    <label>
+        <p>Phone Number</p>
+        <input type="text" .value=${order.phoneNumber} @change=${handlePropChange(order, (order, val) => order.setPhoneNumber(val))}
+                required></input>
+    </label>
+
+    <label>
+        <p>Email Address</p>
+        <input type="text" .value=${order.emailAddress} @change=${handlePropChange(order, (order, val) => order.setEmailAddress(val))}
+                required></input>
+    </label>
     `;

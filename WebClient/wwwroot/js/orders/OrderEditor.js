@@ -10502,6 +10502,8 @@
     id: types.optional(types.identifier, ""),
     customerName: types.optional(types.string, ""),
     deliveryAddress: types.optional(types.string, ""),
+    phoneNumber: types.optional(types.string, ""),
+    emailAddress: types.optional(types.string, ""),
     items: types.array(OrderItem)
   }).actions((self2) => ({
     setCustomerName(customerName) {
@@ -10509,6 +10511,12 @@
     },
     setDeliveryAddress(deliveryAddress) {
       self2.deliveryAddress = deliveryAddress;
+    },
+    setPhoneNumber(phoneNumber) {
+      self2.phoneNumber = phoneNumber;
+    },
+    setEmailAddress(emailAddress) {
+      self2.emailAddress = emailAddress;
     },
     addItem() {
       self2.items.push(OrderItem.create({}));
@@ -10569,6 +10577,18 @@
         <p>Delivery Address</p>
         <textarea rows="2" cols="40" .value=${order.deliveryAddress} @change=${handlePropChange(order, (order2, val) => order2.setDeliveryAddress(val))}
                 required></textarea>
+    </label>
+
+    <label>
+        <p>Phone Number</p>
+        <input type="text" .value=${order.phoneNumber} @change=${handlePropChange(order, (order2, val) => order2.setPhoneNumber(val))}
+                required></input>
+    </label>
+
+    <label>
+        <p>Email Address</p>
+        <input type="text" .value=${order.emailAddress} @change=${handlePropChange(order, (order2, val) => order2.setEmailAddress(val))}
+                required></input>
     </label>
     `;
 

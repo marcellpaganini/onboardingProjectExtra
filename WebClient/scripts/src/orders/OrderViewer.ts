@@ -20,6 +20,16 @@ const orderViewer = (
         <p><strong>Delivery Address</strong></p>
         <p>${order.deliveryAddress}</p>
     </label>
+
+    <label>
+        <p><strong>Phone Number</strong></p>
+        <p>${order.phoneNumber}</p>
+    </label>
+
+    <label>
+        <p><strong>Email Address</strong></p>
+        <p>${order.emailAddress}</p>
+    </label>
 	
     <br />
 
