@@ -10590,8 +10590,10 @@
     }
 `;
 
-  // src/orders/OrderList.ts
+  // src/common/formTools.ts
   var priceToCurrency = (price) => price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
+
+  // src/orders/OrderList.ts
   var ordersRow = ({ id, customerName, totalPrice }) => p`
     <tr>
         <td>${customerName}</td>

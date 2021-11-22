@@ -4830,6 +4830,7 @@
     f2();
     return false;
   };
+  var priceToCurrency = (price) => price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
 
   // node_modules/mobx-state-tree/dist/mobx-state-tree.module.js
   var livelinessChecking = "warn";
@@ -10572,7 +10573,6 @@
     `;
 
   // src/orders/orderItemEditor.ts
-  var priceToCurrency = (price) => price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
   var orderItemEditor = (order, orderItem, inventoryItems) => p`
     <tr>
         <td>

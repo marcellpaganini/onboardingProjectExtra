@@ -1,11 +1,9 @@
 import { html } from 'lit';
-import { handlePropChange } from '../common/formTools';
+import { handlePropChange, priceToCurrency } from '../common/formTools';
 import { IInventoryItem } from '../inventory/InventoryItem';
 import { IOrder } from './Order';
 import { IOrderItem } from './OrderItem';
 
-const priceToCurrency = (price: number | undefined) =>
-    price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
 
 const orderItemEditor = (
     order: IOrder,

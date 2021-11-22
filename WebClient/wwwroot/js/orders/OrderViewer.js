@@ -10603,8 +10603,10 @@
     }
 `;
 
-  // src/orders/OrderViewer.ts
+  // src/common/formTools.ts
   var priceToCurrency = (price) => price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
+
+  // src/orders/OrderViewer.ts
   var orderViewer = (order) => p`
     <label>
         <p><strong>Customer Name</strong></p>

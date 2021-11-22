@@ -4,10 +4,8 @@ import { customElement, property } from 'lit/decorators.js';
 import { OrderViewerStore } from './orderViewerStore';
 import { IOrder } from './Order';
 import { button, table } from '../common/componentStyle';
+import { priceToCurrency } from '../common/formTools';
 
-
-const priceToCurrency = (price: number | undefined) =>
-    price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
 
 const orderViewer = (
     order: IOrder

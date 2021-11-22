@@ -6,6 +6,7 @@ import { handlePropChange, handleSubmit } from '../common/formTools';
 import { InventoryEditorStore } from './InventoryEditorStore';
 import { IInventoryItem } from './InventoryItem';
 
+
 const itemEditor = (item: IInventoryItem, onSave: () => {}, onDelete: () => {}) =>
     html`
     <form @submit=${handleSubmit(() => onSave())}>

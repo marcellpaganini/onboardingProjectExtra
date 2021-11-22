@@ -13,3 +13,6 @@ export const handleSubmit = (f: Function) => (e: Event) => {
 
     return false;
 }
+
+export const priceToCurrency = (price: number | undefined) =>
+    price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";

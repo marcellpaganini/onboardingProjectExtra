@@ -10522,11 +10522,14 @@
     }
 `;
 
+  // src/common/formTools.ts
+  var priceToCurrency = (price) => price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
+
   // src/inventory/InventoryList.ts
   var inventoryRow = ({ id, name, price }) => p`
     <tr>
         <td>${name}</td>
-        <td>${price}</td>
+        <td>${priceToCurrency(price)}</td>
         <td>
             <a href="${AppBasePath}/Inventory/Edit/${id}">Edit</a>
         </td>

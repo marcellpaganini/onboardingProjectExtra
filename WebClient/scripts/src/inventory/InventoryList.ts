@@ -4,12 +4,14 @@ import { customElement } from 'lit/decorators.js';
 import { InventoryListStore } from './InventoryListStore';
 import { IInventoryItem } from './InventoryItem';
 import { table, button } from '../common/componentStyle';
+import { priceToCurrency } from '../common/formTools';
+
 
 const inventoryRow = ({ id, name, price }: IInventoryItem) =>
     html`
     <tr>
         <td>${name}</td>
-        <td>${price}</td>
+        <td>${priceToCurrency(price)}</td>
         <td>
             <a href="${AppBasePath}/Inventory/Edit/${id}">Edit</a>
         </td>
