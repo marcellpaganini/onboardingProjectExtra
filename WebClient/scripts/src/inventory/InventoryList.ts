@@ -7,9 +7,10 @@ import { table, button } from '../common/componentStyle';
 import { priceToCurrency } from '../common/formTools';
 
 
-const inventoryRow = ({ id, name, price }: IInventoryItem) =>
+const inventoryRow = ({ id, name, price, image }: IInventoryItem) =>
     html`
     <tr>
+        <td><img src="${image}" width="50" height="50"></td>
         <td>${name}</td>
         <td>${priceToCurrency(price)}</td>
         <td>
@@ -22,6 +23,7 @@ const inventoryTable = (items: IInventoryItem[] = []) =>
     html`
     <table>
         <thead>
+            <th>Item</th>
             <th>Name</th>
             <th>Price</th>
             <th></th>

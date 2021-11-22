@@ -10443,7 +10443,8 @@
   var BaseInventoryItem = types.model("InventoryItem", {
     id: types.optional(types.identifier, ""),
     name: types.string,
-    price: types.number
+    price: types.number,
+    image: types.optional(types.string, "")
   }).actions((self2) => ({
     setName(name) {
       self2.name = name;
@@ -10526,8 +10527,9 @@
   var priceToCurrency = (price) => price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
 
   // src/inventory/InventoryList.ts
-  var inventoryRow = ({ id, name, price }) => p`
+  var inventoryRow = ({ id, name, price, image }) => p`
     <tr>
+        <td><img src="${image}" width="50" height="50"></td>
         <td>${name}</td>
         <td>${priceToCurrency(price)}</td>
         <td>
@@ -10538,6 +10540,7 @@
   var inventoryTable = (items = []) => p`
     <table>
         <thead>
+            <th>Item</th>
             <th>Name</th>
             <th>Price</th>
             <th></th>

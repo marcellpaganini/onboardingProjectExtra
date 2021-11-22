@@ -5,7 +5,8 @@ const BaseInventoryItem = types
     .model("InventoryItem", {
         id: types.optional(types.identifier, ""),
         name: types.string,
-        price: types.number
+        price: types.number,
+        image: types.optional(types.string, "")
     })
     .actions(self => ({
         setName(name: string) {
