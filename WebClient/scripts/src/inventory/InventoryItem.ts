@@ -15,6 +15,10 @@ const BaseInventoryItem = types
 
         setPrice(price: number) {
             self.price = price;
+        },
+
+        setImage(image: string) {
+            self.image = image;
         }
     }));
 

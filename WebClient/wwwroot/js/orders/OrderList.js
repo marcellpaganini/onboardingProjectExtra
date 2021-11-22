@@ -10451,6 +10451,9 @@
     },
     setPrice(price) {
       self2.price = price;
+    },
+    setImage(image) {
+      self2.image = image;
     }
   }));
   var InventoryItem = types.snapshotProcessor(BaseInventoryItem, { postProcessor });

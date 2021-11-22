@@ -10528,6 +10528,9 @@
     },
     setPrice(price) {
       self2.price = price;
+    },
+    setImage(image) {
+      self2.image = image;
     }
   }));
   var InventoryItem = types.snapshotProcessor(BaseInventoryItem, { postProcessor });
@@ -10598,6 +10601,12 @@
         <label>
             <p>Price</p>
             <input type="number" step="0.01" min="0.01" .value=${item.price.toString()} @change=${handlePropChange(item, (item2, val) => item2.setPrice(Number(val) ?? 0.01))}
+            required />
+        </label>
+
+        <label>
+            <p>Image</p>
+            <input type="text" .value=${item.image} @change=${handlePropChange(item, (item2, val) => item2.setImage(val))}
             required />
         </label>
 

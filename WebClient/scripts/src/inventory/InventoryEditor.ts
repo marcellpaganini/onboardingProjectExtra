@@ -23,6 +23,12 @@ const itemEditor = (item: IInventoryItem, onSave: () => {}, onDelete: () => {}) 
             required />
         </label>
 
+        <label>
+            <p>Image</p>
+            <input type="text" .value=${item.image} @change=${handlePropChange(item, (item, val) => item.setImage(val))}
+            required />
+        </label>
+
         <br /> <br />
 
         <button>Submit</button> <button type="button" @click=${onDelete} >Delete</button>
