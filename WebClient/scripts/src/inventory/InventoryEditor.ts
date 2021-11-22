@@ -1,6 +1,7 @@
 import { MobxLitElement } from '@adobe/lit-mobx';
-import { html } from 'lit';
+import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { table, button } from '../common/componentStyle';
 import { handlePropChange, handleSubmit } from '../common/formTools';
 import { InventoryEditorStore } from './InventoryEditorStore';
 import { IInventoryItem } from './InventoryItem';
@@ -20,6 +21,9 @@ const itemEditor = (item: IInventoryItem, onSave: () => {}, onDelete: () => {}) 
             item.setPrice(Number(val) ?? 0.01))}
             required />
         </label>
+
+        <br /> <br />
+
         <button>Submit</button> <button type="button" @click=${onDelete} >Delete</button>
     
     </form>
@@ -27,6 +31,11 @@ const itemEditor = (item: IInventoryItem, onSave: () => {}, onDelete: () => {}) 
 
 @customElement('inventory-editor')
 export class InventoryEditor extends MobxLitElement {
+    static styles = css`
+        ${table}
+        ${button}
+    `;
+
     @property({ attribute: "item-id" })
     itemId: string = "";
 

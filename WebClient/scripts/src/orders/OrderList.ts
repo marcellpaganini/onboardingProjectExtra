@@ -3,7 +3,7 @@ import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { OrderListStore } from './OrderListStore';
 import { IOrder } from './Order';
-import { table } from '../common/table';
+import { table, button } from '../common/componentStyle';
 
 
 const priceToCurrency = (price: number | undefined) =>
@@ -41,6 +41,7 @@ const ordersTable = (orders: IOrder[] = []) =>
 export class OrderList extends MobxLitElement {
     static styles = css`
         ${table}
+        ${button}
     `;
 
     store = OrderListStore.create();

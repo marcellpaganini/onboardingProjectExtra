@@ -1,6 +1,7 @@
 (() => {
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
   var __decorateClass = (decorators, target, key, kind) => {
     var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
     for (var i4 = decorators.length - 1, decorator; i4 >= 0; i4--)
@@ -9,6 +10,10 @@
     if (kind && result)
       __defProp(target, key, result);
     return result;
+  };
+  var __publicField = (obj, key, value) => {
+    __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+    return value;
   };
 
   // node_modules/mobx/dist/mobx.esm.js
@@ -4250,6 +4255,16 @@
     }
   };
   var o = (t3) => new s(typeof t3 == "string" ? t3 : t3 + "", e);
+  var r = (t3, ...n6) => {
+    const o6 = t3.length === 1 ? t3[0] : n6.reduce((e5, n7, s5) => e5 + ((t4) => {
+      if (t4._$cssResult$ === true)
+        return t4.cssText;
+      if (typeof t4 == "number")
+        return t4;
+      throw Error("Value passed to 'css' function must be a 'css' function result: " + t4 + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
+    })(n7) + t3[s5 + 1], t3[0]);
+    return new s(o6, e);
+  };
   var i = (e5, n6) => {
     t ? e5.adoptedStyleSheets = n6.map((t3) => t3 instanceof CSSStyleSheet ? t3 : t3.styleSheet) : n6.forEach((t3) => {
       const n7 = document.createElement("style"), s5 = window.litNonce;
@@ -4817,6 +4832,57 @@
       e6.constructor.createProperty(n7, i4);
     })(e5, n6, t3) : i3(e5, n6);
   }
+
+  // src/common/componentStyle.ts
+  var table = r`
+    table {
+        /*margin: 0 auto;*/
+        color: #333;
+        background: white;
+        border: 1px solid grey;
+        font-size: 12pt;
+        border-collapse: collapse;
+    }
+
+    table thead th,
+    table tfoot th {
+        color: #777;
+        background: rgba(0,0,0,.1);
+    }
+    table caption {
+        padding:.5em;
+    }
+    table th,
+    table td {
+        padding: .5em;
+        border: 1px solid lightgrey;
+    }
+`;
+  var button = r`
+    button {
+        background-color: navy;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        font-size: 16px;
+        margin: 4px 2px;
+        opacity: 0.6;
+        transition: 0.3s;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        opacity: 1
+    }
+
+    .btnRemove {
+        background-color: white;
+        padding: 0;
+    }
+`;
 
   // src/common/formTools.ts
   var handlePropChange = (item, handler) => (e5) => {
@@ -10533,6 +10599,9 @@
             <input type="number" step="0.01" min="0.01" .value=${item.price.toString()} @change=${handlePropChange(item, (item2, val) => item2.setPrice(Number(val) ?? 0.01))}
             required />
         </label>
+
+        <br /> <br />
+
         <button>Submit</button> <button type="button" @click=${onDelete} >Delete</button>
     
     </form>
@@ -10553,6 +10622,10 @@
     };
     render = () => this.store.item ? itemEditor(this.store.item, this.saveItem, this.deleteItem) : "Now loading...";
   };
+  __publicField(InventoryEditor, "styles", r`
+        ${table}
+        ${button}
+    `);
   __decorateClass([
     e4({ attribute: "item-id" })
   ], InventoryEditor.prototype, "itemId", 2);

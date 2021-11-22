@@ -1,8 +1,9 @@
 import { MobxLitElement } from '@adobe/lit-mobx';
-import { html } from 'lit';
+import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { OrderViewerStore } from './orderViewerStore';
 import { IOrder } from './Order';
+import { button, table } from '../common/componentStyle';
 
 
 const priceToCurrency = (price: number | undefined) =>
@@ -61,6 +62,11 @@ const orderViewer = (
 
 @customElement('order-viewer')
 export class OrderViewer extends MobxLitElement {
+    static styles = css`
+        ${table}
+        ${button}
+    `;
+
     @property({ attribute: "order-id" })
     orderId: string = "";
 

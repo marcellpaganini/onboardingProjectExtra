@@ -1,6 +1,7 @@
 (() => {
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
   var __decorateClass = (decorators, target, key, kind) => {
     var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
     for (var i3 = decorators.length - 1, decorator; i3 >= 0; i3--)
@@ -9,6 +10,10 @@
     if (kind && result)
       __defProp(target, key, result);
     return result;
+  };
+  var __publicField = (obj, key, value) => {
+    __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+    return value;
   };
 
   // node_modules/@lit/reactive-element/css-tag.js
@@ -30,6 +35,16 @@
     }
   };
   var o = (t3) => new s(typeof t3 == "string" ? t3 : t3 + "", e);
+  var r = (t3, ...n6) => {
+    const o6 = t3.length === 1 ? t3[0] : n6.reduce((e5, n7, s5) => e5 + ((t4) => {
+      if (t4._$cssResult$ === true)
+        return t4.cssText;
+      if (typeof t4 == "number")
+        return t4;
+      throw Error("Value passed to 'css' function must be a 'css' function result: " + t4 + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
+    })(n7) + t3[s5 + 1], t3[0]);
+    return new s(o6, e);
+  };
   var i = (e5, n6) => {
     t ? e5.adoptedStyleSheets = n6.map((t3) => t3 instanceof CSSStyleSheet ? t3 : t3.styleSheet) : n6.forEach((t3) => {
       const n7 = document.createElement("style"), s5 = window.litNonce;
@@ -10581,13 +10596,13 @@
         <td>
             ${priceToCurrency(orderItem.totalPrice)}
         </td>
-        <td><button type="button" @click=${() => order.removeItem(orderItem)} id="">❌</button></td>
+        <td><button type="button" @click=${() => order.removeItem(orderItem)} id="" class="btnRemove">❌</button></td>
     </tr>
     `;
   var orderItemsEditor = (order, items) => p`
-    <button type="button" @click=${() => order.addItem()}>Add Item</button>
+    <button type="button" @click=${() => order.addItem()}>Add Item</button> <br />
     
-    <table>
+    <table style="width: 65%;">
         <thead>
             <tr>
                 <th>Product</th>
@@ -10609,6 +10624,57 @@
         </tbody>
     </table>
     `;
+
+  // src/common/componentStyle.ts
+  var table = r`
+    table {
+        /*margin: 0 auto;*/
+        color: #333;
+        background: white;
+        border: 1px solid grey;
+        font-size: 12pt;
+        border-collapse: collapse;
+    }
+
+    table thead th,
+    table tfoot th {
+        color: #777;
+        background: rgba(0,0,0,.1);
+    }
+    table caption {
+        padding:.5em;
+    }
+    table th,
+    table td {
+        padding: .5em;
+        border: 1px solid lightgrey;
+    }
+`;
+  var button = r`
+    button {
+        background-color: navy;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        text-align: center;
+        font-size: 16px;
+        margin: 4px 2px;
+        opacity: 0.6;
+        transition: 0.3s;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        opacity: 1
+    }
+
+    .btnRemove {
+        background-color: white;
+        padding: 0;
+    }
+`;
 
   // src/orders/OrderEditor.ts
   var orderEditor = (order, items, onSave) => p`
@@ -10645,6 +10711,9 @@
       return this.store.inventoryItems ? orderEditor(this.store.order, this.store.inventoryItems, this.saveOrder) : p`Now loading...`;
     }
   };
+  __publicField(OrderEditor, "styles", r`
+        ${button}
+    `);
   OrderEditor = __decorateClass([
     n5("order-editor")
   ], OrderEditor);

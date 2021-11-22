@@ -1,8 +1,9 @@
 import { MobxLitElement } from '@adobe/lit-mobx';
-import { html } from 'lit';
+import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { InventoryListStore } from './InventoryListStore';
 import { IInventoryItem } from './InventoryItem';
+import { table, button } from '../common/componentStyle';
 
 const inventoryRow = ({ id, name, price }: IInventoryItem) =>
     html`
@@ -28,10 +29,16 @@ const inventoryTable = (items: IInventoryItem[] = []) =>
             ${items.map(inventoryRow)}
         </tbody>
     </table>
+    <br /><br />
     `;
 
 @customElement('inventory-list')
 export class InventoryList extends MobxLitElement {
+    static styles = css`
+        ${table}
+        ${button}
+    `;
+
     store = InventoryListStore.create();
 
     firstUpdated = async () => {

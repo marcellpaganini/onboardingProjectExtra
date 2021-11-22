@@ -39,7 +39,7 @@ const orderItemEditor = (
         <td>
             ${priceToCurrency(orderItem.totalPrice)}
         </td>
-        <td><button type="button" @click=${() => order.removeItem(orderItem)} id="">❌</button></td>
+        <td><button type="button" @click=${() => order.removeItem(orderItem)} id="" class="btnRemove">❌</button></td>
     </tr>
     `
 
@@ -48,9 +48,9 @@ export const orderItemsEditor = (
     items: IInventoryItem[]
 ) =>
     html`
-    <button type="button" @click=${()=> order.addItem()}>Add Item</button>
+    <button type="button" @click=${()=> order.addItem()}>Add Item</button> <br />
     
-    <table>
+    <table style="width: 65%;">
         <thead>
             <tr>
                 <th>Product</th>

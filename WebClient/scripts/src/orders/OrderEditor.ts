@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { css, html } from 'lit';
 import { MobxLitElement } from '@adobe/lit-mobx';
 import { customElement } from 'lit/decorators.js';
 import { handleSubmit } from '../common/formTools';
@@ -7,6 +7,7 @@ import { IInventoryItem } from '../inventory/InventoryItem';
 import { OrderEditorStore } from './OrderEditorStore';
 import { orderDetailsEditor } from './orderDetailsEditor';
 import { orderItemsEditor } from './orderItemEditor';
+import { button } from '../common/componentStyle';
 
 const orderEditor = (
     order: IOrder,
@@ -30,6 +31,10 @@ const orderEditor = (
 
 @customElement('order-editor')
 export class OrderEditor extends MobxLitElement {
+    static styles = css`
+        ${button}
+    `;
+
     store = OrderEditorStore.create();
 
     firstUpdated = async () => {
