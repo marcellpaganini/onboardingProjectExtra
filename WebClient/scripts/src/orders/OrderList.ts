@@ -1,8 +1,10 @@
 import { MobxLitElement } from '@adobe/lit-mobx';
-import { html } from 'lit';
+import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { OrderListStore } from './OrderListStore';
 import { IOrder } from './Order';
+import { table } from '../common/table';
+
 
 const priceToCurrency = (price: number | undefined) =>
     price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
@@ -37,6 +39,10 @@ const ordersTable = (orders: IOrder[] = []) =>
 
 @customElement('order-list')
 export class OrderList extends MobxLitElement {
+    static styles = css`
+        ${table}
+    `;
+
     store = OrderListStore.create();
 
     firstUpdated = async () => {
