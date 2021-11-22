@@ -7,5 +7,6 @@ namespace OrderManagement.Types.Inventory
         public Guid? Id { get; init; } = null;
         public string Name { get; init; } = "";
         public decimal Price { get; init; } = 0.00m;
+        public string Image { get; init; } = "";
     }
 }
