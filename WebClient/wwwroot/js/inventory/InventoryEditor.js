@@ -10624,11 +10624,14 @@
     };
     saveItem = async () => {
       await this.store.save();
+      location.assign("../../");
       alert("Item saved successfully.");
     };
     deleteItem = async () => {
       await this.store.delete();
       confirm("Are you sure?.");
+      location.assign("../../");
+      alert("Item deleted successfully.");
     };
     render = () => this.store.item ? itemEditor(this.store.item, this.saveItem, this.deleteItem) : "Now loading...";
   };
