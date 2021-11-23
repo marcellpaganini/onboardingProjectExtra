@@ -7,7 +7,7 @@ import { IInventoryItem } from '../inventory/InventoryItem';
 import { OrderEditorStore } from './OrderEditorStore';
 import { orderDetailsEditor } from './orderDetailsEditor';
 import { orderItemsEditor } from './orderItemEditor';
-import { button } from '../common/componentStyle';
+import { button, input } from '../common/componentStyle';
 
 const orderEditor = (
     order: IOrder,
@@ -33,6 +33,7 @@ const orderEditor = (
 export class OrderEditor extends MobxLitElement {
     static styles = css`
         ${button}
+        ${input}
     `;
 
     store = OrderEditorStore.create();

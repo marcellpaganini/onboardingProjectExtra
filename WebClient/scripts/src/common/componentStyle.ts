@@ -50,3 +50,15 @@ export const button = css`
         padding: 0;
     }
 `;
+
+export const input = css`
+    input[type=text], textarea {
+        width: 60%;
+        padding: 6px 10px;
+        margin: 4px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+`;

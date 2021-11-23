@@ -1,7 +1,7 @@
 import { MobxLitElement } from '@adobe/lit-mobx';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { table, button } from '../common/componentStyle';
+import { table, button, input } from '../common/componentStyle';
 import { handlePropChange, handleSubmit } from '../common/formTools';
 import { InventoryEditorStore } from './InventoryEditorStore';
 import { IInventoryItem } from './InventoryItem';
@@ -41,6 +41,7 @@ export class InventoryEditor extends MobxLitElement {
     static styles = css`
         ${table}
         ${button}
+        ${input}
     `;
 
     @property({ attribute: "item-id" })

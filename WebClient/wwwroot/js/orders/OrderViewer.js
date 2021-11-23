@@ -10614,6 +10614,17 @@
         padding: 0;
     }
 `;
+  var input = r`
+    input[type=text], textarea {
+        width: 50%;
+        padding: 6px 10px;
+        margin: 4px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+`;
 
   // src/common/formTools.ts
   var priceToCurrency = (price) => price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
