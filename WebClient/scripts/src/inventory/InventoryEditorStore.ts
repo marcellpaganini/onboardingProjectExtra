@@ -4,7 +4,8 @@ import { InventoryItem } from './InventoryItem';
 
 const defaultInventoryItem = {
     name: "",
-    price: 0.00
+    price: 0.00,
+    image: ""
 };
 
 export const InventoryEditorStore = types

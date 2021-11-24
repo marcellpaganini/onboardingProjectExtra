@@ -1,5 +1,5 @@
 import { flow, types } from 'mobx-state-tree';
-import { getInventoryItems, deleteInventoryItem } from './inventoryApi';
+import { getInventoryItems } from './inventoryApi';
 import { InventoryItem } from './InventoryItem';
 
 export const InventoryListStore = types

@@ -52,7 +52,7 @@ export const button = css`
 `;
 
 export const input = css`
-    input[type=text], textarea {
+    input[type=text], input[type=number], textarea {
         width: 60%;
         padding: 6px 10px;
         margin: 4px 0;

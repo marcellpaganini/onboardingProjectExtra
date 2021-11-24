@@ -10602,8 +10602,8 @@
     }
 `;
   var input = r`
-    input[type=text], textarea {
-        width: 50%;
+    input[type=text], input[type=number], textarea {
+        width: 60%;
         padding: 6px 10px;
         margin: 4px 0;
         display: inline-block;

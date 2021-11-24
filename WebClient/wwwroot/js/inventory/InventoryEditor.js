@@ -4884,8 +4884,8 @@
     }
 `;
   var input = r`
-    input[type=text], textarea {
-        width: 50%;
+    input[type=text], input[type=number], textarea {
+        width: 60%;
         padding: 6px 10px;
         margin: 4px 0;
         display: inline-block;
@@ -10575,7 +10575,8 @@
   // src/inventory/InventoryEditorStore.ts
   var defaultInventoryItem = {
     name: "",
-    price: 0
+    price: 0,
+    image: ""
   };
   var InventoryEditorStore = types.model("InventoryEditorStore", {
     item: types.maybe(InventoryItem)
