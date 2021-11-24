@@ -30,6 +30,11 @@ const orderViewer = (
         <p><strong>Email Address</strong></p>
         <p>${order.emailAddress}</p>
     </label>
+
+    <label>
+        <p><strong>Date</strong></p>
+        <p>${order.orderDate}</p>
+    </label>
 	
     <br />
 
