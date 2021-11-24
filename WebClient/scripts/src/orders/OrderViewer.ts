@@ -4,7 +4,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { OrderViewerStore } from './orderViewerStore';
 import { IOrder } from './Order';
 import { button, table } from '../common/componentStyle';
-import { priceToCurrency } from '../common/formTools';
+import { priceToCurrency, decimalToPercentage } from '../common/formTools';
 
 
 const orderViewer = (
@@ -39,6 +39,7 @@ const orderViewer = (
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Price(per item)</th>
+                <th>Tax</th>
                 <th>Price(total)</th>
             </tr>
         </thead>
@@ -53,10 +54,13 @@ const orderViewer = (
                         ${item.quantity.toString()}
                     </td>
                     <td>
-                        ${priceToCurrency(item.unitPrice)}
+                        ${priceToCurrency(item.buyPricePerUnit)}
                     </td>
                     <td>
-                        ${priceToCurrency(item.totalPrice)}
+                        ${decimalToPercentage(item.tax)}
+                    </td>
+                    <td>
+                        ${priceToCurrency(item.totalPriceOnDate)}
                     </td>
                 </tr>
                 `)}

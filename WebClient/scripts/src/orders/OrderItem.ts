@@ -6,7 +6,9 @@ export const BaseOrderItem = types
     .model("OrderItem", {
         id: types.optional(types.identifier, ""),
         inventoryItemId: types.maybe(types.reference(InventoryItem)),
-        quantity: types.optional(types.number, 1)
+        quantity: types.optional(types.number, 1),
+        buyPricePerUnit: types.optional(types.number, 0.00),
+        tax: types.optional(types.number, 0.15)
     })
     .actions(self => ({
         setInventoryItem(inventoryItem: IInventoryItem | undefined) {
@@ -16,6 +18,10 @@ export const BaseOrderItem = types
         setQuantity(quantity: number) {
             self.quantity = quantity;
         },
+
+        setBuyPricePerUnit(buyPricePerUnit: number) {
+            self.buyPricePerUnit = buyPricePerUnit;
+        }
 
     }))
     .views(self => ({
@@ -31,7 +37,11 @@ export const BaseOrderItem = types
                 return undefined;
             }
 
-            return self.inventoryItemId.price * self.quantity;
+            return (self.inventoryItemId.price * self.quantity) * self.tax + self.inventoryItemId.price * self.quantity;
+        },
+
+        get totalPriceOnDate() {
+            return (self.buyPricePerUnit * self.quantity) * self.tax + self.buyPricePerUnit * self.quantity;
         }
     }));
 

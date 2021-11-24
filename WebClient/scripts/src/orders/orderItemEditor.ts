@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { handlePropChange, priceToCurrency } from '../common/formTools';
+import { handlePropChange, priceToCurrency, decimalToPercentage } from '../common/formTools';
 import { IInventoryItem } from '../inventory/InventoryItem';
 import { IOrder } from './Order';
 import { IOrderItem } from './OrderItem';
@@ -30,9 +30,14 @@ const orderItemEditor = (
             <input type="number" min="1" class="tableInput" .value=${orderItem.quantity.toString()} @change=${handlePropChange(orderItem, (item, val)=>
             item.setQuantity(Number(val) ?? 1))}
             required />
+            <input type="hidden" value="${orderItem.inventoryItemId?.id === undefined ? orderItem.buyPricePerUnit : orderItem.unitPrice?.toString() ?? 0.00}" 
+                @change=${handlePropChange(orderItem, (item, val)=> item.setBuyPricePerUnit(Number(val)))}>
         </td>
         <td>
             ${priceToCurrency(orderItem.unitPrice)}
+        </td>
+        <td>
+            ${decimalToPercentage(orderItem.tax)}
         </td>
         <td>
             ${priceToCurrency(orderItem.totalPrice)}
@@ -54,6 +59,7 @@ export const orderItemsEditor = (
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Price(per item)</th>
+                <th>Tax</th>
                 <th>Price(total)</th>
                 <th></th>
             </tr>

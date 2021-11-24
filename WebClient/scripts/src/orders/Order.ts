@@ -43,9 +43,9 @@ export const BaseOrder = types
                 (total, item) =>
                     (total === undefined)
                         ? undefined
-                        : (item?.totalPrice === undefined)
+                        : (item?.totalPriceOnDate === undefined)
                             ? total
-                            : total + item.totalPrice,
+                            : total + item.totalPriceOnDate,
                 0
             );
         }

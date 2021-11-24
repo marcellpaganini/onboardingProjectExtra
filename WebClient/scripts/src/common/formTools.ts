@@ -16,3 +16,6 @@ export const handleSubmit = (f: Function) => (e: Event) => {
 
 export const priceToCurrency = (price: number | undefined) =>
     price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
+
+export const decimalToPercentage = (decimal: number | undefined) =>
+    decimal?.toLocaleString("en", {style: "percent"}) ?? "";

@@ -10462,13 +10462,18 @@
   var BaseOrderItem = types.model("OrderItem", {
     id: types.optional(types.identifier, ""),
     inventoryItemId: types.maybe(types.reference(InventoryItem)),
-    quantity: types.optional(types.number, 1)
+    quantity: types.optional(types.number, 1),
+    buyPricePerUnit: types.optional(types.number, 0),
+    tax: types.optional(types.number, 0.15)
   }).actions((self2) => ({
     setInventoryItem(inventoryItem) {
       self2.inventoryItemId = inventoryItem;
     },
     setQuantity(quantity) {
       self2.quantity = quantity;
+    },
+    setBuyPricePerUnit(buyPricePerUnit) {
+      self2.buyPricePerUnit = buyPricePerUnit;
     }
   })).views((self2) => ({
     get unitPrice() {
@@ -10478,7 +10483,10 @@
       if (self2.inventoryItemId === void 0 || self2.quantity < 1) {
         return void 0;
       }
-      return self2.inventoryItemId.price * self2.quantity;
+      return self2.inventoryItemId.price * self2.quantity * self2.tax + self2.inventoryItemId.price * self2.quantity;
+    },
+    get totalPriceOnDate() {
+      return self2.buyPricePerUnit * self2.quantity * self2.tax + self2.buyPricePerUnit * self2.quantity;
     }
   }));
   var postProcessSnapshot = (snapshot) => ({
@@ -10517,7 +10525,7 @@
     }
   })).views((self2) => ({
     get totalPrice() {
-      return self2.items.reduce((total, item) => total === void 0 ? void 0 : item?.totalPrice === void 0 ? total : total + item.totalPrice, 0);
+      return self2.items.reduce((total, item) => total === void 0 ? void 0 : item?.totalPriceOnDate === void 0 ? total : total + item.totalPriceOnDate, 0);
     }
   }));
   var Order = types.snapshotProcessor(BaseOrder, { postProcessor });

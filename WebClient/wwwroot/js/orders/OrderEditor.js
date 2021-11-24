@@ -4831,6 +4831,7 @@
     return false;
   };
   var priceToCurrency = (price) => price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
+  var decimalToPercentage = (decimal) => decimal?.toLocaleString("en", { style: "percent" }) ?? "";
 
   // node_modules/mobx-state-tree/dist/mobx-state-tree.module.js
   var livelinessChecking = "warn";
@@ -10475,13 +10476,18 @@
   var BaseOrderItem = types.model("OrderItem", {
     id: types.optional(types.identifier, ""),
     inventoryItemId: types.maybe(types.reference(InventoryItem)),
-    quantity: types.optional(types.number, 1)
+    quantity: types.optional(types.number, 1),
+    buyPricePerUnit: types.optional(types.number, 0),
+    tax: types.optional(types.number, 0.15)
   }).actions((self2) => ({
     setInventoryItem(inventoryItem) {
       self2.inventoryItemId = inventoryItem;
     },
     setQuantity(quantity) {
       self2.quantity = quantity;
+    },
+    setBuyPricePerUnit(buyPricePerUnit) {
+      self2.buyPricePerUnit = buyPricePerUnit;
     }
   })).views((self2) => ({
     get unitPrice() {
@@ -10491,7 +10497,10 @@
       if (self2.inventoryItemId === void 0 || self2.quantity < 1) {
         return void 0;
       }
-      return self2.inventoryItemId.price * self2.quantity;
+      return self2.inventoryItemId.price * self2.quantity * self2.tax + self2.inventoryItemId.price * self2.quantity;
+    },
+    get totalPriceOnDate() {
+      return self2.buyPricePerUnit * self2.quantity * self2.tax + self2.buyPricePerUnit * self2.quantity;
     }
   }));
   var postProcessSnapshot = (snapshot) => ({
@@ -10530,7 +10539,7 @@
     }
   })).views((self2) => ({
     get totalPrice() {
-      return self2.items.reduce((total, item) => total === void 0 ? void 0 : item?.totalPrice === void 0 ? total : total + item.totalPrice, 0);
+      return self2.items.reduce((total, item) => total === void 0 ? void 0 : item?.totalPriceOnDate === void 0 ? total : total + item.totalPriceOnDate, 0);
     }
   }));
   var Order = types.snapshotProcessor(BaseOrder, { postProcessor });
@@ -10613,9 +10622,14 @@
         <td>
             <input type="number" min="1" class="tableInput" .value=${orderItem.quantity.toString()} @change=${handlePropChange(orderItem, (item, val) => item.setQuantity(Number(val) ?? 1))}
             required />
+            <input type="hidden" value="${orderItem.inventoryItemId?.id === void 0 ? orderItem.buyPricePerUnit : orderItem.unitPrice?.toString() ?? 0}" 
+                @change=${handlePropChange(orderItem, (item, val) => item.setBuyPricePerUnit(Number(val)))}>
         </td>
         <td>
             ${priceToCurrency(orderItem.unitPrice)}
+        </td>
+        <td>
+            ${decimalToPercentage(orderItem.tax)}
         </td>
         <td>
             ${priceToCurrency(orderItem.totalPrice)}
@@ -10632,6 +10646,7 @@
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Price(per item)</th>
+                <th>Tax</th>
                 <th>Price(total)</th>
                 <th></th>
             </tr>
