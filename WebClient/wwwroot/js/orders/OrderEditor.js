@@ -10603,7 +10603,7 @@
             <select .value=${orderItem.inventoryItemId?.id ?? ""} @change=${handlePropChange(orderItem, (orderItem2, itemId) => {
     const matchingItem = inventoryItems.find((i3) => i3.id === itemId);
     orderItem2.setInventoryItem(matchingItem);
-  })}>
+  })} class="tableInput">
                 <option value="">--Choose a Product--</option>
                 ${inventoryItems.map((item) => p`
                     <option value=${item.id}>${item.name}</option>
@@ -10611,7 +10611,7 @@
             </select>
         </td>
         <td>
-            <input type="number" min="1" .value=${orderItem.quantity.toString()} @change=${handlePropChange(orderItem, (item, val) => item.setQuantity(Number(val) ?? 1))}
+            <input type="number" min="1" class="tableInput" .value=${orderItem.quantity.toString()} @change=${handlePropChange(orderItem, (item, val) => item.setQuantity(Number(val) ?? 1))}
             required />
         </td>
         <td>
@@ -10700,7 +10700,7 @@
     }
 `;
   var input = r`
-    input[type=text], input[type=number], textarea {
+    input[type=text], input[type=number], textarea, select {
         width: 60%;
         padding: 6px 10px;
         margin: 4px 0;
@@ -10708,6 +10708,11 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
+    }
+
+    .tableInput {
+        padding: 0;
+        width:80%;
     }
 `;
 

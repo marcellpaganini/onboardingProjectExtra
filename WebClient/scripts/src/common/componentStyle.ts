@@ -52,7 +52,7 @@ export const button = css`
 `;
 
 export const input = css`
-    input[type=text], input[type=number], textarea {
+    input[type=text], input[type=number], textarea, select {
         width: 60%;
         padding: 6px 10px;
         margin: 4px 0;
@@ -60,5 +60,10 @@ export const input = css`
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
+    }
+
+    .tableInput {
+        padding: 0;
+        width:80%;
     }
 `;

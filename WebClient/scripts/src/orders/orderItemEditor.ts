@@ -17,7 +17,7 @@ const orderItemEditor = (
                 //This is slightly more complex than it needs to be because the inventoryItems collection isn't a map.
                 const matchingItem = inventoryItems.find(i => i.id === itemId);
                 orderItem.setInventoryItem(matchingItem);
-            })}>
+            })} class="tableInput">
                 <option value="">--Choose a Product--</option>
                 ${inventoryItems.map((item) => 
                     html`
@@ -27,7 +27,7 @@ const orderItemEditor = (
             </select>
         </td>
         <td>
-            <input type="number" min="1" .value=${orderItem.quantity.toString()} @change=${handlePropChange(orderItem, (item, val)=>
+            <input type="number" min="1" class="tableInput" .value=${orderItem.quantity.toString()} @change=${handlePropChange(orderItem, (item, val)=>
             item.setQuantity(Number(val) ?? 1))}
             required />
         </td>

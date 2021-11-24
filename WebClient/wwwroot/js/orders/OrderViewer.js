@@ -10615,7 +10615,7 @@
     }
 `;
   var input = r`
-    input[type=text], input[type=number], textarea {
+    input[type=text], input[type=number], textarea, select {
         width: 60%;
         padding: 6px 10px;
         margin: 4px 0;
@@ -10623,6 +10623,11 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
+    }
+
+    .tableInput {
+        padding: 0;
+        width:80%;
     }
 `;
 
