@@ -1,4 +1,5 @@
-import { Instance, types } from 'mobx-state-tree';
+import { DateTime } from 'luxon';
+import { Instance, SnapshotOut, types } from 'mobx-state-tree';
 import { postProcessor } from '../common/recordPostProcessor';
 import { IOrderItem, OrderItem } from './OrderItem';
 
@@ -9,7 +10,7 @@ export const BaseOrder = types
         deliveryAddress: types.optional(types.string, ""),
         phoneNumber: types.optional(types.refinement(types.string, p => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p)), ""),
         emailAddress: types.optional(types.refinement(types.string, e => /^$|\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(e)), ""),
-        orderDate: types.optional(types.string, ""),
+        orderDate: types.optional(types.string, DateTime.now().toLocaleString()),
         items: types.array(OrderItem)
     })
     .actions(self => ({

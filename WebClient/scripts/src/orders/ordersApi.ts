@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import { getSnapshot, SnapshotIn } from 'mobx-state-tree';
 import { IOrder, Order } from './Order';
 
@@ -16,6 +17,9 @@ export const getOrder = async (id: string) => {
 };
 
 export const saveOrder = async (order: IOrder) => {
+
+    console.log(order);
+    order.orderDate = DateTime.fromFormat(order.orderDate, 'MM-dd-yyyy').toUTC().toJSON()
 
     const response = await fetch(`${AppBasePath}/api/orders`, {
         method: 'POST',

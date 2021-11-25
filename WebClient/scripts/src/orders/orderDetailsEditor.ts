@@ -1,4 +1,5 @@
 import { html } from 'lit';
+import { DateTime } from 'luxon';
 import { handlePropChange } from '../common/formTools';
 import { IOrder } from './Order';
 
@@ -30,4 +31,7 @@ export const orderDetailsEditor = (
         <input type="text" .value=${order.emailAddress!} @change=${handlePropChange(order, (order, val) => order.setEmailAddress(val))}
                 required></input>
     </label>
+        <input type="hidden" .value=${DateTime.now().toUTC().toJSON()} @change=${handlePropChange(order, (order, val) => order.setOrderDate(val))}
+                required>
+        </input>
     `;

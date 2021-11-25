@@ -5,6 +5,7 @@ import { InventoryListStore } from './InventoryListStore';
 import { IInventoryItem } from './InventoryItem';
 import { table, button } from '../common/componentStyle';
 import { priceToCurrency } from '../common/formTools';
+import { DateTime } from 'luxon';
 
 
 const inventoryRow = ({ id, name, price, image }: IInventoryItem) =>
@@ -21,6 +22,7 @@ const inventoryRow = ({ id, name, price, image }: IInventoryItem) =>
 
 const inventoryTable = (items: IInventoryItem[] = []) =>
     html`
+    <p>${DateTime.now().toUTC().toJSON()}</p>
     <table>
         <thead>
             <th>Item</th>
