@@ -1588,7 +1588,7 @@
       function mapMonths(f2) {
         var ms = [];
         for (var i3 = 1; i3 <= 12; i3++) {
-          var dt = DateTime4.utc(2016, i3, 1);
+          var dt = DateTime3.utc(2016, i3, 1);
           ms.push(f2(dt));
         }
         return ms;
@@ -1596,7 +1596,7 @@
       function mapWeekdays(f2) {
         var ms = [];
         for (var i3 = 1; i3 <= 7; i3++) {
-          var dt = DateTime4.utc(2016, 11, 13 + i3);
+          var dt = DateTime3.utc(2016, 11, 13 + i3);
           ms.push(f2(dt));
         }
         return ms;
@@ -1658,7 +1658,7 @@
               if (opts.timeZoneName) {
                 this.dt = dt;
               } else {
-                this.dt = dt.offset === 0 ? dt : DateTime4.fromMillis(dt.ts + dt.offset * 60 * 1e3);
+                this.dt = dt.offset === 0 ? dt : DateTime3.fromMillis(dt.ts + dt.offset * 60 * 1e3);
               }
             }
           } else if (dt.zone.type === "system") {
@@ -1844,7 +1844,7 @@
                 hour: "numeric",
                 hourCycle: "h12"
               };
-              _this3.meridiemCache = [DateTime4.utc(2016, 11, 13, 9), DateTime4.utc(2016, 11, 13, 19)].map(function(dt) {
+              _this3.meridiemCache = [DateTime3.utc(2016, 11, 13, 9), DateTime3.utc(2016, 11, 13, 19)].map(function(dt) {
                 return _this3.extract(dt, intl, "dayperiod");
               });
             }
@@ -1861,7 +1861,7 @@
               era: length
             };
             if (!_this4.eraCache[length]) {
-              _this4.eraCache[length] = [DateTime4.utc(-40, 1, 1), DateTime4.utc(2017, 1, 1)].map(function(dt) {
+              _this4.eraCache[length] = [DateTime3.utc(-40, 1, 1), DateTime3.utc(2017, 1, 1)].map(function(dt) {
                 return _this4.extract(dt, intl, "era");
               });
             }
@@ -2687,14 +2687,14 @@
           if (s6 && e5) {
             var start, startIsValid;
             try {
-              start = DateTime4.fromISO(s6, opts);
+              start = DateTime3.fromISO(s6, opts);
               startIsValid = start.isValid;
             } catch (e6) {
               startIsValid = false;
             }
             var end, endIsValid;
             try {
-              end = DateTime4.fromISO(e5, opts);
+              end = DateTime3.fromISO(e5, opts);
               endIsValid = end.isValid;
             } catch (e6) {
               endIsValid = false;
@@ -2971,7 +2971,7 @@
           if (zone === void 0) {
             zone = Settings.defaultZone;
           }
-          var proto = DateTime4.now().setZone(zone).set({
+          var proto = DateTime3.now().setZone(zone).set({
             month: 12
           });
           return !zone.isUniversal && proto.offset !== proto.set({
@@ -3501,7 +3501,7 @@
       var dummyDateTimeCache = null;
       function getDummyDateTime() {
         if (!dummyDateTimeCache) {
-          dummyDateTimeCache = DateTime4.fromMillis(1555555555555);
+          dummyDateTimeCache = DateTime3.fromMillis(1555555555555);
         }
         return dummyDateTimeCache;
       }
@@ -3701,7 +3701,7 @@
           loc: inst.loc,
           invalid: inst.invalid
         };
-        return new DateTime4(_extends2({}, current, alts, {
+        return new DateTime3(_extends2({}, current, alts, {
           old: current
         }));
       }
@@ -3763,12 +3763,12 @@
       function parseDataToDateTime(parsed, parsedZone, opts, format, text) {
         var setZone = opts.setZone, zone = opts.zone;
         if (parsed && Object.keys(parsed).length !== 0) {
-          var interpretationZone = parsedZone || zone, inst = DateTime4.fromObject(parsed, _extends2({}, opts, {
+          var interpretationZone = parsedZone || zone, inst = DateTime3.fromObject(parsed, _extends2({}, opts, {
             zone: interpretationZone
           }));
           return setZone ? inst : inst.setZone(zone);
         } else {
-          return DateTime4.invalid(new Invalid("unparsable", 'the input "' + text + `" can't be parsed as ` + format));
+          return DateTime3.invalid(new Invalid("unparsable", 'the input "' + text + `" can't be parsed as ` + format));
         }
       }
       function toTechFormat(dt, format, allowZ) {
@@ -3872,7 +3872,7 @@
           }
           var invalid = hasInvalidGregorianData(obj) || hasInvalidTimeData(obj);
           if (invalid) {
-            return DateTime4.invalid(invalid);
+            return DateTime3.invalid(invalid);
           }
           var offsetProvis = zone.offset(tsNow);
           var _objToTS = objToTS(obj, offsetProvis, zone);
@@ -3881,7 +3881,7 @@
         } else {
           ts = tsNow;
         }
-        return new DateTime4({
+        return new DateTime3({
           ts,
           zone,
           loc,
@@ -3925,8 +3925,8 @@
         }
         return [opts, args];
       }
-      var DateTime4 = /* @__PURE__ */ function() {
-        function DateTime5(config) {
+      var DateTime3 = /* @__PURE__ */ function() {
+        function DateTime4(config) {
           var zone = config.zone || Settings.defaultZone;
           var invalid = config.invalid || (Number.isNaN(config.ts) ? new Invalid("invalid input") : null) || (!zone.isValid ? unsupportedZone(zone) : null);
           this.ts = isUndefined(config.ts) ? Settings.now() : config.ts;
@@ -3953,10 +3953,10 @@
           this.o = o6;
           this.isLuxonDateTime = true;
         }
-        DateTime5.now = function now2() {
-          return new DateTime5({});
+        DateTime4.now = function now2() {
+          return new DateTime4({});
         };
-        DateTime5.local = function local() {
+        DateTime4.local = function local() {
           var _lastOpts = lastOpts(arguments), opts = _lastOpts[0], args = _lastOpts[1], year = args[0], month = args[1], day = args[2], hour = args[3], minute = args[4], second = args[5], millisecond = args[6];
           return quickDT({
             year,
@@ -3968,7 +3968,7 @@
             millisecond
           }, opts);
         };
-        DateTime5.utc = function utc() {
+        DateTime4.utc = function utc() {
           var _lastOpts2 = lastOpts(arguments), opts = _lastOpts2[0], args = _lastOpts2[1], year = args[0], month = args[1], day = args[2], hour = args[3], minute = args[4], second = args[5], millisecond = args[6];
           opts.zone = FixedOffsetZone.utcInstance;
           return quickDT({
@@ -3981,62 +3981,62 @@
             millisecond
           }, opts);
         };
-        DateTime5.fromJSDate = function fromJSDate(date, options) {
+        DateTime4.fromJSDate = function fromJSDate(date, options) {
           if (options === void 0) {
             options = {};
           }
           var ts = isDate(date) ? date.valueOf() : NaN;
           if (Number.isNaN(ts)) {
-            return DateTime5.invalid("invalid input");
+            return DateTime4.invalid("invalid input");
           }
           var zoneToUse = normalizeZone(options.zone, Settings.defaultZone);
           if (!zoneToUse.isValid) {
-            return DateTime5.invalid(unsupportedZone(zoneToUse));
+            return DateTime4.invalid(unsupportedZone(zoneToUse));
           }
-          return new DateTime5({
+          return new DateTime4({
             ts,
             zone: zoneToUse,
             loc: Locale.fromObject(options)
           });
         };
-        DateTime5.fromMillis = function fromMillis(milliseconds, options) {
+        DateTime4.fromMillis = function fromMillis(milliseconds, options) {
           if (options === void 0) {
             options = {};
           }
           if (!isNumber2(milliseconds)) {
             throw new InvalidArgumentError("fromMillis requires a numerical input, but received a " + typeof milliseconds + " with value " + milliseconds);
           } else if (milliseconds < -MAX_DATE || milliseconds > MAX_DATE) {
-            return DateTime5.invalid("Timestamp out of range");
+            return DateTime4.invalid("Timestamp out of range");
           } else {
-            return new DateTime5({
+            return new DateTime4({
               ts: milliseconds,
               zone: normalizeZone(options.zone, Settings.defaultZone),
               loc: Locale.fromObject(options)
             });
           }
         };
-        DateTime5.fromSeconds = function fromSeconds(seconds, options) {
+        DateTime4.fromSeconds = function fromSeconds(seconds, options) {
           if (options === void 0) {
             options = {};
           }
           if (!isNumber2(seconds)) {
             throw new InvalidArgumentError("fromSeconds requires a numerical input");
           } else {
-            return new DateTime5({
+            return new DateTime4({
               ts: seconds * 1e3,
               zone: normalizeZone(options.zone, Settings.defaultZone),
               loc: Locale.fromObject(options)
             });
           }
         };
-        DateTime5.fromObject = function fromObject(obj, opts) {
+        DateTime4.fromObject = function fromObject(obj, opts) {
           if (opts === void 0) {
             opts = {};
           }
           obj = obj || {};
           var zoneToUse = normalizeZone(opts.zone, Settings.defaultZone);
           if (!zoneToUse.isValid) {
-            return DateTime5.invalid(unsupportedZone(zoneToUse));
+            return DateTime4.invalid(unsupportedZone(zoneToUse));
           }
           var tsNow = Settings.now(), offsetProvis = zoneToUse.offset(tsNow), normalized = normalizeObject(obj, normalizeUnit), containsOrdinal = !isUndefined(normalized.ordinal), containsGregorYear = !isUndefined(normalized.year), containsGregorMD = !isUndefined(normalized.month) || !isUndefined(normalized.day), containsGregor = containsGregorYear || containsGregorMD, definiteWeekDef = normalized.weekYear || normalized.weekNumber, loc = Locale.fromObject(opts);
           if ((containsGregor || containsOrdinal) && definiteWeekDef) {
@@ -4073,41 +4073,41 @@
           }
           var higherOrderInvalid = useWeekData ? hasInvalidWeekData(normalized) : containsOrdinal ? hasInvalidOrdinalData(normalized) : hasInvalidGregorianData(normalized), invalid = higherOrderInvalid || hasInvalidTimeData(normalized);
           if (invalid) {
-            return DateTime5.invalid(invalid);
+            return DateTime4.invalid(invalid);
           }
-          var gregorian = useWeekData ? weekToGregorian(normalized) : containsOrdinal ? ordinalToGregorian(normalized) : normalized, _objToTS2 = objToTS(gregorian, offsetProvis, zoneToUse), tsFinal = _objToTS2[0], offsetFinal = _objToTS2[1], inst = new DateTime5({
+          var gregorian = useWeekData ? weekToGregorian(normalized) : containsOrdinal ? ordinalToGregorian(normalized) : normalized, _objToTS2 = objToTS(gregorian, offsetProvis, zoneToUse), tsFinal = _objToTS2[0], offsetFinal = _objToTS2[1], inst = new DateTime4({
             ts: tsFinal,
             zone: zoneToUse,
             o: offsetFinal,
             loc
           });
           if (normalized.weekday && containsGregor && obj.weekday !== inst.weekday) {
-            return DateTime5.invalid("mismatched weekday", "you can't specify both a weekday of " + normalized.weekday + " and a date of " + inst.toISO());
+            return DateTime4.invalid("mismatched weekday", "you can't specify both a weekday of " + normalized.weekday + " and a date of " + inst.toISO());
           }
           return inst;
         };
-        DateTime5.fromISO = function fromISO(text, opts) {
+        DateTime4.fromISO = function fromISO(text, opts) {
           if (opts === void 0) {
             opts = {};
           }
           var _parseISODate = parseISODate(text), vals = _parseISODate[0], parsedZone = _parseISODate[1];
           return parseDataToDateTime(vals, parsedZone, opts, "ISO 8601", text);
         };
-        DateTime5.fromRFC2822 = function fromRFC2822(text, opts) {
+        DateTime4.fromRFC2822 = function fromRFC2822(text, opts) {
           if (opts === void 0) {
             opts = {};
           }
           var _parseRFC2822Date = parseRFC2822Date(text), vals = _parseRFC2822Date[0], parsedZone = _parseRFC2822Date[1];
           return parseDataToDateTime(vals, parsedZone, opts, "RFC 2822", text);
         };
-        DateTime5.fromHTTP = function fromHTTP(text, opts) {
+        DateTime4.fromHTTP = function fromHTTP(text, opts) {
           if (opts === void 0) {
             opts = {};
           }
           var _parseHTTPDate = parseHTTPDate(text), vals = _parseHTTPDate[0], parsedZone = _parseHTTPDate[1];
           return parseDataToDateTime(vals, parsedZone, opts, "HTTP", opts);
         };
-        DateTime5.fromFormat = function fromFormat(text, fmt, opts) {
+        DateTime4.fromFormat = function fromFormat(text, fmt, opts) {
           if (opts === void 0) {
             opts = {};
           }
@@ -4120,25 +4120,25 @@
             defaultToEN: true
           }), _parseFromTokens = parseFromTokens(localeToUse, text, fmt), vals = _parseFromTokens[0], parsedZone = _parseFromTokens[1], invalid = _parseFromTokens[2];
           if (invalid) {
-            return DateTime5.invalid(invalid);
+            return DateTime4.invalid(invalid);
           } else {
             return parseDataToDateTime(vals, parsedZone, opts, "format " + fmt, text);
           }
         };
-        DateTime5.fromString = function fromString(text, fmt, opts) {
+        DateTime4.fromString = function fromString(text, fmt, opts) {
           if (opts === void 0) {
             opts = {};
           }
-          return DateTime5.fromFormat(text, fmt, opts);
+          return DateTime4.fromFormat(text, fmt, opts);
         };
-        DateTime5.fromSQL = function fromSQL(text, opts) {
+        DateTime4.fromSQL = function fromSQL(text, opts) {
           if (opts === void 0) {
             opts = {};
           }
           var _parseSQL = parseSQL(text), vals = _parseSQL[0], parsedZone = _parseSQL[1];
           return parseDataToDateTime(vals, parsedZone, opts, "SQL", text);
         };
-        DateTime5.invalid = function invalid(reason, explanation) {
+        DateTime4.invalid = function invalid(reason, explanation) {
           if (explanation === void 0) {
             explanation = null;
           }
@@ -4149,15 +4149,15 @@
           if (Settings.throwOnInvalid) {
             throw new InvalidDateTimeError(invalid2);
           } else {
-            return new DateTime5({
+            return new DateTime4({
               invalid: invalid2
             });
           }
         };
-        DateTime5.isDateTime = function isDateTime(o6) {
+        DateTime4.isDateTime = function isDateTime(o6) {
           return o6 && o6.isLuxonDateTime || false;
         };
-        var _proto = DateTime5.prototype;
+        var _proto = DateTime4.prototype;
         _proto.get = function get3(unit) {
           return this[unit];
         };
@@ -4190,7 +4190,7 @@
           if (zone.equals(this.zone)) {
             return this;
           } else if (!zone.isValid) {
-            return DateTime5.invalid(unsupportedZone(zone));
+            return DateTime4.invalid(unsupportedZone(zone));
           } else {
             var newTS = this.ts;
             if (keepLocalTime || keepCalendarTime) {
@@ -4430,7 +4430,7 @@
           if (opts === void 0) {
             opts = {};
           }
-          return this.diff(DateTime5.now(), unit, opts);
+          return this.diff(DateTime4.now(), unit, opts);
         };
         _proto.until = function until(otherDateTime) {
           return this.isValid ? Interval.fromDateTimes(this, otherDateTime) : this;
@@ -4453,7 +4453,7 @@
           }
           if (!this.isValid)
             return null;
-          var base = options.base || DateTime5.fromObject({}, {
+          var base = options.base || DateTime4.fromObject({}, {
             zone: this.zone
           }), padding = options.padding ? this < base ? -options.padding : options.padding : 0;
           var units = ["years", "months", "days", "hours", "minutes", "seconds"];
@@ -4474,7 +4474,7 @@
           }
           if (!this.isValid)
             return null;
-          return diffRelative(options.base || DateTime5.fromObject({}, {
+          return diffRelative(options.base || DateTime4.fromObject({}, {
             zone: this.zone
           }), this, _extends2({}, options, {
             numeric: "auto",
@@ -4482,29 +4482,29 @@
             calendary: true
           }));
         };
-        DateTime5.min = function min() {
+        DateTime4.min = function min() {
           for (var _len = arguments.length, dateTimes = new Array(_len), _key = 0; _key < _len; _key++) {
             dateTimes[_key] = arguments[_key];
           }
-          if (!dateTimes.every(DateTime5.isDateTime)) {
+          if (!dateTimes.every(DateTime4.isDateTime)) {
             throw new InvalidArgumentError("min requires all arguments be DateTimes");
           }
           return bestBy(dateTimes, function(i3) {
             return i3.valueOf();
           }, Math.min);
         };
-        DateTime5.max = function max() {
+        DateTime4.max = function max() {
           for (var _len2 = arguments.length, dateTimes = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
             dateTimes[_key2] = arguments[_key2];
           }
-          if (!dateTimes.every(DateTime5.isDateTime)) {
+          if (!dateTimes.every(DateTime4.isDateTime)) {
             throw new InvalidArgumentError("max requires all arguments be DateTimes");
           }
           return bestBy(dateTimes, function(i3) {
             return i3.valueOf();
           }, Math.max);
         };
-        DateTime5.fromFormatExplain = function fromFormatExplain(text, fmt, options) {
+        DateTime4.fromFormatExplain = function fromFormatExplain(text, fmt, options) {
           if (options === void 0) {
             options = {};
           }
@@ -4515,13 +4515,13 @@
           });
           return explainFromTokens(localeToUse, text, fmt);
         };
-        DateTime5.fromStringExplain = function fromStringExplain(text, fmt, options) {
+        DateTime4.fromStringExplain = function fromStringExplain(text, fmt, options) {
           if (options === void 0) {
             options = {};
           }
-          return DateTime5.fromFormatExplain(text, fmt, options);
+          return DateTime4.fromFormatExplain(text, fmt, options);
         };
-        _createClass2(DateTime5, [{
+        _createClass2(DateTime4, [{
           key: "isValid",
           get: function get3() {
             return this.invalid === null;
@@ -4827,21 +4827,21 @@
             return DATETIME_HUGE_WITH_SECONDS;
           }
         }]);
-        return DateTime5;
+        return DateTime4;
       }();
       function friendlyDateTime(dateTimeish) {
-        if (DateTime4.isDateTime(dateTimeish)) {
+        if (DateTime3.isDateTime(dateTimeish)) {
           return dateTimeish;
         } else if (dateTimeish && dateTimeish.valueOf && isNumber2(dateTimeish.valueOf())) {
-          return DateTime4.fromJSDate(dateTimeish);
+          return DateTime3.fromJSDate(dateTimeish);
         } else if (dateTimeish && typeof dateTimeish === "object") {
-          return DateTime4.fromObject(dateTimeish);
+          return DateTime3.fromObject(dateTimeish);
         } else {
           throw new InvalidArgumentError("Unknown datetime argument: " + dateTimeish + ", of type " + typeof dateTimeish);
         }
       }
       var VERSION = "2.1.1";
-      exports.DateTime = DateTime4;
+      exports.DateTime = DateTime3;
       exports.Duration = Duration;
       exports.FixedOffsetZone = FixedOffsetZone;
       exports.IANAZone = IANAZone;
@@ -15286,9 +15286,6 @@
     snapshotProcessor
   };
 
-  // src/orders/ordersApi.ts
-  var import_luxon2 = __toModule(require_luxon());
-
   // src/orders/Order.ts
   var import_luxon = __toModule(require_luxon());
 
@@ -15395,8 +15392,11 @@
 
   // src/orders/ordersApi.ts
   var saveOrder = async (order) => {
-    console.log(order);
-    order.orderDate = import_luxon2.DateTime.fromFormat(order.orderDate, "MM-dd-yyyy").toUTC().toJSON();
+    const year = order.orderDate.substring(6, order.orderDate.length) + "-";
+    const monthDay = order.orderDate.substring(0, 5);
+    const datetime = (year + monthDay + "T00:00:00").replace("/", "-");
+    order.orderDate = datetime;
+    console.log(order.orderDate);
     const response = await fetch(`${AppBasePath}/api/orders`, {
       method: "POST",
       headers: {
@@ -15430,7 +15430,7 @@
   }));
 
   // src/orders/orderDetailsEditor.ts
-  var import_luxon3 = __toModule(require_luxon());
+  var import_luxon2 = __toModule(require_luxon());
   var orderDetailsEditor = (order) => p`
     <label>
         <p>Customer Name</p>
@@ -15455,7 +15455,7 @@
         <input type="text" .value=${order.emailAddress} @change=${handlePropChange(order, (order2, val) => order2.setEmailAddress(val))}
                 required></input>
     </label>
-        <input type="hidden" .value=${import_luxon3.DateTime.now().toUTC().toJSON()} @change=${handlePropChange(order, (order2, val) => order2.setOrderDate(val))}
+        <input type="hidden" .value=${import_luxon2.DateTime.now().toUTC().toJSON()} @change=${handlePropChange(order, (order2, val) => order2.setOrderDate(val))}
                 required>
         </input>
     `;
