@@ -10529,7 +10529,7 @@
     }
   })).views((self2) => ({
     get totalPrice() {
-      return self2.items.reduce((total, item) => total === void 0 ? void 0 : item?.totalPriceOnDate === void 0 ? total : total + item.totalPriceOnDate, 0);
+      return self2.items.reduce((total, item) => total === void 0 ? void 0 : self2.id === "" ? item?.totalPrice === void 0 ? total : total + item.totalPrice : item?.totalPriceOnDate === void 0 ? total : total + item.totalPriceOnDate, 0);
     }
   }));
   var Order = types.snapshotProcessor(BaseOrder, { postProcessor });
