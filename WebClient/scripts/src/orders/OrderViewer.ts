@@ -33,7 +33,7 @@ const orderViewer = (
 
     <label>
         <p><strong>Date</strong></p>
-        <p>${order.orderDate}</p>
+        <p>${order.orderDate.substring(0, order.orderDate.indexOf("T"))}</p>
     </label>
 	
     <br />

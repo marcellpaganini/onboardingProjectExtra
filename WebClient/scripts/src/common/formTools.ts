@@ -1,3 +1,4 @@
+
 export const handlePropChange = <T>(item: T, handler: (obj: T, val: string) => void) => (e: Event) => {
     const target = <HTMLInputElement>e.currentTarget;
 
@@ -19,3 +20,4 @@ export const priceToCurrency = (price: number | undefined) =>
 
 export const decimalToPercentage = (decimal: number | undefined) =>
     decimal?.toLocaleString("en", {style: "percent"}) ?? "";
+    

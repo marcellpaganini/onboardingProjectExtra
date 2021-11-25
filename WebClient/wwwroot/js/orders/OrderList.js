@@ -10503,7 +10503,7 @@
     deliveryAddress: types.optional(types.string, ""),
     phoneNumber: types.optional(types.refinement(types.string, (p2) => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p2)), ""),
     emailAddress: types.optional(types.refinement(types.string, (e5) => /^$|\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(e5)), ""),
-    orderDate: types.optional(types.Date, new Date()),
+    orderDate: types.optional(types.string, ""),
     items: types.array(OrderItem)
   }).actions((self2) => ({
     setCustomerName(customerName) {
@@ -10634,9 +10634,10 @@
   var priceToCurrency = (price) => price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
 
   // src/orders/OrderList.ts
-  var ordersRow = ({ id, customerName, totalPrice }) => p`
+  var ordersRow = ({ id, customerName, totalPrice, orderDate }) => p`
     <tr>
         <td>${customerName}</td>
+        <td>${orderDate.substring(0, orderDate.indexOf("T"))}</td>
         <td>${priceToCurrency(totalPrice)}</td>
         <td>
             <a href="${AppBasePath}/orders/View/${id}">View</a>
@@ -10648,6 +10649,7 @@
         <thead>
             <tr>
             <th>Customer Name</th>
+            <th>Date</th>
             <th>Total</th>
             <th></th>
             </tr>

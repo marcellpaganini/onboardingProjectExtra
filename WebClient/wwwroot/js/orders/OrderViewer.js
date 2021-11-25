@@ -10517,7 +10517,7 @@
     deliveryAddress: types.optional(types.string, ""),
     phoneNumber: types.optional(types.refinement(types.string, (p2) => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p2)), ""),
     emailAddress: types.optional(types.refinement(types.string, (e5) => /^$|\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(e5)), ""),
-    orderDate: types.optional(types.Date, new Date()),
+    orderDate: types.optional(types.string, ""),
     items: types.array(OrderItem)
   }).actions((self2) => ({
     setCustomerName(customerName) {
@@ -10671,7 +10671,7 @@
 
     <label>
         <p><strong>Date</strong></p>
-        <p>${order.orderDate}</p>
+        <p>${order.orderDate.substring(0, order.orderDate.indexOf("T"))}</p>
     </label>
 	
     <br />

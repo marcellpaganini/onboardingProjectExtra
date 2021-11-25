@@ -7,10 +7,11 @@ import { table, button } from '../common/componentStyle';
 import { priceToCurrency } from '../common/formTools';
 
 
-const ordersRow = ({id, customerName, totalPrice}: IOrder) =>
+const ordersRow = ({id, customerName, totalPrice, orderDate}: IOrder) =>
     html`
     <tr>
         <td>${customerName}</td>
+        <td>${orderDate.substring(0, orderDate.indexOf("T"))}</td>
         <td>${priceToCurrency(totalPrice)}</td>
         <td>
             <a href="${AppBasePath}/orders/View/${id}">View</a>
@@ -24,6 +25,7 @@ const ordersTable = (orders: IOrder[] = []) =>
         <thead>
             <tr>
             <th>Customer Name</th>
+            <th>Date</th>
             <th>Total</th>
             <th></th>
             </tr>
