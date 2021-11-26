@@ -4,7 +4,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { OrderViewerStore } from './orderViewerStore';
 import { IOrder } from './Order';
 import { button, table } from '../common/componentStyle';
-import { priceToCurrency, decimalToPercentage } from '../common/formTools';
+import { priceToCurrency, decimalToPercentage, getStatus } from '../common/formTools';
 
 
 const orderViewer = (
@@ -34,6 +34,11 @@ const orderViewer = (
     <label>
         <p><strong>Date</strong></p>
         <p>${order.orderDate.substring(0, order.orderDate.indexOf("T"))}</p>
+    </label>
+
+    <label>
+        <p><strong>Status</strong></p>
+        <p>${getStatus(order.status)}</p>
     </label>
 	
     <br />

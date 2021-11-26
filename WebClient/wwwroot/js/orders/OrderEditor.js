@@ -9671,6 +9671,9 @@
   };
   var priceToCurrency = (price) => price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
   var decimalToPercentage = (decimal) => decimal?.toLocaleString("en", { style: "percent" }) ?? "";
+  var getRandomStatus = () => {
+    return Math.floor(Math.random() * (8 - 1) + 1);
+  };
 
   // node_modules/mobx-state-tree/dist/mobx-state-tree.module.js
   var livelinessChecking = "warn";
@@ -15361,6 +15364,7 @@
     phoneNumber: types.optional(types.refinement(types.string, (p2) => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p2)), ""),
     emailAddress: types.optional(types.refinement(types.string, (e5) => /^$|\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(e5)), ""),
     orderDate: types.optional(types.string, import_luxon.DateTime.now().toUTC().toJSON()),
+    status: types.optional(types.number, 1),
     items: types.array(OrderItem)
   }).actions((self2) => ({
     setCustomerName(customerName) {
@@ -15378,6 +15382,9 @@
     setOrderDate(orderDate) {
       self2.orderDate = orderDate;
     },
+    setOrderStatus(orderStatus) {
+      self2.status = orderStatus;
+    },
     addItem() {
       self2.items.push(OrderItem.create({}));
     },
@@ -15393,6 +15400,7 @@
 
   // src/orders/ordersApi.ts
   var saveOrder = async (order) => {
+    order.status = getRandomStatus();
     const response = await fetch(`${AppBasePath}/api/orders`, {
       method: "POST",
       headers: {
@@ -15451,6 +15459,9 @@
         <input type="text" .value=${order.emailAddress} @change=${handlePropChange(order, (order2, val) => order2.setEmailAddress(val))}
                 required></input>
     </label>
+        <input type="hidden" .value=${getRandomStatus().toString()} @change=${handlePropChange(order, (order2, val) => order2.setOrderStatus(Number(val)))}
+                required>
+        </input>
         <input type="hidden" .value=${import_luxon2.DateTime.now().toUTC().toJSON()} @change=${handlePropChange(order, (order2, val) => order2.setOrderDate(val))}
                 required>
         </input>

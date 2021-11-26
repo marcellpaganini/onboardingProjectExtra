@@ -15286,6 +15286,30 @@
     snapshotProcessor
   };
 
+  // src/common/formTools.ts
+  var priceToCurrency = (price) => price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
+  var decimalToPercentage = (decimal) => decimal?.toLocaleString("en", { style: "percent" }) ?? "";
+  var getStatus = (status) => {
+    switch (status) {
+      case 1:
+        return "\u23F3 Pending payment";
+      case 2:
+        return "\u{1F9FE} Payment received";
+      case 3:
+        return "\u{1F4E6} Shipped";
+      case 4:
+        return "\u{1F69A} On vehicle for delivery";
+      case 5:
+        return "\u2705 Delivered";
+      case 6:
+        return "\u274C Canceled";
+      case 7:
+        return "\u21A9 Returned to sender";
+      default:
+        return "No status";
+    }
+  };
+
   // src/orders/Order.ts
   var import_luxon = __toModule(require_luxon());
 
@@ -15361,6 +15385,7 @@
     phoneNumber: types.optional(types.refinement(types.string, (p2) => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p2)), ""),
     emailAddress: types.optional(types.refinement(types.string, (e5) => /^$|\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(e5)), ""),
     orderDate: types.optional(types.string, import_luxon.DateTime.now().toUTC().toJSON()),
+    status: types.optional(types.number, 1),
     items: types.array(OrderItem)
   }).actions((self2) => ({
     setCustomerName(customerName) {
@@ -15377,6 +15402,9 @@
     },
     setOrderDate(orderDate) {
       self2.orderDate = orderDate;
+    },
+    setOrderStatus(orderStatus) {
+      self2.status = orderStatus;
     },
     addItem() {
       self2.items.push(OrderItem.create({}));
@@ -15486,10 +15514,6 @@
     }
 `;
 
-  // src/common/formTools.ts
-  var priceToCurrency = (price) => price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
-  var decimalToPercentage = (decimal) => decimal?.toLocaleString("en", { style: "percent" }) ?? "";
-
   // src/orders/OrderViewer.ts
   var orderViewer = (order) => p`
     <label>
@@ -15515,6 +15539,11 @@
     <label>
         <p><strong>Date</strong></p>
         <p>${order.orderDate.substring(0, order.orderDate.indexOf("T"))}</p>
+    </label>
+
+    <label>
+        <p><strong>Status</strong></p>
+        <p>${getStatus(order.status)}</p>
     </label>
 	
     <br />

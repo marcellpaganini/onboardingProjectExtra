@@ -1,5 +1,5 @@
-import { DateTime } from 'luxon';
 import { getSnapshot, SnapshotIn } from 'mobx-state-tree';
+import { getRandomStatus } from '../common/formTools';
 import { IOrder, Order } from './Order';
 
 export const getOrders = async () => {
@@ -17,6 +17,8 @@ export const getOrder = async (id: string) => {
 };
 
 export const saveOrder = async (order: IOrder) => {
+
+    order.status = getRandomStatus();
 
     const response = await fetch(`${AppBasePath}/api/orders`, {
         method: 'POST',

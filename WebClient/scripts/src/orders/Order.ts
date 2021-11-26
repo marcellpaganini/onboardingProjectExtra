@@ -11,6 +11,7 @@ export const BaseOrder = types
         phoneNumber: types.optional(types.refinement(types.string, p => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p)), ""),
         emailAddress: types.optional(types.refinement(types.string, e => /^$|\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(e)), ""),
         orderDate: types.optional(types.string, DateTime.now().toUTC().toJSON()),
+        status: types.optional(types.number, 1),
         items: types.array(OrderItem)
     })
     .actions(self => ({
@@ -32,6 +33,10 @@ export const BaseOrder = types
 
         setOrderDate(orderDate: string) {
             self.orderDate = orderDate;
+        },
+
+        setOrderStatus(orderStatus: number) {
+            self.status = orderStatus;
         },
 
         addItem() {
