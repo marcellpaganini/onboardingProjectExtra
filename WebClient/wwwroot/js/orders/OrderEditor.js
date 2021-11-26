@@ -15359,7 +15359,7 @@
     deliveryAddress: types.optional(types.string, ""),
     phoneNumber: types.optional(types.refinement(types.string, (p2) => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p2)), ""),
     emailAddress: types.optional(types.refinement(types.string, (e5) => /^$|\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(e5)), ""),
-    orderDate: types.optional(types.string, import_luxon.DateTime.now().toLocaleString()),
+    orderDate: types.optional(types.string, import_luxon.DateTime.now().toUTC().toJSON()),
     items: types.array(OrderItem)
   }).actions((self2) => ({
     setCustomerName(customerName) {
@@ -15392,10 +15392,6 @@
 
   // src/orders/ordersApi.ts
   var saveOrder = async (order) => {
-    const year = order.orderDate.substring(6, order.orderDate.length) + "-";
-    const monthDay = order.orderDate.substring(0, 5);
-    const datetime = (year + monthDay + "T00:00:00").replace("/", "-");
-    order.orderDate = datetime;
     console.log(order.orderDate);
     const response = await fetch(`${AppBasePath}/api/orders`, {
       method: "POST",
@@ -15477,7 +15473,7 @@
         <td>
             <input type="number" min="1" class="tableInput" .value=${orderItem.quantity.toString()} @change=${handlePropChange(orderItem, (item, val) => item.setQuantity(Number(val) ?? 1))}
             required />
-            <input type="hidden" value="${orderItem.inventoryItemId?.id === void 0 ? orderItem.buyPricePerUnit : orderItem.unitPrice?.toString() ?? 0}" 
+            <input type="hidden" value="${orderItem.inventoryItemId?.id === void 0 ? orderItem.unitPrice?.toString() ?? 0 : orderItem.buyPricePerUnit}" 
                 @change=${handlePropChange(orderItem, (item, val) => item.setBuyPricePerUnit(Number(val)))}>
         </td>
         <td>

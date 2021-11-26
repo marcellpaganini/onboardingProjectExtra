@@ -30,7 +30,7 @@ const orderItemEditor = (
             <input type="number" min="1" class="tableInput" .value=${orderItem.quantity.toString()} @change=${handlePropChange(orderItem, (item, val)=>
             item.setQuantity(Number(val) ?? 1))}
             required />
-            <input type="hidden" value="${orderItem.inventoryItemId?.id === undefined ? orderItem.buyPricePerUnit : orderItem.unitPrice?.toString() ?? 0.00}" 
+            <input type="hidden" value="${orderItem.inventoryItemId?.id === undefined ? orderItem.unitPrice?.toString() ?? 0.00 : orderItem.buyPricePerUnit}" 
                 @change=${handlePropChange(orderItem, (item, val)=> item.setBuyPricePerUnit(Number(val)))}>
         </td>
         <td>

@@ -18,11 +18,7 @@ export const getOrder = async (id: string) => {
 
 export const saveOrder = async (order: IOrder) => {
 
-    const year = order.orderDate.substring(6, order.orderDate.length) + "-";
-    const monthDay = order.orderDate.substring(0, 5);
-    const datetime = (year + monthDay + "T00:00:00").replace("/", "-");
-    order.orderDate = datetime;
-    console.log(order.orderDate);
+   console.log(order.orderDate);
 
 
     const response = await fetch(`${AppBasePath}/api/orders`, {
