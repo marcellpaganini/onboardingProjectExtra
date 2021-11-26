@@ -15316,6 +15316,7 @@
     },
     setBuyPricePerUnit(buyPricePerUnit) {
       self2.buyPricePerUnit = buyPricePerUnit;
+      return self2.buyPricePerUnit;
     }
   })).views((self2) => ({
     get unitPrice() {

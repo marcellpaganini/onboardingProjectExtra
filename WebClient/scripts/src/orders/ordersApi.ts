@@ -18,9 +18,6 @@ export const getOrder = async (id: string) => {
 
 export const saveOrder = async (order: IOrder) => {
 
-   console.log(order.orderDate);
-
-
     const response = await fetch(`${AppBasePath}/api/orders`, {
         method: 'POST',
         headers: {

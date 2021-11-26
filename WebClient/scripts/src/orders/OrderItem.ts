@@ -21,6 +21,7 @@ export const BaseOrderItem = types
 
         setBuyPricePerUnit(buyPricePerUnit: number) {
             self.buyPricePerUnit = buyPricePerUnit;
+            return self.buyPricePerUnit;
         }
 
     }))

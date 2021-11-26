@@ -15330,6 +15330,7 @@
     },
     setBuyPricePerUnit(buyPricePerUnit) {
       self2.buyPricePerUnit = buyPricePerUnit;
+      return self2.buyPricePerUnit;
     }
   })).views((self2) => ({
     get unitPrice() {
@@ -15392,7 +15393,6 @@
 
   // src/orders/ordersApi.ts
   var saveOrder = async (order) => {
-    console.log(order.orderDate);
     const response = await fetch(`${AppBasePath}/api/orders`, {
       method: "POST",
       headers: {
@@ -15473,8 +15473,7 @@
         <td>
             <input type="number" min="1" class="tableInput" .value=${orderItem.quantity.toString()} @change=${handlePropChange(orderItem, (item, val) => item.setQuantity(Number(val) ?? 1))}
             required />
-            <input type="hidden" value="${orderItem.inventoryItemId?.id === void 0 ? orderItem.unitPrice?.toString() ?? 0 : orderItem.buyPricePerUnit}" 
-                @change=${handlePropChange(orderItem, (item, val) => item.setBuyPricePerUnit(Number(val)))}>
+            <input type="hidden" value="${orderItem.inventoryItemId?.id === void 0 ? orderItem.unitPrice?.toString() ?? 0 : orderItem.setBuyPricePerUnit(Number(orderItem.unitPrice))}">
         </td>
         <td>
             ${priceToCurrency(orderItem.unitPrice)}
