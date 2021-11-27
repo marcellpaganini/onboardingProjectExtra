@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using OrderManagement.Types.Orders;
 
 namespace OrderManagement.Types.Customers
 {
@@ -14,5 +16,6 @@ namespace OrderManagement.Types.Customers
         public string Country { get; init; } = "";
         public string EmailAddress { get; init; } = "";
         public string PhoneNumber { get; init; } = "";
+        public ICollection<Order> Orders { get; init; } = new List<Order>();
     }
 }
