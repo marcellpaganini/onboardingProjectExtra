@@ -432,3 +432,15 @@ $RECYCLE.BIN/
 WebClient/wwwroot/js
 WebClient/scripts/node_modules
 WebClient/test.db
+WebClient/obj/Debug/net5.0/WebClient.assets.cache
+Types/obj/Debug/net5.0/Types.GeneratedMSBuildEditorConfig.editorconfig
+Types/obj/Debug/net5.0/Types.assets.cache
+Services/obj/Debug/net5.0/Services.GeneratedMSBuildEditorConfig.editorconfig
+Services/obj/Debug/net5.0/Services.assets.cache
+Data/obj/Debug/net5.0/Data.assets.cache
+WebClient/obj/Debug/net5.0/WebClient.assets.cache
+Types/obj/Debug/net5.0/Types.GeneratedMSBuildEditorConfig.editorconfig
+Types/obj/Debug/net5.0/Types.assets.cache
+Services/obj/Debug/net5.0/Services.GeneratedMSBuildEditorConfig.editorconfig
+Services/obj/Debug/net5.0/Services.assets.cache
+Data/obj/Debug/net5.0/Data.assets.cache
