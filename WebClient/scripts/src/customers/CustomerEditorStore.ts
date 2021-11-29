@@ -7,7 +7,7 @@ const defaultCustomer = {
     lastName: "",
     deliveryAddress: "",
     city: "",
-    state: "",
+    state: "New Brunswick",
     postalCode: "",
     country: "",
     emailAddress: "",
