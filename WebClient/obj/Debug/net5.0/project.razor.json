@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\WebClient.csproj",
+  "FilePath": "c:\\src\\MissingLink\\onboardingProjectExtra\\WebClient\\WebClient.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "5.0",
@@ -15619,48 +15619,48 @@
   "RootNamespace": "WebClient",
   "Documents": [
     {
-      "FilePath": "c:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\Pages\\_ViewImports.cshtml",
-      "TargetPath": "Pages\\_ViewImports.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\Pages\\Orders\\Edit.cshtml",
-      "TargetPath": "Pages\\Orders\\Edit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\Pages\\Orders\\View.cshtml",
+      "FilePath": "c:\\src\\MissingLink\\onboardingProjectExtra\\WebClient\\Pages\\Orders\\View.cshtml",
       "TargetPath": "Pages\\Orders\\View.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\Pages\\Index.cshtml",
+      "FilePath": "c:\\src\\MissingLink\\onboardingProjectExtra\\WebClient\\Pages\\Index.cshtml",
       "TargetPath": "Pages\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\Pages\\Inventory\\Index.cshtml",
-      "TargetPath": "Pages\\Inventory\\Index.cshtml",
+      "FilePath": "c:\\src\\MissingLink\\onboardingProjectExtra\\WebClient\\Pages\\Orders\\Edit.cshtml",
+      "TargetPath": "Pages\\Orders\\Edit.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\Pages\\_ViewStart.cshtml",
-      "TargetPath": "Pages\\_ViewStart.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\Pages\\Orders\\Index.cshtml",
-      "TargetPath": "Pages\\Orders\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\Pages\\Inventory\\Edit.cshtml",
+      "FilePath": "c:\\src\\MissingLink\\onboardingProjectExtra\\WebClient\\Pages\\Inventory\\Edit.cshtml",
       "TargetPath": "Pages\\Inventory\\Edit.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\Pages\\Shared\\_Layout.cshtml",
+      "FilePath": "c:\\src\\MissingLink\\onboardingProjectExtra\\WebClient\\Pages\\Shared\\_Layout.cshtml",
       "TargetPath": "Pages\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\src\\MissingLink\\onboardingProjectExtra\\WebClient\\Pages\\_ViewImports.cshtml",
+      "TargetPath": "Pages\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\src\\MissingLink\\onboardingProjectExtra\\WebClient\\Pages\\Orders\\Index.cshtml",
+      "TargetPath": "Pages\\Orders\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\src\\MissingLink\\onboardingProjectExtra\\WebClient\\Pages\\Inventory\\Index.cshtml",
+      "TargetPath": "Pages\\Inventory\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\src\\MissingLink\\onboardingProjectExtra\\WebClient\\Pages\\_ViewStart.cshtml",
+      "TargetPath": "Pages\\_ViewStart.cshtml",
       "FileKind": "mvc"
     }
   ],

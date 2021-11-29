@@ -20,7 +20,7 @@ namespace OrderManagement.Data.Customers
                 .Include(o => o.Orders)
                 .ToListAsync();
 
-        public async Task<Customer?> Get(Guid id) =>
+        public async Task<Customer?> Get(Guid? id) =>
             await context.Set<Customer>()
                 .Include(o => o.Orders)
                 .FirstOrDefaultAsync(r => r.Id == id);

@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OrderManagement.Types.Customer;
+using OrderManagement.Types.Customers;
 
-namespace OrderManagement.Data.Customer
+namespace OrderManagement.Data.Customers
 {
     public class CustomerModel : BaseModel<Customer>
     {
