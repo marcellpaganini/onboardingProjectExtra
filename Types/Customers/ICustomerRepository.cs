@@ -9,5 +9,6 @@ namespace OrderManagement.Types.Customers
         Task<IEnumerable<Customer>> Get();
         Task<Customer?> Get(Guid? id);
         Task<Customer> Save(Customer customer);
+        Task<Customer> Delete(Customer item);
     }
 }

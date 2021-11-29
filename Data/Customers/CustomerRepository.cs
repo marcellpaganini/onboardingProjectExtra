@@ -36,5 +36,12 @@ namespace OrderManagement.Data.Customers
 
             return customer;
         }
+
+        public async Task<Customer> Delete(Customer customer)
+        {
+            context.Remove(customer);
+            await context.SaveChangesAsync();
+            return customer;
+        }
     }
 }
