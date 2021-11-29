@@ -1,34 +1,20 @@
 import { DateTime } from 'luxon';
-import { Instance, types } from 'mobx-state-tree';
-import { postProcessor } from '../common/recordPostProcessor';
+import { Instance, SnapshotOut, types } from 'mobx-state-tree';
+import { Customer, ICustomer } from '../customers/Customer';
 import { IOrderItem, OrderItem } from './OrderItem';
+
 
 export const BaseOrder = types
     .model("Order", {
         id: types.optional(types.identifier, ""),
-        customerName: types.optional(types.string, ""),
-        deliveryAddress: types.optional(types.string, ""),
-        phoneNumber: types.optional(types.refinement(types.string, p => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p)), ""),
-        emailAddress: types.optional(types.refinement(types.string, e => /^$|\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(e)), ""),
+        customerId: types.maybe(types.reference(Customer)),
         orderDate: types.optional(types.string, DateTime.now().toUTC().toJSON()),
         status: types.optional(types.number, 1),
         items: types.array(OrderItem)
     })
     .actions(self => ({
-        setCustomerName(customerName: string) {
-            self.customerName = customerName;
-        },
-
-        setDeliveryAddress(deliveryAddress: string) {
-            self.deliveryAddress = deliveryAddress;
-        },
-
-        setPhoneNumber(phoneNumber: string) {
-            self.phoneNumber = phoneNumber;
-        },
-
-        setEmailAddress(emailAddress: string) {
-            self.emailAddress = emailAddress;
+        setCustomer(customer: ICustomer | undefined) {
+            self.customerId = customer;
         },
 
         setOrderDate(orderDate: string) {
@@ -65,6 +51,13 @@ export const BaseOrder = types
         }
     }));
 
-export const Order = types.snapshotProcessor(BaseOrder, { postProcessor })
+    const postProcessSnapshot = (snapshot: SnapshotOut<typeof BaseOrder>) =>
+    ({
+        ...snapshot,
+        id: snapshot.id || undefined,
+        customerId: snapshot.customerId
+    });
+
+export const Order = types.snapshotProcessor(BaseOrder, { postProcessor: postProcessSnapshot })
 
 export type IOrder = Instance<typeof Order>
