@@ -10,7 +10,7 @@ const BaseInventoryItem = types
         city: types.optional(types.string, ""),
         state: types.enumeration("state", ["Ontario", "Quebec", "Nova Scotia", "New Brunswick", "Manitoba",
                                  "British Columbia", "Prince Edward Island", "Saskatchewan", "Alberta", "Newfoundland and Labrador"]),
-        postalCode: types.optional(types.refinement(types.string, p => /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i.test(p)), ""),
+        postalCode: types.optional(types.refinement(types.string, p => /^$|[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i.test(p)), ""),
         country: types.optional(types.string, "Canada"),
         emailAddress: types.optional(types.refinement(types.string, e => /^$|\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(e)), ""),
         phoneNumber: types.optional(types.refinement(types.string, p => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p)), "")

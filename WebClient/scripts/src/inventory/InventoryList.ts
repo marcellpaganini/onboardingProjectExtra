@@ -22,7 +22,6 @@ const inventoryRow = ({ id, name, price, image }: IInventoryItem) =>
 
 const inventoryTable = (items: IInventoryItem[] = []) =>
     html`
-    <p>${DateTime.now().toUTC().toJSON()}</p>
     <table>
         <thead>
             <th>Item</th>

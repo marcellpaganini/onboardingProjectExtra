@@ -6,7 +6,6 @@ module.exports = {
         './src/orders/OrderViewer.ts',
         './src/orders/OrderList.ts',
         './src/customers/CustomersList.ts',
-        './src/customers/CustomerEditor.ts',
     ],
     bundle: true,
     sourcemap: true,

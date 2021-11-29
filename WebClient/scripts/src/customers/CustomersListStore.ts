@@ -11,4 +11,9 @@ export const CustomersListStore = types
         load: flow(function* () {
             self.customers = yield getCustomers();
         })
+    }))
+    .views(self => ({
+        get fullName() {
+            return `${self.customer?.firstName} ${self.customer?.lastName}`;
+        }
     }));
