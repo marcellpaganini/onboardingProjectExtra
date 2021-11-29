@@ -17,12 +17,10 @@ namespace OrderManagement.Data.Customers
 
         public async Task<IEnumerable<Customer>> Get() =>
             await context.Set<Customer>()
-                .Include(o => o.Orders)
                 .ToListAsync();
 
         public async Task<Customer?> Get(Guid? id) =>
             await context.Set<Customer>()
-                .Include(o => o.Orders)
                 .FirstOrDefaultAsync(r => r.Id == id);
         public async Task<Customer> Save(Customer customer)
         {
