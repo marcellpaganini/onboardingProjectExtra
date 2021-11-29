@@ -21,5 +21,8 @@ namespace OrderManagement.Services.Customers
 
         public async Task<Customer> Save(Customer customer) =>
             await customerRepository.Save(customer);
+        
+        public async Task<Customer> Delete(Customer customer) =>
+            await customerRepository.Delete(customer);
     }
 }
