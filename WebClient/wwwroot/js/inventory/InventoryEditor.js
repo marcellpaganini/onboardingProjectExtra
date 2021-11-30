@@ -4894,6 +4894,10 @@
         box-sizing: border-box;
     }
 
+    .customer {
+        width:40%;
+    }
+
     .tableInput {
         padding: 0;
         width:80%;

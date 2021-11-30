@@ -13,7 +13,7 @@ export const orderDetailsEditor = (
                 //This is slightly more complex than it needs to be because the inventoryItems collection isn't a map.
                 const matchingCustomer = customers.find(c => c.id === customerId);
                 order.setCustomer(matchingCustomer);
-            })} class="tableInput">
+            })} class="customer">
                 <option value="">--Choose a Customer--</option>
                 ${customers.map((customer) => 
                     html`
