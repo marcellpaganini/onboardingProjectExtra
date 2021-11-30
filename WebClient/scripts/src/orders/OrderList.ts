@@ -7,10 +7,10 @@ import { table, button } from '../common/componentStyle';
 import { getStatus, priceToCurrency } from '../common/formTools';
 
 
-const ordersRow = ({id, customerName, totalPrice, status, orderDate}: IOrder) =>
+const ordersRow = ({id, customerId, totalPrice, status, orderDate}: IOrder) =>
     html`
     <tr>
-        <td>${customerName}</td>
+        <td>${customerId?.fullName}</td>
         <td>${orderDate.substring(0, orderDate.indexOf("T"))}</td>
         <td>${getStatus(status)}</td>
         <td>${priceToCurrency(totalPrice)}</td>

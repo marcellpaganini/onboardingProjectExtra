@@ -13,22 +13,22 @@ const orderViewer = (
     html`
     <label>
         <p><strong>Customer Name</strong></p>
-        <p>${order.customerName}</p>
+        <p>${order.customerId?.fullName}</p>
     </label>
     
     <label>
         <p><strong>Delivery Address</strong></p>
-        <p>${order.deliveryAddress}</p>
+        <p>${order.customerId?.fullAddress}</p>
     </label>
 
     <label>
         <p><strong>Phone Number</strong></p>
-        <p>${order.phoneNumber}</p>
+        <p>${order.customerId?.phoneNumber}</p>
     </label>
 
     <label>
         <p><strong>Email Address</strong></p>
-        <p>${order.emailAddress}</p>
+        <p>${order.customerId?.emailAddress}</p>
     </label>
 
     <label>

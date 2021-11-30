@@ -15304,8 +15304,69 @@
     id: snapshot.id || void 0
   });
 
+  // src/customers/Customer.ts
+  var BaseInventoryItem = types.model("Customer", {
+    id: types.optional(types.identifier, ""),
+    firstName: types.optional(types.string, ""),
+    lastName: types.optional(types.string, ""),
+    deliveryAddress: types.optional(types.string, ""),
+    city: types.optional(types.string, ""),
+    state: types.enumeration("state", [
+      "Ontario",
+      "Quebec",
+      "Nova Scotia",
+      "New Brunswick",
+      "Manitoba",
+      "British Columbia",
+      "Prince Edward Island",
+      "Saskatchewan",
+      "Alberta",
+      "Newfoundland and Labrador"
+    ]),
+    postalCode: types.optional(types.refinement(types.string, (p2) => /^$|[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i.test(p2)), ""),
+    country: types.optional(types.string, "Canada"),
+    emailAddress: types.optional(types.refinement(types.string, (e5) => /^$|\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(e5)), ""),
+    phoneNumber: types.optional(types.refinement(types.string, (p2) => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p2)), "")
+  }).actions((self2) => ({
+    setFirstName(firstName) {
+      self2.firstName = firstName;
+    },
+    setLastName(lastName) {
+      self2.lastName = lastName;
+    },
+    setDeliveryAddress(deliveryAddress) {
+      self2.deliveryAddress = deliveryAddress;
+    },
+    setCity(city) {
+      self2.city = city;
+    },
+    setState(state) {
+      self2.state = state;
+    },
+    setPostalCode(postalCode) {
+      self2.postalCode = postalCode;
+    },
+    setCountry(country) {
+      self2.country = country;
+    },
+    setEmailAddress(emailAddress) {
+      self2.emailAddress = emailAddress;
+    },
+    setPhoneNumber(phoneNumber) {
+      self2.phoneNumber = phoneNumber;
+    }
+  })).views((self2) => ({
+    get fullName() {
+      return `${self2.firstName} ${self2.lastName}`;
+    },
+    get fullAddress() {
+      return `${self2.deliveryAddress}, ${self2.city}, ${self2.country} - PC: ${self2.postalCode}`;
+    }
+  }));
+  var Customer = types.snapshotProcessor(BaseInventoryItem, { postProcessor });
+
   // src/inventory/InventoryItem.ts
-  var BaseInventoryItem = types.model("InventoryItem", {
+  var BaseInventoryItem2 = types.model("InventoryItem", {
     id: types.optional(types.identifier, ""),
     name: types.string,
     price: types.number,
@@ -15321,7 +15382,7 @@
       self2.image = image;
     }
   }));
-  var InventoryItem = types.snapshotProcessor(BaseInventoryItem, { postProcessor });
+  var InventoryItem = types.snapshotProcessor(BaseInventoryItem2, { postProcessor });
 
   // src/orders/OrderItem.ts
   var BaseOrderItem = types.model("OrderItem", {
@@ -15365,25 +15426,13 @@
   // src/orders/Order.ts
   var BaseOrder = types.model("Order", {
     id: types.optional(types.identifier, ""),
-    customerName: types.optional(types.string, ""),
-    deliveryAddress: types.optional(types.string, ""),
-    phoneNumber: types.optional(types.refinement(types.string, (p2) => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p2)), ""),
-    emailAddress: types.optional(types.refinement(types.string, (e5) => /^$|\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(e5)), ""),
+    customerId: types.maybe(types.reference(Customer)),
     orderDate: types.optional(types.string, import_luxon.DateTime.now().toUTC().toJSON()),
     status: types.optional(types.number, 1),
     items: types.array(OrderItem)
   }).actions((self2) => ({
-    setCustomerName(customerName) {
-      self2.customerName = customerName;
-    },
-    setDeliveryAddress(deliveryAddress) {
-      self2.deliveryAddress = deliveryAddress;
-    },
-    setPhoneNumber(phoneNumber) {
-      self2.phoneNumber = phoneNumber;
-    },
-    setEmailAddress(emailAddress) {
-      self2.emailAddress = emailAddress;
+    setCustomer(customer) {
+      self2.customerId = customer;
     },
     setOrderDate(orderDate) {
       self2.orderDate = orderDate;
@@ -15402,7 +15451,12 @@
       return self2.items.reduce((total, item) => total === void 0 ? void 0 : self2.id === "" ? item?.totalPrice === void 0 ? total : total + item.totalPrice : item?.totalPriceOnDate === void 0 ? total : total + item.totalPriceOnDate, 0);
     }
   }));
-  var Order = types.snapshotProcessor(BaseOrder, { postProcessor });
+  var postProcessSnapshot2 = (snapshot) => ({
+    ...snapshot,
+    id: snapshot.id || void 0,
+    customerId: snapshot.customerId
+  });
+  var Order = types.snapshotProcessor(BaseOrder, { postProcessor: postProcessSnapshot2 });
 
   // src/orders/ordersApi.ts
   var getOrders = async () => {
@@ -15418,18 +15472,27 @@
     return results.map((i3) => InventoryItem.create(i3));
   };
 
+  // src/customers/customersApi.ts
+  var getCustomers = async () => {
+    const response = await fetch(`${AppBasePath}/api/customers`);
+    const results = await response.json();
+    return results.map((i3) => Customer.create(i3));
+  };
+
   // src/orders/OrderListStore.ts
   var OrderListStore = types.model("OrderListStore", {
     orders: types.maybe(types.array(Order)),
-    inventoryItems: types.array(InventoryItem)
+    inventoryItems: types.array(InventoryItem),
+    customers: types.array(Customer)
   }).actions((self2) => ({
     load: flow3(function* () {
       self2.inventoryItems = yield getInventoryItems();
+      self2.customers = yield getCustomers();
       self2.orders = yield getOrders();
     })
   })).views((self2) => ({
     get sortedOrders() {
-      return self2.orders?.slice().sort((a2, b2) => a2.customerName.localeCompare(b2.customerName, void 0, { caseFirst: "upper" })) ?? [];
+      return self2.orders?.slice().sort((a2, b2) => a2.customerId.firstName.localeCompare(b2.customerId.firstName, void 0, { caseFirst: "upper" })) ?? [];
     }
   }));
 
@@ -15501,9 +15564,9 @@
 `;
 
   // src/orders/OrderList.ts
-  var ordersRow = ({ id, customerName, totalPrice, status, orderDate }) => p`
+  var ordersRow = ({ id, customerId, totalPrice, status, orderDate }) => p`
     <tr>
-        <td>${customerName}</td>
+        <td>${customerId?.fullName}</td>
         <td>${orderDate.substring(0, orderDate.indexOf("T"))}</td>
         <td>${getStatus(status)}</td>
         <td>${priceToCurrency(totalPrice)}</td>

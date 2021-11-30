@@ -6,8 +6,7 @@ import { IOrder } from './Order';
 
 export const orderDetailsEditor = (
     order: IOrder,
-    customer: ICustomer,
-    customers: ICustomer[]
+    customers: ICustomer[],
 ) =>
     html`
     <select .value=${order.customerId?.id ?? ""} @change=${handlePropChange(order, (order, customerId) => {
@@ -18,7 +17,7 @@ export const orderDetailsEditor = (
                 <option value="">--Choose a Customer--</option>
                 ${customers.map((customer) => 
                     html`
-                    <option value=${customer.id}>${customer.firstName + " " + customer.lastName}</option>
+                    <option value=${customer.id}>${customer.fullName}</option>
                     `
                 )}
     </select>

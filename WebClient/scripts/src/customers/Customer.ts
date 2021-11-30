@@ -51,6 +51,15 @@ const BaseInventoryItem = types
         setPhoneNumber(phoneNumber: string) {
             self.phoneNumber = phoneNumber;
         }
+    }))
+    .views(self => ({
+        get fullName() {
+            return `${self.firstName} ${self.lastName}`;
+        },
+
+        get fullAddress() {
+            return `${self.deliveryAddress}, ${self.city}, ${self.country} - PC: ${self.postalCode}`;
+        }
     }));
 
 export const Customer = types.snapshotProcessor(BaseInventoryItem, { postProcessor })

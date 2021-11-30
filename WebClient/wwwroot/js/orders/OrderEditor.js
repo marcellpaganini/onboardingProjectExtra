@@ -15298,8 +15298,69 @@
     id: snapshot.id || void 0
   });
 
+  // src/customers/Customer.ts
+  var BaseInventoryItem = types.model("Customer", {
+    id: types.optional(types.identifier, ""),
+    firstName: types.optional(types.string, ""),
+    lastName: types.optional(types.string, ""),
+    deliveryAddress: types.optional(types.string, ""),
+    city: types.optional(types.string, ""),
+    state: types.enumeration("state", [
+      "Ontario",
+      "Quebec",
+      "Nova Scotia",
+      "New Brunswick",
+      "Manitoba",
+      "British Columbia",
+      "Prince Edward Island",
+      "Saskatchewan",
+      "Alberta",
+      "Newfoundland and Labrador"
+    ]),
+    postalCode: types.optional(types.refinement(types.string, (p2) => /^$|[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i.test(p2)), ""),
+    country: types.optional(types.string, "Canada"),
+    emailAddress: types.optional(types.refinement(types.string, (e5) => /^$|\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(e5)), ""),
+    phoneNumber: types.optional(types.refinement(types.string, (p2) => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p2)), "")
+  }).actions((self2) => ({
+    setFirstName(firstName) {
+      self2.firstName = firstName;
+    },
+    setLastName(lastName) {
+      self2.lastName = lastName;
+    },
+    setDeliveryAddress(deliveryAddress) {
+      self2.deliveryAddress = deliveryAddress;
+    },
+    setCity(city) {
+      self2.city = city;
+    },
+    setState(state) {
+      self2.state = state;
+    },
+    setPostalCode(postalCode) {
+      self2.postalCode = postalCode;
+    },
+    setCountry(country) {
+      self2.country = country;
+    },
+    setEmailAddress(emailAddress) {
+      self2.emailAddress = emailAddress;
+    },
+    setPhoneNumber(phoneNumber) {
+      self2.phoneNumber = phoneNumber;
+    }
+  })).views((self2) => ({
+    get fullName() {
+      return `${self2.firstName} ${self2.lastName}`;
+    },
+    get fullAddress() {
+      return `${self2.deliveryAddress}, ${self2.city}, ${self2.country} - PC: ${self2.postalCode}`;
+    }
+  }));
+  var Customer = types.snapshotProcessor(BaseInventoryItem, { postProcessor });
+
   // src/inventory/InventoryItem.ts
-  var BaseInventoryItem = types.model("InventoryItem", {
+  var BaseInventoryItem2 = types.model("InventoryItem", {
     id: types.optional(types.identifier, ""),
     name: types.string,
     price: types.number,
@@ -15315,7 +15376,7 @@
       self2.image = image;
     }
   }));
-  var InventoryItem = types.snapshotProcessor(BaseInventoryItem, { postProcessor });
+  var InventoryItem = types.snapshotProcessor(BaseInventoryItem2, { postProcessor });
 
   // src/orders/OrderItem.ts
   var BaseOrderItem = types.model("OrderItem", {
@@ -15359,25 +15420,13 @@
   // src/orders/Order.ts
   var BaseOrder = types.model("Order", {
     id: types.optional(types.identifier, ""),
-    customerName: types.optional(types.string, ""),
-    deliveryAddress: types.optional(types.string, ""),
-    phoneNumber: types.optional(types.refinement(types.string, (p2) => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p2)), ""),
-    emailAddress: types.optional(types.refinement(types.string, (e5) => /^$|\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(e5)), ""),
+    customerId: types.maybe(types.reference(Customer)),
     orderDate: types.optional(types.string, import_luxon.DateTime.now().toUTC().toJSON()),
     status: types.optional(types.number, 1),
     items: types.array(OrderItem)
   }).actions((self2) => ({
-    setCustomerName(customerName) {
-      self2.customerName = customerName;
-    },
-    setDeliveryAddress(deliveryAddress) {
-      self2.deliveryAddress = deliveryAddress;
-    },
-    setPhoneNumber(phoneNumber) {
-      self2.phoneNumber = phoneNumber;
-    },
-    setEmailAddress(emailAddress) {
-      self2.emailAddress = emailAddress;
+    setCustomer(customer) {
+      self2.customerId = customer;
     },
     setOrderDate(orderDate) {
       self2.orderDate = orderDate;
@@ -15396,7 +15445,12 @@
       return self2.items.reduce((total, item) => total === void 0 ? void 0 : self2.id === "" ? item?.totalPrice === void 0 ? total : total + item.totalPrice : item?.totalPriceOnDate === void 0 ? total : total + item.totalPriceOnDate, 0);
     }
   }));
-  var Order = types.snapshotProcessor(BaseOrder, { postProcessor });
+  var postProcessSnapshot2 = (snapshot) => ({
+    ...snapshot,
+    id: snapshot.id || void 0,
+    customerId: snapshot.customerId
+  });
+  var Order = types.snapshotProcessor(BaseOrder, { postProcessor: postProcessSnapshot2 });
 
   // src/orders/ordersApi.ts
   var saveOrder = async (order) => {
@@ -15418,13 +15472,22 @@
     return results.map((i3) => InventoryItem.create(i3));
   };
 
+  // src/customers/customersApi.ts
+  var getCustomers = async () => {
+    const response = await fetch(`${AppBasePath}/api/customers`);
+    const results = await response.json();
+    return results.map((i3) => Customer.create(i3));
+  };
+
   // src/orders/OrderEditorStore.ts
   var OrderEditorStore = types.model("OrderEditorStore", {
     order: types.optional(Order, () => Order.create({})),
-    inventoryItems: types.array(InventoryItem)
+    inventoryItems: types.array(InventoryItem),
+    customers: types.array(Customer)
   }).actions((self2) => ({
     load: flow3(function* () {
       self2.inventoryItems = yield getInventoryItems();
+      self2.customers = yield getCustomers();
     }),
     save: flow3(function* () {
       if (self2.order) {
@@ -15435,36 +15498,21 @@
 
   // src/orders/orderDetailsEditor.ts
   var import_luxon2 = __toModule(require_luxon());
-  var orderDetailsEditor = (order) => p`
-    <label>
-        <p>Customer Name</p>
-        <input type="text" .value=${order.customerName} @change=${handlePropChange(order, (order2, val) => order2.setCustomerName(val))}
-        required />
-    </label>
+  var orderDetailsEditor = (order, customers) => p`
+    <select .value=${order.customerId?.id ?? ""} @change=${handlePropChange(order, (order2, customerId) => {
+    const matchingCustomer = customers.find((c2) => c2.id === customerId);
+    order2.setCustomer(matchingCustomer);
+  })} class="tableInput">
+                <option value="">--Choose a Customer--</option>
+                ${customers.map((customer) => p`
+                    <option value=${customer.id}>${customer.fullName}</option>
+                    `)}
+    </select>
     
-    <label>
-        <p>Delivery Address</p>
-        <textarea rows="2" cols="40" .value=${order.deliveryAddress} @change=${handlePropChange(order, (order2, val) => order2.setDeliveryAddress(val))}
-                required></textarea>
-    </label>
-
-    <label>
-        <p>Phone Number</p>
-        <input type="text" .value=${order.phoneNumber} @change=${handlePropChange(order, (order2, val) => order2.setPhoneNumber(val))}
-                required></input>
-    </label>
-
-    <label>
-        <p>Email Address</p>
-        <input type="text" .value=${order.emailAddress} @change=${handlePropChange(order, (order2, val) => order2.setEmailAddress(val))}
-                required></input>
-    </label>
         <input type="hidden" .value=${getRandomStatus().toString()} @change=${handlePropChange(order, (order2, val) => order2.setOrderStatus(Number(val)))}
-                required>
-        </input>
+                required />
         <input type="hidden" .value=${import_luxon2.DateTime.now().toUTC().toJSON()} @change=${handlePropChange(order, (order2, val) => order2.setOrderDate(val))}
-                required>
-        </input>
+                required />
     `;
 
   // src/orders/orderItemEditor.ts
@@ -15593,9 +15641,9 @@
 `;
 
   // src/orders/OrderEditor.ts
-  var orderEditor = (order, items, onSave) => p`
+  var orderEditor = (order, customers, items, onSave) => p`
     <form @submit=${handleSubmit(() => onSave())}>
-        ${orderDetailsEditor(order)}
+        ${orderDetailsEditor(order, customers)}
     
         <br /><br />
     
@@ -15615,11 +15663,8 @@
       if (this.store.order.items.length === 0) {
         alert("There are no items in this order.");
         return;
-      } else if (!this.store.order.emailAddress) {
-        alert("Please add a valid email address.");
-        return;
-      } else if (!this.store.order.phoneNumber) {
-        alert("Please add a valid phone number.");
+      } else if (!this.store.order.customerId?.emailAddress || !this.store.order.customerId?.phoneNumber || !this.store.order.customerId?.postalCode) {
+        alert("Please add a valid email/phone number/postal code.");
         return;
       } else if (this.store.order.items.some((item) => item.inventoryItemId === void 0)) {
         alert("Please select a product for the added item.");
@@ -15630,7 +15675,7 @@
       location.assign(`./view/${this.store.order.id}`);
     };
     render() {
-      return this.store.inventoryItems ? orderEditor(this.store.order, this.store.inventoryItems, this.saveOrder) : p`Now loading...`;
+      return this.store.inventoryItems ? orderEditor(this.store.order, this.store.customers, this.store.inventoryItems, this.saveOrder) : p`Now loading...`;
     }
   };
   __publicField(OrderEditor, "styles", r`

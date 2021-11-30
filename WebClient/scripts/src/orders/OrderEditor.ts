@@ -8,15 +8,17 @@ import { OrderEditorStore } from './OrderEditorStore';
 import { orderDetailsEditor } from './orderDetailsEditor';
 import { orderItemsEditor } from './orderItemEditor';
 import { button, input } from '../common/componentStyle';
+import { ICustomer } from '../customers/Customer';
 
 const orderEditor = (
     order: IOrder,
+    customers: ICustomer[],
     items: IInventoryItem[],
     onSave: () => any,
 ) =>
     html`
     <form @submit=${handleSubmit(() => onSave())}>
-        ${orderDetailsEditor(order)}
+        ${orderDetailsEditor(order, customers)}
     
         <br /><br />
     
@@ -46,11 +48,9 @@ export class OrderEditor extends MobxLitElement {
         if (this.store.order.items.length === 0){
             alert('There are no items in this order.');
             return;
-        } else if ((!this.store.order.emailAddress)){ 
-            alert('Please add a valid email address.');
-            return;
-        } else if ((!this.store.order.phoneNumber)){ 
-            alert('Please add a valid phone number.');
+        } else if ((!this.store.order.customerId?.emailAddress || !this.store.order.customerId?.phoneNumber ||
+                    !this.store.order.customerId?.postalCode)){ 
+            alert('Please add a valid email/phone number/postal code.');
             return;
         } else if (this.store.order.items.some(item => item.inventoryItemId === undefined)){ 
             alert('Please select a product for the added item.');
@@ -65,7 +65,7 @@ export class OrderEditor extends MobxLitElement {
 
     public render() {
         return (this.store.inventoryItems)
-            ? orderEditor(this.store.order, this.store.inventoryItems, this.saveOrder)
+            ? orderEditor(this.store.order, this.store.customers, this.store.inventoryItems, this.saveOrder)
             : html`Now loading...`;
     }
 }
