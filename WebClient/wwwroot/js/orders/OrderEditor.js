@@ -15423,7 +15423,8 @@
     customerId: types.maybe(types.reference(Customer)),
     orderDate: types.optional(types.string, import_luxon.DateTime.now().toUTC().toJSON()),
     status: types.optional(types.number, 1),
-    items: types.array(OrderItem)
+    items: types.array(OrderItem),
+    customer: types.maybe(Customer)
   }).actions((self2) => ({
     setCustomer(customer) {
       self2.customerId = customer;
@@ -15455,6 +15456,8 @@
   // src/orders/ordersApi.ts
   var saveOrder = async (order) => {
     order.status = getRandomStatus();
+    order.customer = order.customerId;
+    delete order.customerId;
     const response = await fetch(`${AppBasePath}/api/orders`, {
       method: "POST",
       headers: {
@@ -15502,7 +15505,7 @@
     <select .value=${order.customerId?.id ?? ""} @change=${handlePropChange(order, (order2, customerId) => {
     const matchingCustomer = customers.find((c2) => c2.id === customerId);
     order2.setCustomer(matchingCustomer);
-  })} class="tableInput">
+  })} class="customer">
                 <option value="">--Choose a Customer--</option>
                 ${customers.map((customer) => p`
                     <option value=${customer.id}>${customer.fullName}</option>
