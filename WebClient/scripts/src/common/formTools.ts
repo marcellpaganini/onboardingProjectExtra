@@ -39,3 +39,5 @@ export const getStatus = (status: number | undefined): String => {
     }
 }
     
+export const states:string[] = ["Ontario", "Quebec", "Nova Scotia", "New Brunswick", "Manitoba",
+"British Columbia", "Prince Edward Island", "Saskatchewan", "Alberta", "Newfoundland and Labrador"]
