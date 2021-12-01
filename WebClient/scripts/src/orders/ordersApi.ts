@@ -1,5 +1,5 @@
 import { getSnapshot, SnapshotIn } from 'mobx-state-tree';
-import { getRandomStatus } from '../common/formTools';
+import { helperFunctions } from '../common/formTools';
 import { IOrder, Order } from './Order';
 
 export const getOrders = async () => {
@@ -18,7 +18,7 @@ export const getOrder = async (id: string) => {
 
 export const saveOrder = async (order: IOrder) => {
 
-    order.status = getRandomStatus();
+    order.status = helperFunctions.getRandomStatus();
 
     // order.customer = order.customer;
     // delete order.customer;

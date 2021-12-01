@@ -4,7 +4,7 @@ import { customElement } from 'lit/decorators.js';
 import { InventoryListStore } from './InventoryListStore';
 import { IInventoryItem } from './InventoryItem';
 import { table, button } from '../common/componentStyle';
-import { priceToCurrency } from '../common/formTools';
+import { helperFunctions } from '../common/formTools';
 import { DateTime } from 'luxon';
 
 
@@ -13,7 +13,7 @@ const inventoryRow = ({ id, name, price, image }: IInventoryItem) =>
     <tr>
         <td><img src="${image}" width="50" height="50"></td>
         <td>${name}</td>
-        <td>${priceToCurrency(price)}</td>
+        <td>${helperFunctions.priceToCurrency(price)}</td>
         <td>
             <a href="${AppBasePath}/Inventory/Edit/${id}">Edit</a>
         </td>

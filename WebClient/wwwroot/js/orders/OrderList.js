@@ -15273,25 +15273,35 @@
   };
 
   // src/common/formTools.ts
-  var priceToCurrency = (price) => price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
-  var getStatus = (status) => {
-    switch (status) {
-      case 1:
-        return "\u23F3 Pending payment";
-      case 2:
-        return "\u{1F9FE} Payment received";
-      case 3:
-        return "\u{1F4E6} Shipped";
-      case 4:
-        return "\u{1F69A} On vehicle for delivery";
-      case 5:
-        return "\u2705 Delivered";
-      case 6:
-        return "\u274C Canceled";
-      case 7:
-        return "\u21A9 Returned to sender";
-      default:
-        return "No status";
+  var helperFunctions = {
+    priceToCurrency: (price) => {
+      return price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
+    },
+    decimalToPercentage: (decimal) => {
+      return decimal?.toLocaleString("en", { style: "percent" }) ?? "";
+    },
+    getRandomStatus: () => {
+      return Math.floor(Math.random() * (8 - 1) + 1);
+    },
+    getStatus: (status) => {
+      switch (status) {
+        case 1:
+          return "\u23F3 Pending payment";
+        case 2:
+          return "\u{1F9FE} Payment received";
+        case 3:
+          return "\u{1F4E6} Shipped";
+        case 4:
+          return "\u{1F69A} On vehicle for delivery";
+        case 5:
+          return "\u2705 Delivered";
+        case 6:
+          return "\u274C Canceled";
+        case 7:
+          return "\u21A9 Returned to sender";
+        default:
+          return "No status";
+      }
     }
   };
 
@@ -15577,8 +15587,8 @@
     <tr>
         <td>${customerId?.fullName}</td>
         <td>${orderDate.substring(0, orderDate.indexOf("T"))}</td>
-        <td>${getStatus(status)}</td>
-        <td>${priceToCurrency(totalPrice)}</td>
+        <td>${helperFunctions.getStatus(status)}</td>
+        <td>${helperFunctions.priceToCurrency(totalPrice)}</td>
         <td>
             <a href="${AppBasePath}/orders/View/${id}">View</a>
         </td>

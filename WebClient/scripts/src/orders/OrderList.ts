@@ -4,7 +4,7 @@ import { customElement } from 'lit/decorators.js';
 import { OrderListStore } from './OrderListStore';
 import { IOrder } from './Order';
 import { table, button } from '../common/componentStyle';
-import { getStatus, priceToCurrency } from '../common/formTools';
+import {helperFunctions } from '../common/formTools';
 
 
 const ordersRow = ({id, customerId, totalPrice, status, orderDate}: IOrder) =>
@@ -12,8 +12,8 @@ const ordersRow = ({id, customerId, totalPrice, status, orderDate}: IOrder) =>
     <tr>
         <td>${customerId?.fullName}</td>
         <td>${orderDate.substring(0, orderDate.indexOf("T"))}</td>
-        <td>${getStatus(status)}</td>
-        <td>${priceToCurrency(totalPrice)}</td>
+        <td>${helperFunctions.getStatus(status)}</td>
+        <td>${helperFunctions.priceToCurrency(totalPrice)}</td>
         <td>
             <a href="${AppBasePath}/orders/View/${id}">View</a>
         </td>

@@ -15287,26 +15287,35 @@
   };
 
   // src/common/formTools.ts
-  var priceToCurrency = (price) => price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
-  var decimalToPercentage = (decimal) => decimal?.toLocaleString("en", { style: "percent" }) ?? "";
-  var getStatus = (status) => {
-    switch (status) {
-      case 1:
-        return "\u23F3 Pending payment";
-      case 2:
-        return "\u{1F9FE} Payment received";
-      case 3:
-        return "\u{1F4E6} Shipped";
-      case 4:
-        return "\u{1F69A} On vehicle for delivery";
-      case 5:
-        return "\u2705 Delivered";
-      case 6:
-        return "\u274C Canceled";
-      case 7:
-        return "\u21A9 Returned to sender";
-      default:
-        return "No status";
+  var helperFunctions = {
+    priceToCurrency: (price) => {
+      return price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
+    },
+    decimalToPercentage: (decimal) => {
+      return decimal?.toLocaleString("en", { style: "percent" }) ?? "";
+    },
+    getRandomStatus: () => {
+      return Math.floor(Math.random() * (8 - 1) + 1);
+    },
+    getStatus: (status) => {
+      switch (status) {
+        case 1:
+          return "\u23F3 Pending payment";
+        case 2:
+          return "\u{1F9FE} Payment received";
+        case 3:
+          return "\u{1F4E6} Shipped";
+        case 4:
+          return "\u{1F69A} On vehicle for delivery";
+        case 5:
+          return "\u2705 Delivered";
+        case 6:
+          return "\u274C Canceled";
+        case 7:
+          return "\u21A9 Returned to sender";
+        default:
+          return "No status";
+      }
     }
   };
 
@@ -15615,7 +15624,7 @@
 
     <label>
         <p><strong>Status</strong></p>
-        <p>${getStatus(order.status)}</p>
+        <p>${helperFunctions.getStatus(order.status)}</p>
     </label>
 	
     <br />
@@ -15640,19 +15649,19 @@
                         ${item.quantity.toString()}
                     </td>
                     <td>
-                        ${priceToCurrency(item.buyPricePerUnit)}
+                        ${helperFunctions.priceToCurrency(item.buyPricePerUnit)}
                     </td>
                     <td>
-                        ${decimalToPercentage(item.tax)}
+                        ${helperFunctions.decimalToPercentage(item.tax)}
                     </td>
                     <td>
-                        ${priceToCurrency(item.totalPriceOnDate)}
+                        ${helperFunctions.priceToCurrency(item.totalPriceOnDate)}
                     </td>
                 </tr>
                 `)}
             <tr>
                 <td colspan=4 style="color: blue;">
-                    <strong>Total:</strong> ${priceToCurrency(order.totalPrice)}</td>
+                    <strong>Total:</strong> ${helperFunctions.priceToCurrency(order.totalPrice)}</td>
             </tr>
         </tbody>
     </table>

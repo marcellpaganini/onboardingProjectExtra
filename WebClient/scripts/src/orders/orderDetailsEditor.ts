@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { DateTime } from 'luxon';
-import { getRandomStatus, handlePropChange } from '../common/formTools';
+import { helperFunctions, handlePropChange } from '../common/formTools';
 import { ICustomer } from '../customers/Customer';
 import { IOrder } from './Order';
 
@@ -22,7 +22,7 @@ export const orderDetailsEditor = (
                 )}
     </select>
     
-        <input type="hidden" .value=${getRandomStatus().toString()} @change=${handlePropChange(order, (order, val) => order.setOrderStatus(Number(val)))}
+        <input type="hidden" .value=${helperFunctions.getRandomStatus().toString()} @change=${handlePropChange(order, (order, val) => order.setOrderStatus(Number(val)))}
                 required />
         <input type="hidden" .value=${DateTime.now().toUTC().toJSON()} @change=${handlePropChange(order, (order, val) => order.setOrderDate(val))}
                 required />

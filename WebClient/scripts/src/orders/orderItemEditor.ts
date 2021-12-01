@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { handlePropChange, priceToCurrency, decimalToPercentage } from '../common/formTools';
+import { handlePropChange, helperFunctions } from '../common/formTools';
 import { IInventoryItem } from '../inventory/InventoryItem';
 import { IOrder } from './Order';
 import { IOrderItem } from './OrderItem';
@@ -33,13 +33,13 @@ const orderItemEditor = (
             <input type="hidden" value="${orderItem.inventoryItemId?.id === undefined ? orderItem.unitPrice?.toString() ?? 0.00 : orderItem.setBuyPricePerUnit(Number(orderItem.unitPrice))}">
         </td>
         <td>
-            ${priceToCurrency(orderItem.unitPrice)}
+            ${helperFunctions.priceToCurrency(orderItem.unitPrice)}
         </td>
         <td>
-            ${decimalToPercentage(orderItem.tax)}
+            ${helperFunctions.decimalToPercentage(orderItem.tax)}
         </td>
         <td>
-            ${priceToCurrency(orderItem.totalPrice)}
+            ${helperFunctions.priceToCurrency(orderItem.totalPrice)}
         </td>
         <td><button type="button" @click=${() => order.removeItem(orderItem)} id="" class="btnRemove">❌</button></td>
     </tr>
@@ -67,7 +67,7 @@ export const orderItemsEditor = (
             ${order.items.map((orderItem) => orderItemEditor(order, orderItem, items))}
             <tr>
                 <td colspan=4 style="color: blue;">
-                    <strong>Total:</strong> ${priceToCurrency(order.totalPrice)}</td>
+                    <strong>Total:</strong> ${helperFunctions.priceToCurrency(order.totalPrice)}</td>
             </tr>
             <tr>
                 <td colspan=4 id="msg" style="height:15px ;font-size: 13px; color: red;"></td>

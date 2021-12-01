@@ -9669,10 +9669,36 @@
     f2();
     return false;
   };
-  var priceToCurrency = (price) => price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
-  var decimalToPercentage = (decimal) => decimal?.toLocaleString("en", { style: "percent" }) ?? "";
-  var getRandomStatus = () => {
-    return Math.floor(Math.random() * (8 - 1) + 1);
+  var helperFunctions = {
+    priceToCurrency: (price) => {
+      return price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
+    },
+    decimalToPercentage: (decimal) => {
+      return decimal?.toLocaleString("en", { style: "percent" }) ?? "";
+    },
+    getRandomStatus: () => {
+      return Math.floor(Math.random() * (8 - 1) + 1);
+    },
+    getStatus: (status) => {
+      switch (status) {
+        case 1:
+          return "\u23F3 Pending payment";
+        case 2:
+          return "\u{1F9FE} Payment received";
+        case 3:
+          return "\u{1F4E6} Shipped";
+        case 4:
+          return "\u{1F69A} On vehicle for delivery";
+        case 5:
+          return "\u2705 Delivered";
+        case 6:
+          return "\u274C Canceled";
+        case 7:
+          return "\u21A9 Returned to sender";
+        default:
+          return "No status";
+      }
+    }
   };
 
   // node_modules/mobx-state-tree/dist/mobx-state-tree.module.js
@@ -15454,7 +15480,7 @@
 
   // src/orders/ordersApi.ts
   var saveOrder = async (order) => {
-    order.status = getRandomStatus();
+    order.status = helperFunctions.getRandomStatus();
     const response = await fetch(`${AppBasePath}/api/orders`, {
       method: "POST",
       headers: {
@@ -15509,7 +15535,7 @@
                     `)}
     </select>
     
-        <input type="hidden" .value=${getRandomStatus().toString()} @change=${handlePropChange(order, (order2, val) => order2.setOrderStatus(Number(val)))}
+        <input type="hidden" .value=${helperFunctions.getRandomStatus().toString()} @change=${handlePropChange(order, (order2, val) => order2.setOrderStatus(Number(val)))}
                 required />
         <input type="hidden" .value=${import_luxon2.DateTime.now().toUTC().toJSON()} @change=${handlePropChange(order, (order2, val) => order2.setOrderDate(val))}
                 required />
@@ -15535,13 +15561,13 @@
             <input type="hidden" value="${orderItem.inventoryItemId?.id === void 0 ? orderItem.unitPrice?.toString() ?? 0 : orderItem.setBuyPricePerUnit(Number(orderItem.unitPrice))}">
         </td>
         <td>
-            ${priceToCurrency(orderItem.unitPrice)}
+            ${helperFunctions.priceToCurrency(orderItem.unitPrice)}
         </td>
         <td>
-            ${decimalToPercentage(orderItem.tax)}
+            ${helperFunctions.decimalToPercentage(orderItem.tax)}
         </td>
         <td>
-            ${priceToCurrency(orderItem.totalPrice)}
+            ${helperFunctions.priceToCurrency(orderItem.totalPrice)}
         </td>
         <td><button type="button" @click=${() => order.removeItem(orderItem)} id="" class="btnRemove">❌</button></td>
     </tr>
@@ -15564,7 +15590,7 @@
             ${order.items.map((orderItem) => orderItemEditor(order, orderItem, items))}
             <tr>
                 <td colspan=4 style="color: blue;">
-                    <strong>Total:</strong> ${priceToCurrency(order.totalPrice)}</td>
+                    <strong>Total:</strong> ${helperFunctions.priceToCurrency(order.totalPrice)}</td>
             </tr>
             <tr>
                 <td colspan=4 id="msg" style="height:15px ;font-size: 13px; color: red;"></td>
