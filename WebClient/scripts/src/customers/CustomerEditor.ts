@@ -2,7 +2,7 @@ import { MobxLitElement } from '@adobe/lit-mobx';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { table, button, input } from '../common/componentStyle';
-import { handlePropChange, handleSubmit } from '../common/formTools';
+import { handlePropChange, handleSubmit, states } from '../common/formTools';
 import { CustomerEditorStore } from './CustomerEditorStore';
 import { ICustomer } from './Customer';
 
@@ -35,9 +35,16 @@ const customerEditor = (customer: ICustomer, onSave: () => {}, onDelete: () => {
         </label>
 
         <label>
-            <p>State</p>
-            <input type="text" .value=${customer.state} @change=${handlePropChange(customer, (customer, val) => customer.setState(val))}
-            required />
+            <p>Province</p>
+            <select .value=${customer.state ?? ""} @change=${handlePropChange(customer, (customer, val) => {
+                customer.setState(val);
+                })}>
+                ${states.map((state) => 
+                    html`
+                    <option value=${state}>${state}</option>
+                    `
+                )}
+            </select>
         </label>
 
         <label>
@@ -49,7 +56,7 @@ const customerEditor = (customer: ICustomer, onSave: () => {}, onDelete: () => {
         <label>
             <p>Country</p>
             <input type="text" .value=${customer.country} @change=${handlePropChange(customer, (customer, val) => customer.setCountry(val))}
-            required />
+            readonly />
         </label>
 
         <label>

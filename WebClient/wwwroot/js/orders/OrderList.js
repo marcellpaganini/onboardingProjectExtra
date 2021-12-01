@@ -15492,7 +15492,7 @@
     })
   })).views((self2) => ({
     get sortedOrders() {
-      return self2.orders?.slice().sort((a2, b2) => a2.customer.firstName.localeCompare(b2.customer.firstName, void 0, { caseFirst: "upper" })) ?? [];
+      return self2.orders?.slice().sort((a2, b2) => a2.customerId.firstName.localeCompare(b2.customerId.firstName, void 0, { caseFirst: "upper" })) ?? [];
     }
   }));
 

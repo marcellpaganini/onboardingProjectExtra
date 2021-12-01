@@ -9,7 +9,7 @@ const defaultCustomer = {
     city: "",
     state: "New Brunswick",
     postalCode: "",
-    country: "",
+    country: "Canada",
     emailAddress: "",
     phoneNumber: ""
 };

@@ -21,6 +21,6 @@ export const OrderListStore = types
     }))
     .views(self => ({
         get sortedOrders() {
-            return self.orders?.slice().sort( (a, b) => a.customer!.firstName.localeCompare(b.customer!.firstName, undefined, { caseFirst: 'upper' })) ?? [];
+            return self.orders?.slice().sort( (a, b) => a.customerId!.firstName.localeCompare(b.customerId!.firstName, undefined, { caseFirst: 'upper' })) ?? [];
         }
     }));
