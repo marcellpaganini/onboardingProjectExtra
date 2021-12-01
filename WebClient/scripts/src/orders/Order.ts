@@ -10,8 +10,7 @@ export const BaseOrder = types
         customerId: types.maybe(types.reference(Customer)),
         orderDate: types.optional(types.string, DateTime.now().toUTC().toJSON()),
         status: types.optional(types.number, 1),
-        items: types.array(OrderItem),
-        customer: types.maybe(Customer)
+        items: types.array(OrderItem)
     })
     .actions(self => ({
         setCustomer(customer: ICustomer | undefined) {

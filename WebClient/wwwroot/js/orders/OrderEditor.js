@@ -15423,8 +15423,7 @@
     customerId: types.maybe(types.reference(Customer)),
     orderDate: types.optional(types.string, import_luxon.DateTime.now().toUTC().toJSON()),
     status: types.optional(types.number, 1),
-    items: types.array(OrderItem),
-    customer: types.maybe(Customer)
+    items: types.array(OrderItem)
   }).actions((self2) => ({
     setCustomer(customer) {
       self2.customerId = customer;
@@ -15456,8 +15455,6 @@
   // src/orders/ordersApi.ts
   var saveOrder = async (order) => {
     order.status = getRandomStatus();
-    order.customer = order.customerId;
-    delete order.customerId;
     const response = await fetch(`${AppBasePath}/api/orders`, {
       method: "POST",
       headers: {

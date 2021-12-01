@@ -20,8 +20,8 @@ export const saveOrder = async (order: IOrder) => {
 
     order.status = getRandomStatus();
 
-    order.customer = order.customerId;
-    delete order.customerId;
+    // order.customer = order.customer;
+    // delete order.customer;
 
     const response = await fetch(`${AppBasePath}/api/orders`, {
         method: 'POST',
