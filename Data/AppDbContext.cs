@@ -3,6 +3,9 @@ using System.Collections.Immutable;
 using Microsoft.EntityFrameworkCore;
 using OrderManagement.Data.Inventory;
 using OrderManagement.Data.Orders;
+using OrderManagement.Data.Customers;
+using OrderManagement.Data.Categories;
+
 
 namespace OrderManagement.Data
 {
@@ -10,7 +13,9 @@ namespace OrderManagement.Data
     {
         private IEnumerable<BaseModel> DataModels { get; } = ImmutableList.Create<BaseModel>(
             new InventoryItemModel(),
-            new OrderModel()
+            new OrderModel(),
+            new CustomerModel(),
+            new CategoryModel()
         );
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
