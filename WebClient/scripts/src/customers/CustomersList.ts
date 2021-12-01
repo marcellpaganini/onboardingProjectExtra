@@ -26,7 +26,7 @@ const customersRow = ({ id, firstName, lastName, deliveryAddress, city, state,
 
 const customersTable = (customers: ICustomer[] = []) =>
     html`
-    <table>
+    <table class="long">
         <thead>
             <th>Full Name</th>
             <th>Delivery Address</th>

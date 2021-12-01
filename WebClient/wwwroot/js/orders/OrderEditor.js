@@ -15597,6 +15597,11 @@
         padding: .5em;
         border: 1px solid lightgrey;
     }
+
+    .long {
+        font-size: 9pt;
+        padding: .2em;
+    }
 `;
   var button = r`
     button {

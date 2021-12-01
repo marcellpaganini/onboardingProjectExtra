@@ -23,6 +23,11 @@ export const table = css`
         padding: .5em;
         border: 1px solid lightgrey;
     }
+
+    .long {
+        font-size: 9pt;
+        padding: .2em;
+    }
 `;
 
 export const button = css`
