@@ -1,7 +1,7 @@
 import { Instance, types } from 'mobx-state-tree';
 import { postProcessor } from '../common/recordPostProcessor';
 
-const BaseInventoryItem = types
+const BaseCustomer = types
     .model("Customer", {
         id: types.optional(types.identifier, ""),
         firstName: types.optional(types.string, ""),
@@ -62,6 +62,6 @@ const BaseInventoryItem = types
         }
     }));
 
-export const Customer = types.snapshotProcessor(BaseInventoryItem, { postProcessor })
+export const Customer = types.snapshotProcessor(BaseCustomer, { postProcessor })
 
 export type ICustomer = Instance<typeof Customer>
