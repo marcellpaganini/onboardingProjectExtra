@@ -15644,6 +15644,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\src\\MissingLink\\onboardingProjectExtra\\WebClient\\Pages\\Categories\\Index.cshtml",
+      "TargetPath": "Pages\\Categories\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\src\\MissingLink\\onboardingProjectExtra\\WebClient\\Pages\\Customers\\Edit.cshtml",
       "TargetPath": "Pages\\Customers\\Edit.cshtml",
       "FileKind": "mvc"
@@ -15661,6 +15666,11 @@
     {
       "FilePath": "c:\\src\\MissingLink\\onboardingProjectExtra\\WebClient\\Pages\\Orders\\Index.cshtml",
       "TargetPath": "Pages\\Orders\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\src\\MissingLink\\onboardingProjectExtra\\WebClient\\Pages\\Categories\\Edit.cshtml",
+      "TargetPath": "Pages\\Categories\\Edit.cshtml",
       "FileKind": "mvc"
     },
     {

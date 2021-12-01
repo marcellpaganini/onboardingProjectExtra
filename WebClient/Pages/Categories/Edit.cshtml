@@ -1,0 +1,14 @@
+@page "{id:Guid?}"
+
+@{
+    ViewData["Title"] = "Edit Category";
+    var id = @ViewContext.RouteData.Values["id"];
+}
+
+<script src="~/js/Categories/CategoryEditor.js"></script>
+
+<h1>Category</h1>
+
+<a href="~/Categories">Go Back</a>
+
+<category-editor category-id=@id></category-editor>
