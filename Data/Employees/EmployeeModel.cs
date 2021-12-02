@@ -1,12 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OrderManagement.Types.Customers;
+using OrderManagement.Types.Employees;
 
-namespace OrderManagement.Data.Customers
+namespace OrderManagement.Data.Employees
 {
-    public class CustomerModel : BaseModel<Customer>
+    public class EmployeeModel : BaseModel<Employee>
     {
-        protected override void DefineModel(EntityTypeBuilder<Customer> model)
+        protected override void DefineModel(EntityTypeBuilder<Employee> model)
         {
             model.HasKey(r => r.Id);
 
