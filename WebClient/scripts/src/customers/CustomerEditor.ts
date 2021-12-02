@@ -103,7 +103,7 @@ export class CustomerEditor extends MobxLitElement {
 
     deleteCustomer = async () => {
         await this.store.delete();
-        confirm('Are you sure?.');
+        confirm('Are you sure?');
         location.assign('../../');
         alert('Customer deleted successfully.');
     }
