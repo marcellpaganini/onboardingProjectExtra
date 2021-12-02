@@ -2,7 +2,7 @@ import { MobxLitElement } from '@adobe/lit-mobx';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { table, button, input } from '../common/componentStyle';
-import { handlePropChange, handleSubmit, states } from '../common/formTools';
+import { handlePropChange, handleSubmit } from '../common/formTools';
 import { CategoryEditorStore } from './CategoryEditorStore';
 import { ICategory } from './Category';
 

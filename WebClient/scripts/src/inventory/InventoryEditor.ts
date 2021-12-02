@@ -17,17 +17,22 @@ const itemEditor = (item: IInventoryItem, categories: ICategory[], onSave: () =>
             required />
         </label>
 
-        <select .value=${item.categoryId?.id ?? ""} @change=${handlePropChange(item, (item, categoryId) => {
+        <label>
+            <p>Category</p>
+            <select .value=${item.categoryId?.id ?? ""} @change=${handlePropChange(item, (item, categoryId) => {
                 const matchingCategory = categories.find(c => c.id === categoryId);
                 item.setCategory(matchingCategory);
-            })} class="customer">
+                })} class="customer">
                 <option value="">--Choose a Category--</option>
                 ${categories.map((category) => 
                     html`
                     <option value=${category.id}>${category.name}</option>
                     `
                 )}
-    </select>
+            </select>
+        </label>
+
+        
     
         <label>
             <p>Price</p>

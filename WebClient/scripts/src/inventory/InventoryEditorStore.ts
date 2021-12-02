@@ -6,7 +6,6 @@ import { InventoryItem } from './InventoryItem';
 
 const defaultInventoryItem = {
     name: "",
-    categoryId: "",
     price: 0.00,
     image: ""
 };

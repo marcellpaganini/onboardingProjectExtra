@@ -10620,7 +10620,6 @@
   // src/inventory/InventoryEditorStore.ts
   var defaultInventoryItem = {
     name: "",
-    categoryId: "",
     price: 0,
     image: ""
   };
@@ -10658,7 +10657,9 @@
             required />
         </label>
 
-        <select .value=${item.categoryId?.id ?? ""} @change=${handlePropChange(item, (item2, categoryId) => {
+        <label>
+            <p>Category</p>
+            <select .value=${item.categoryId?.id ?? ""} @change=${handlePropChange(item, (item2, categoryId) => {
     const matchingCategory = categories.find((c2) => c2.id === categoryId);
     item2.setCategory(matchingCategory);
   })} class="customer">
@@ -10666,7 +10667,10 @@
                 ${categories.map((category) => p`
                     <option value=${category.id}>${category.name}</option>
                     `)}
-    </select>
+            </select>
+        </label>
+
+        
     
         <label>
             <p>Price</p>
