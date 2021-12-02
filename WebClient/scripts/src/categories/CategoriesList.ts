@@ -10,7 +10,7 @@ const categoriesRow = ({ id, name, image }: ICategory) =>
     html`
     <tr>
         <td>${name}</td>
-        <td>${image}</td>
+        <td><img src="${image}" width="80" height="80"></td>
         <td>
             <a href="${AppBasePath}/Categories/Edit/${id}">Edit</a>
         </td>
@@ -19,7 +19,7 @@ const categoriesRow = ({ id, name, image }: ICategory) =>
 
 const categoriesTable = (categories: ICategory[] = []) =>
     html`
-    <table class="long">
+    <table>
         <thead>
             <th>Name</th>
             <th>Image</th>

@@ -9,6 +9,6 @@ export const CategoriesListStore = types
     })
     .actions((self) => ({
         load: flow(function* () {
-            self.category = yield getCategories();
+            self.categories = yield getCategories();
         })
     }));

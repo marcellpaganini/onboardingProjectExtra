@@ -15315,7 +15315,7 @@
   });
 
   // src/customers/Customer.ts
-  var BaseInventoryItem = types.model("Customer", {
+  var BaseCustomer = types.model("Customer", {
     id: types.optional(types.identifier, ""),
     firstName: types.optional(types.string, ""),
     lastName: types.optional(types.string, ""),
@@ -15373,10 +15373,10 @@
       return `${self2.deliveryAddress}, ${self2.city}, ${self2.country} - PC: ${self2.postalCode}`;
     }
   }));
-  var Customer = types.snapshotProcessor(BaseInventoryItem, { postProcessor });
+  var Customer = types.snapshotProcessor(BaseCustomer, { postProcessor });
 
   // src/inventory/InventoryItem.ts
-  var BaseInventoryItem2 = types.model("InventoryItem", {
+  var BaseInventoryItem = types.model("InventoryItem", {
     id: types.optional(types.identifier, ""),
     name: types.string,
     price: types.number,
@@ -15392,7 +15392,7 @@
       self2.image = image;
     }
   }));
-  var InventoryItem = types.snapshotProcessor(BaseInventoryItem2, { postProcessor });
+  var InventoryItem = types.snapshotProcessor(BaseInventoryItem, { postProcessor });
 
   // src/orders/OrderItem.ts
   var BaseOrderItem = types.model("OrderItem", {
