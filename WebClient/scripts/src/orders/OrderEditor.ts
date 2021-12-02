@@ -15,7 +15,7 @@ const orderEditor = (
     customers: ICustomer[],
     items: IInventoryItem[],
     onSave: () => any,
-    onDelete: () => {}
+    onDelete: () => any
 ) =>
     html`
     <form @submit=${handleSubmit(() => onSave())}>

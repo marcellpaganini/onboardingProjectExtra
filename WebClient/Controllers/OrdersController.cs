@@ -30,5 +30,9 @@ namespace OrderManagement.WebClient.Controllers
         [HttpPost]
         public async Task<Order> Post(Order order) =>
             await orderService.Save(order);
+        
+        [HttpDelete]
+        public async Task<Order> Delete(Order order) =>
+            await orderService.Delete(order);
     }
 }
