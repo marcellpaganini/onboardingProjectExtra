@@ -36,5 +36,12 @@ namespace OrderManagement.Data.Orders
 
             return order;
         }
+
+        public async Task<Order> Delete(Order order)
+        {
+            context.Remove(order);
+            await context.SaveChangesAsync();
+            return order;
+        }
     }
 }

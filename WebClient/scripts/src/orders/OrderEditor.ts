@@ -1,6 +1,6 @@
 import { css, html } from 'lit';
 import { MobxLitElement } from '@adobe/lit-mobx';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { handleSubmit } from '../common/formTools';
 import { IOrder } from './Order';
 import { IInventoryItem } from '../inventory/InventoryItem';
@@ -15,6 +15,7 @@ const orderEditor = (
     customers: ICustomer[],
     items: IInventoryItem[],
     onSave: () => any,
+    onDelete: () => {}
 ) =>
     html`
     <form @submit=${handleSubmit(() => onSave())}>
@@ -26,7 +27,7 @@ const orderEditor = (
     
         <br /><br />
 
-        <button>Submit</button>
+        <button>Submit</button> <button type="button" @click=${onDelete} >Delete</button>
     </form>
         `;
 
@@ -38,10 +39,13 @@ export class OrderEditor extends MobxLitElement {
         ${input}
     `;
 
+    @property({ attribute: "order-id" })
+    orderId: string = "";
+
     store = OrderEditorStore.create();
 
     firstUpdated = async () => {
-        await this.store.load();
+        await this.store.load(this.orderId);
     }
 
     saveOrder = async () => {
@@ -57,15 +61,25 @@ export class OrderEditor extends MobxLitElement {
             return;
         }
 
+        var redirect: string = "";
+        this.orderId === "" ? redirect = `.` : redirect = `..`;
+        
         await this.store.save();
         alert('Order saved successfully.');
-        
-        location.assign(`./view/${this.store.order.id}`);
+        location.assign(`${redirect}/view/${this.store.order.id}`);
+    
+    }
+
+    deleteOrder = async () => {
+        await this.store.delete();
+        confirm('Are you sure?.');
+        location.assign('../../');
+        alert('Item deleted successfully.');
     }
 
     public render() {
         return (this.store.inventoryItems)
-            ? orderEditor(this.store.order, this.store.customers, this.store.inventoryItems, this.saveOrder)
+            ? orderEditor(this.store.order, this.store.customers, this.store.inventoryItems, this.saveOrder, this.deleteOrder)
             : html`Now loading...`;
     }
 }

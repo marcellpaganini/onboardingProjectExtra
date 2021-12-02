@@ -1,5 +1,6 @@
-import { flow, getRoot, Instance, resolveIdentifier, SnapshotOut, types } from 'mobx-state-tree';
+import { Instance, SnapshotOut, types } from 'mobx-state-tree';
 import { Category, ICategory } from '../categories/Category';
+
 
 const BaseInventoryItem = types
     .model("InventoryItem", {
@@ -25,14 +26,7 @@ const BaseInventoryItem = types
         setImage(image: string) {
             self.image = image;
         }
-    }))
-    // .views(self => ({
-    //     get categoryObject(): undefined | Instance<typeof Category> {
-    //         const root = getRoot(self);
-    //         return resolveIdentifier(Category.Type, root, self.categoryId)
-    //     }
-    // }))
-    ;
+    }));
 
     const postProcessSnapshot = (snapshot: SnapshotOut<typeof BaseInventoryItem>) =>
     ({

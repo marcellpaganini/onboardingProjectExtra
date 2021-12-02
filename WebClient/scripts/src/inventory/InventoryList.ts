@@ -5,7 +5,6 @@ import { InventoryListStore } from './InventoryListStore';
 import { IInventoryItem } from './InventoryItem';
 import { table, button } from '../common/componentStyle';
 import { helperFunctions } from '../common/formTools';
-import { DateTime } from 'luxon';
 
 
 const inventoryRow = ({ id, categoryId, name, price, image }: IInventoryItem) =>

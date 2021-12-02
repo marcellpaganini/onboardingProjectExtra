@@ -15616,6 +15616,9 @@
         <td>
             <a href="${AppBasePath}/orders/View/${id}">View</a>
         </td>
+        <td>
+            <a href="${AppBasePath}/orders/Edit/${id}">Edit</a>
+        </td>
     </tr>
     `;
   var ordersTable = (orders = []) => p`
@@ -15626,6 +15629,7 @@
             <th>Date</th>
             <th>Status</th>
             <th>Total</th>
+            <th></th>
             <th></th>
             </tr>
         </thead>

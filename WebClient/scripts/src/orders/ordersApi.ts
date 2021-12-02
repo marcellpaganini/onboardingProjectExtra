@@ -20,9 +20,6 @@ export const saveOrder = async (order: IOrder) => {
 
     order.status = helperFunctions.getRandomStatus();
 
-    // order.customer = order.customer;
-    // delete order.customer;
-
     const response = await fetch(`${AppBasePath}/api/orders`, {
         method: 'POST',
         headers: {
@@ -32,3 +29,15 @@ export const saveOrder = async (order: IOrder) => {
     });
     return Order.create(await response.json());
 };
+
+export const deleteOrder = async (order: IOrder) => {
+    const response = await fetch(`${AppBasePath}/api/orders`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(getSnapshot(order))
+    });
+
+    return Order.create(await response.json());
+}

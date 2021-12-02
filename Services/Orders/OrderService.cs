@@ -21,5 +21,8 @@ namespace OrderManagement.Services.Orders
 
         public async Task<Order> Save(Order order) =>
             await orderRepository.Save(order);
+
+        public async Task<Order> Delete(Order order) =>
+            await orderRepository.Delete(order);
     }
 }
