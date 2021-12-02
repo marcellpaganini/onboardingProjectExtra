@@ -5,7 +5,8 @@ using OrderManagement.Data.Inventory;
 using OrderManagement.Data.Orders;
 using OrderManagement.Data.Customers;
 using OrderManagement.Data.Categories;
-
+using OrderManagement.Data.Employees;
+using OrderManagement.Data.Offices;
 
 namespace OrderManagement.Data
 {
@@ -15,7 +16,9 @@ namespace OrderManagement.Data
             new InventoryItemModel(),
             new OrderModel(),
             new CustomerModel(),
-            new CategoryModel()
+            new CategoryModel(),
+            new EmployeeModel(),
+            new OfficeModel()
         );
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
