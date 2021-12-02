@@ -8,10 +8,11 @@ import { helperFunctions } from '../common/formTools';
 import { DateTime } from 'luxon';
 
 
-const inventoryRow = ({ id, name, price, image }: IInventoryItem) =>
+const inventoryRow = ({ id, categoryId, name, price, image }: IInventoryItem) =>
     html`
     <tr>
         <td><img src="${image}" width="50" height="50"></td>
+        <td>${categoryId?.name}</td>
         <td>${name}</td>
         <td>${helperFunctions.priceToCurrency(price)}</td>
         <td>
@@ -25,6 +26,7 @@ const inventoryTable = (items: IInventoryItem[] = []) =>
     <table>
         <thead>
             <th>Item</th>
+            <th>Category</th>
             <th>Name</th>
             <th>Price</th>
             <th></th>

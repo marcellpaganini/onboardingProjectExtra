@@ -1,13 +1,14 @@
 import { MobxLitElement } from '@adobe/lit-mobx';
 import { css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { ICategory } from '../categories/Category';
 import { table, button, input } from '../common/componentStyle';
 import { handlePropChange, handleSubmit } from '../common/formTools';
 import { InventoryEditorStore } from './InventoryEditorStore';
 import { IInventoryItem } from './InventoryItem';
 
 
-const itemEditor = (item: IInventoryItem, onSave: () => {}, onDelete: () => {}) =>
+const itemEditor = (item: IInventoryItem, categories: ICategory[], onSave: () => {}, onDelete: () => {}) =>
     html`
     <form @submit=${handleSubmit(() => onSave())}>
         <label>
@@ -15,6 +16,18 @@ const itemEditor = (item: IInventoryItem, onSave: () => {}, onDelete: () => {}) 
             <input type="text" .value=${item.name} @change=${handlePropChange(item, (item, val) => item.setName(val))}
             required />
         </label>
+
+        <select .value=${item.categoryId?.id ?? ""} @change=${handlePropChange(item, (item, categoryId) => {
+                const matchingCategory = categories.find(c => c.id === categoryId);
+                item.setCategory(matchingCategory);
+            })} class="customer">
+                <option value="">--Choose a Category--</option>
+                ${categories.map((category) => 
+                    html`
+                    <option value=${category.id}>${category.name}</option>
+                    `
+                )}
+    </select>
     
         <label>
             <p>Price</p>
@@ -68,6 +81,6 @@ export class InventoryEditor extends MobxLitElement {
 
     render = () =>
         (this.store.item)
-            ? itemEditor(this.store.item, this.saveItem, this.deleteItem)
+            ? itemEditor(this.store.item, this.store.categories, this.saveItem, this.deleteItem)
             : 'Now loading...';
 }

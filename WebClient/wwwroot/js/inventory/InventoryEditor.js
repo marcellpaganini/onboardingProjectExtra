@@ -10541,13 +10541,39 @@
     id: snapshot.id || void 0
   });
 
+  // src/categories/Category.ts
+  var BaseCategory = types.model("Category", {
+    id: types.optional(types.identifier, ""),
+    name: types.optional(types.string, ""),
+    image: types.optional(types.string, "")
+  }).actions((self2) => ({
+    setName(name) {
+      self2.name = name;
+    },
+    setImage(image) {
+      self2.image = image;
+    }
+  }));
+  var Category = types.snapshotProcessor(BaseCategory, { postProcessor });
+
+  // src/categories/categoriesApi.ts
+  var getCategories = async () => {
+    const response = await fetch(`${AppBasePath}/api/categories`);
+    const results = await response.json();
+    return results.map((i4) => Category.create(i4));
+  };
+
   // src/inventory/InventoryItem.ts
   var BaseInventoryItem = types.model("InventoryItem", {
     id: types.optional(types.identifier, ""),
+    categoryId: types.maybe(types.reference(Category)),
     name: types.string,
     price: types.number,
     image: types.optional(types.string, "")
   }).actions((self2) => ({
+    setCategory(category) {
+      self2.categoryId = category;
+    },
     setName(name) {
       self2.name = name;
     },
@@ -10558,7 +10584,12 @@
       self2.image = image;
     }
   }));
-  var InventoryItem = types.snapshotProcessor(BaseInventoryItem, { postProcessor });
+  var postProcessSnapshot = (snapshot) => ({
+    ...snapshot,
+    id: snapshot.id || void 0,
+    categoryId: snapshot.categoryId
+  });
+  var InventoryItem = types.snapshotProcessor(BaseInventoryItem, { postProcessor: postProcessSnapshot });
 
   // src/inventory/inventoryApi.ts
   var getInventoryItem = async (id) => {
@@ -10589,13 +10620,16 @@
   // src/inventory/InventoryEditorStore.ts
   var defaultInventoryItem = {
     name: "",
+    categoryId: "",
     price: 0,
     image: ""
   };
   var InventoryEditorStore = types.model("InventoryEditorStore", {
-    item: types.maybe(InventoryItem)
+    item: types.maybe(InventoryItem),
+    categories: types.array(Category)
   }).actions((self2) => ({
     load: flow3(function* (id) {
+      self2.categories = yield getCategories();
       if (!id) {
         self2.item = InventoryItem.create(defaultInventoryItem);
         return;
@@ -10616,13 +10650,23 @@
   }));
 
   // src/inventory/InventoryEditor.ts
-  var itemEditor = (item, onSave, onDelete) => p`
+  var itemEditor = (item, categories, onSave, onDelete) => p`
     <form @submit=${handleSubmit(() => onSave())}>
         <label>
             <p>Name</p>
             <input type="text" .value=${item.name} @change=${handlePropChange(item, (item2, val) => item2.setName(val))}
             required />
         </label>
+
+        <select .value=${item.categoryId?.id ?? ""} @change=${handlePropChange(item, (item2, categoryId) => {
+    const matchingCategory = categories.find((c2) => c2.id === categoryId);
+    item2.setCategory(matchingCategory);
+  })} class="customer">
+                <option value="">--Choose a Category--</option>
+                ${categories.map((category) => p`
+                    <option value=${category.id}>${category.name}</option>
+                    `)}
+    </select>
     
         <label>
             <p>Price</p>
@@ -10659,7 +10703,7 @@
       location.assign("../../");
       alert("Item deleted successfully.");
     };
-    render = () => this.store.item ? itemEditor(this.store.item, this.saveItem, this.deleteItem) : "Now loading...";
+    render = () => this.store.item ? itemEditor(this.store.item, this.store.categories, this.saveItem, this.deleteItem) : "Now loading...";
   };
   __publicField(InventoryEditor, "styles", r`
         ${table}

@@ -10439,13 +10439,39 @@
     id: snapshot.id || void 0
   });
 
+  // src/categories/Category.ts
+  var BaseCategory = types.model("Category", {
+    id: types.optional(types.identifier, ""),
+    name: types.optional(types.string, ""),
+    image: types.optional(types.string, "")
+  }).actions((self2) => ({
+    setName(name) {
+      self2.name = name;
+    },
+    setImage(image) {
+      self2.image = image;
+    }
+  }));
+  var Category = types.snapshotProcessor(BaseCategory, { postProcessor });
+
+  // src/categories/categoriesApi.ts
+  var getCategories = async () => {
+    const response = await fetch(`${AppBasePath}/api/categories`);
+    const results = await response.json();
+    return results.map((i3) => Category.create(i3));
+  };
+
   // src/inventory/InventoryItem.ts
   var BaseInventoryItem = types.model("InventoryItem", {
     id: types.optional(types.identifier, ""),
+    categoryId: types.maybe(types.reference(Category)),
     name: types.string,
     price: types.number,
     image: types.optional(types.string, "")
   }).actions((self2) => ({
+    setCategory(category) {
+      self2.categoryId = category;
+    },
     setName(name) {
       self2.name = name;
     },
@@ -10456,7 +10482,12 @@
       self2.image = image;
     }
   }));
-  var InventoryItem = types.snapshotProcessor(BaseInventoryItem, { postProcessor });
+  var postProcessSnapshot = (snapshot) => ({
+    ...snapshot,
+    id: snapshot.id || void 0,
+    categoryId: snapshot.categoryId
+  });
+  var InventoryItem = types.snapshotProcessor(BaseInventoryItem, { postProcessor: postProcessSnapshot });
 
   // src/inventory/inventoryApi.ts
   var getInventoryItems = async () => {
@@ -10468,9 +10499,11 @@
   // src/inventory/InventoryListStore.ts
   var InventoryListStore = types.model("InventoryListStore", {
     items: types.maybe(types.array(InventoryItem)),
-    item: types.maybe(InventoryItem)
+    item: types.maybe(InventoryItem),
+    categories: types.maybe(types.array(Category))
   }).actions((self2) => ({
     load: flow3(function* () {
+      self2.categories = yield getCategories();
       self2.items = yield getInventoryItems();
     })
   }));
@@ -10585,9 +10618,10 @@
   };
 
   // src/inventory/InventoryList.ts
-  var inventoryRow = ({ id, name, price, image }) => p`
+  var inventoryRow = ({ id, categoryId, name, price, image }) => p`
     <tr>
         <td><img src="${image}" width="50" height="50"></td>
+        <td>${categoryId?.name}</td>
         <td>${name}</td>
         <td>${helperFunctions.priceToCurrency(price)}</td>
         <td>
@@ -10599,6 +10633,7 @@
     <table>
         <thead>
             <th>Item</th>
+            <th>Category</th>
             <th>Name</th>
             <th>Price</th>
             <th></th>

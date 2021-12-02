@@ -15389,13 +15389,32 @@
   }));
   var Customer = types.snapshotProcessor(BaseCustomer, { postProcessor });
 
+  // src/categories/Category.ts
+  var BaseCategory = types.model("Category", {
+    id: types.optional(types.identifier, ""),
+    name: types.optional(types.string, ""),
+    image: types.optional(types.string, "")
+  }).actions((self2) => ({
+    setName(name) {
+      self2.name = name;
+    },
+    setImage(image) {
+      self2.image = image;
+    }
+  }));
+  var Category = types.snapshotProcessor(BaseCategory, { postProcessor });
+
   // src/inventory/InventoryItem.ts
   var BaseInventoryItem = types.model("InventoryItem", {
     id: types.optional(types.identifier, ""),
+    categoryId: types.maybe(types.reference(Category)),
     name: types.string,
     price: types.number,
     image: types.optional(types.string, "")
   }).actions((self2) => ({
+    setCategory(category) {
+      self2.categoryId = category;
+    },
     setName(name) {
       self2.name = name;
     },
@@ -15406,7 +15425,12 @@
       self2.image = image;
     }
   }));
-  var InventoryItem = types.snapshotProcessor(BaseInventoryItem, { postProcessor });
+  var postProcessSnapshot = (snapshot) => ({
+    ...snapshot,
+    id: snapshot.id || void 0,
+    categoryId: snapshot.categoryId
+  });
+  var InventoryItem = types.snapshotProcessor(BaseInventoryItem, { postProcessor: postProcessSnapshot });
 
   // src/orders/OrderItem.ts
   var BaseOrderItem = types.model("OrderItem", {
@@ -15440,12 +15464,12 @@
       return self2.buyPricePerUnit * self2.quantity * self2.tax + self2.buyPricePerUnit * self2.quantity;
     }
   }));
-  var postProcessSnapshot = (snapshot) => ({
+  var postProcessSnapshot2 = (snapshot) => ({
     ...snapshot,
     id: snapshot.id || void 0,
     inventoryItemId: snapshot.inventoryItemId
   });
-  var OrderItem = types.snapshotProcessor(BaseOrderItem, { postProcessor: postProcessSnapshot });
+  var OrderItem = types.snapshotProcessor(BaseOrderItem, { postProcessor: postProcessSnapshot2 });
 
   // src/orders/Order.ts
   var BaseOrder = types.model("Order", {
@@ -15475,12 +15499,12 @@
       return self2.items.reduce((total, item) => total === void 0 ? void 0 : self2.id === "" ? item?.totalPrice === void 0 ? total : total + item.totalPrice : item?.totalPriceOnDate === void 0 ? total : total + item.totalPriceOnDate, 0);
     }
   }));
-  var postProcessSnapshot2 = (snapshot) => ({
+  var postProcessSnapshot3 = (snapshot) => ({
     ...snapshot,
     id: snapshot.id || void 0,
     customerId: snapshot.customerId
   });
-  var Order = types.snapshotProcessor(BaseOrder, { postProcessor: postProcessSnapshot2 });
+  var Order = types.snapshotProcessor(BaseOrder, { postProcessor: postProcessSnapshot3 });
 
   // src/orders/ordersApi.ts
   var getOrder = async (id) => {
