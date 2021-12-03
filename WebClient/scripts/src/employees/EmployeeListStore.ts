@@ -12,7 +12,7 @@ export const EmployeesListStore = types
     })
     .actions((self) => ({
         load: flow(function* () {
-            self.employees = yield getEmployees();
             self.offices = yield getOffices(); 
+            self.employees = yield getEmployees();
         })
     }));

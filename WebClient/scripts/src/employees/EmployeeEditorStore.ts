@@ -5,7 +5,6 @@ import { deleteEmployee, getEmployees, getEmployee, saveEmployee } from './emplo
 import { Employee } from './Employee';
 
 const defaultEmployee = {
-    officeId: "",
     manager: "",
     firstName: "",
     lastName: "",
