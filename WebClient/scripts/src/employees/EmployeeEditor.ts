@@ -44,7 +44,7 @@ const employeeEditor = (employee: IEmployee, offices: IOffice[], employees: IEmp
                 employee.setManager(id);
                 })} class="customer">
                 <option value="">--Choose a manager--</option>
-                ${employees.map((employees) => 
+                ${employees.map((employee) => 
                     html`
                     <option value=${employee.id}>${employee.firstName} ${employee.lastName}</option>
                     `

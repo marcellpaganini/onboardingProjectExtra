@@ -247,3 +247,7 @@ C:\src\OnboardingProjectExtra\onboardingProjectExtra\webclient\obj\Debug\net5.0\
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\webclient\obj\Debug\net5.0\ref\WebClient.dll
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\webclient\obj\Debug\net5.0\WebClient.pdb
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\webclient\obj\Debug\net5.0\WebClient.genruntimeconfig.cache
+C:\src\MissingLink\onboardingProjectExtra\WebClient\obj\Debug\net5.0\Razor\Pages\Employees\Edit.cshtml.g.cs
+C:\src\MissingLink\onboardingProjectExtra\WebClient\obj\Debug\net5.0\Razor\Pages\Employees\Index.cshtml.g.cs
+C:\src\MissingLink\onboardingProjectExtra\WebClient\obj\Debug\net5.0\Razor\Pages\Offices\Edit.cshtml.g.cs
+C:\src\MissingLink\onboardingProjectExtra\WebClient\obj\Debug\net5.0\Razor\Pages\Offices\Index.cshtml.g.cs
