@@ -1,0 +1,14 @@
+@page "{id:Guid?}"
+
+@{
+    ViewData["Title"] = "Edit Employee";
+    var id = @ViewContext.RouteData.Values["id"];
+}
+
+<script src="~/js/Employees/EmployeeEditor.js"></script>
+
+<h1>Edit</h1>
+
+<a href="~/Employees">Go Back</a>
+
+<employee-editor employee-id=@id></employee-editor>
