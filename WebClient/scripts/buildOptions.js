@@ -11,6 +11,8 @@ module.exports = {
         './src/categories/CategoryEditor.ts',
         './src/offices/OfficesList.ts',
         './src/offices/OfficeEditor.ts',
+        './src/employees/EmployeesList.ts',
+        './src/employees/EmployeeEditor.ts',
     ],
     bundle: true,
     sourcemap: true,
