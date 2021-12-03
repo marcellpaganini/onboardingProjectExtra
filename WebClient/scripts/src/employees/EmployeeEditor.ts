@@ -8,7 +8,7 @@ import { EmployeeEditorStore } from './EmployeeEditorStore';
 import { IEmployee } from './Employee';
 
 
-const employeeEditor = (employee: IEmployee, offices: IOffice[], employees: IEmployee[], onSave: () => {}, onDelete: () => {}) =>
+const employeeEditor = (employee: IEmployee, offices: IOffice[], employees: IEmployee[] = [], onSave: () => {}, onDelete: () => {}) =>
     html`
     <form @submit=${handleSubmit(() => onSave())}>
         <label>
@@ -24,7 +24,7 @@ const employeeEditor = (employee: IEmployee, offices: IOffice[], employees: IEmp
         </label>
 
         <label>
-            <p>Manager</p>
+            <p>Office</p>
             <select .value=${employee.officeId?.id ?? ""} @change=${handlePropChange(employee, (employee, officeId) => {
                 const matchingOffice = offices.find(o => o.id === officeId);
                 employee.setOffice(matchingOffice);
@@ -39,15 +39,34 @@ const employeeEditor = (employee: IEmployee, offices: IOffice[], employees: IEmp
         </label>
 
         <label>
-            <p>Price</p>
-            <input type="number" step="0.01" min="0.01" .value=${item.price.toString()} @change=${handlePropChange(item, (item, val) =>
-            item.setPrice(Number(val) ?? 0.01))}
+            <p>Manager</p>
+            <select .value=${employee.id ?? ""} @change=${handlePropChange(employee, (employee, id) => {
+                employee.setManager(id);
+                })} class="customer">
+                <option value="">--Choose a manager--</option>
+                ${employees.map((employees) => 
+                    html`
+                    <option value=${employee.id}>${employee.firstName} ${employee.lastName}</option>
+                    `
+                )}
+            </select>
+        </label>
+
+        <label>
+            <p>Email Address</p>
+            <input type="text" .value=${employee.emailAddress} @change=${handlePropChange(employee, (employee, val) => employee.setEmailAddress(val))}
             required />
         </label>
 
         <label>
-            <p>Image</p>
-            <input type="text" .value=${item.image} @change=${handlePropChange(item, (item, val) => item.setImage(val))}
+            <p>Extension</p>
+            <input type="text" .value=${employee.extension} @change=${handlePropChange(employee, (employee, val) => employee.setExtension(val))}
+            required />
+        </label>
+
+        <label>
+            <p>Job Title</p>
+            <input type="text" .value=${employee.jobTitle} @change=${handlePropChange(employee, (employee, val) => employee.setJobTitle(val))}
             required />
         </label>
 
@@ -73,26 +92,23 @@ export class EmployeeEditor extends MobxLitElement {
 
     firstUpdated = async () => {
         await this.store.load(this.employeeId);
-        const managers = this.store.managers;
     }
 
-    saveItem = async () => {
+    saveEmployee = async () => {
         await this.store.save();
         location.assign('../../');
-        alert('Item saved successfully.');
+        alert('Employee saved successfully.');
     }
 
-    deleteItem = async () => {
+    deleteEmployee = async () => {
         await this.store.delete();
         confirm('Are you sure?.');
         location.assign('../../');
         alert('Item deleted successfully.');
     }
 
-    managers = this.store.managers;
-
     render = () =>
-        (this.store.item)
-            ? employee(this.store.item, this.store.categories, this.saveItem, this.deleteItem)
+        (this.store.employee)
+            ? employeeEditor(this.store.employee, this.store.offices, this.store.managers, this.saveEmployee, this.deleteEmployee)
             : 'Now loading...';
 }
