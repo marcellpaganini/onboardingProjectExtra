@@ -9,6 +9,8 @@ module.exports = {
         './src/customers/CustomerEditor.ts',
         './src/categories/CategoriesList.ts',
         './src/categories/CategoryEditor.ts',
+        './src/offices/OfficesList.ts',
+        './src/offices/OfficeEditor.ts',
     ],
     bundle: true,
     sourcemap: true,
