@@ -11,19 +11,19 @@ const officeEditor = (office: IOffice, onSave: () => {}, onDelete: () => {}) =>
     html`
     <form @submit=${handleSubmit(() => onSave())}>
         <label>
-            <p>First Name</p>
+            <p>City</p>
             <input type="text" .value=${office.city} @change=${handlePropChange(office, (office, val) => office.setCity(val))}
             required />
         </label>
     
         <label>
-            <p>Last Name</p>
+            <p>Phone Number</p>
             <input type="text" .value=${office.phone} @change=${handlePropChange(office, (office, val) => office.setPhone(val))}
             required />
         </label>
 
         <label>
-            <p>Delivery Address</p>
+            <p>Address</p>
             <input type="text" .value=${office.address} @change=${handlePropChange(office, (office, val) => office.setAddress(val))}
             required />
         </label>
