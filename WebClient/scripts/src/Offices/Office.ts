@@ -7,9 +7,9 @@ const BaseOffice = types
         city: types.optional(types.string, ""),
         phone: types.optional(types.string, ""),
         address: types.optional(types.string, ""),
-        state: types.optional(types.string, ""),
-        country: types.enumeration("state", ["Ontario", "Quebec", "Nova Scotia", "New Brunswick", "Manitoba",
-                                 "British Columbia", "Prince Edward Island", "Saskatchewan", "Alberta", "Newfoundland and Labrador"]),
+        state: types.enumeration("state", ["Ontario", "Quebec", "Nova Scotia", "New Brunswick", "Manitoba",
+        "British Columbia", "Prince Edward Island", "Saskatchewan", "Alberta", "Newfoundland and Labrador"]),
+        country: types.optional(types.string, ""),
         postalCode: types.optional(types.refinement(types.string, p => /^$|[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i.test(p)), "")
     })
     .actions(self => ({
