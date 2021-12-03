@@ -6,10 +6,10 @@ import { Customer } from '../customers/Customer';
 import { getInventoryItems } from '../inventory/inventoryApi';
 import { getCustomers } from '../customers/customersApi';
 
+
 const defaultOrder = {
     status: 1
 }
-
 
 export const OrderEditorStore = types
     .model("OrderEditorStore", {
