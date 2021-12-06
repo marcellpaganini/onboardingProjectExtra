@@ -24,7 +24,7 @@ const officesRow = ({ id, city, phone, address, state,
 
 const officesTable = (offices: IOffice[] = []) =>
     html`
-    <table class="long">
+    <table>
         <thead>
             <th>Address</th>
             <th>City</th>

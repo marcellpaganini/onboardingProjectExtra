@@ -25,7 +25,7 @@ const employeesRow = ({ id, officeId, manager, firstName, lastName, emailAddress
 
 const employeesTable = (employees: IEmployee[] = []) =>
     html`
-    <table>
+    <table class="long">
         <thead>
             <th>Office</th>
             <th>Manager</th>
