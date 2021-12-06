@@ -15314,9 +15314,92 @@
     id: snapshot.id || void 0
   });
 
+  // src/offices/Office.ts
+  var BaseOffice = types.model("Office", {
+    id: types.optional(types.identifier, ""),
+    city: types.optional(types.string, ""),
+    phone: types.optional(types.string, ""),
+    address: types.optional(types.string, ""),
+    state: types.enumeration("state", [
+      "Ontario",
+      "Quebec",
+      "Nova Scotia",
+      "New Brunswick",
+      "Manitoba",
+      "British Columbia",
+      "Prince Edward Island",
+      "Saskatchewan",
+      "Alberta",
+      "Newfoundland and Labrador"
+    ]),
+    country: types.optional(types.string, ""),
+    postalCode: types.optional(types.refinement(types.string, (p2) => /^$|[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i.test(p2)), "")
+  }).actions((self2) => ({
+    setCity(city) {
+      self2.city = city;
+    },
+    setPhone(phone) {
+      self2.phone = phone;
+    },
+    setAddress(address) {
+      self2.address = address;
+    },
+    setState(state) {
+      self2.state = state;
+    },
+    setCountry(country) {
+      self2.country = country;
+    },
+    setPostalCode(postalCode) {
+      self2.postalCode = postalCode;
+    }
+  }));
+  var Office = types.snapshotProcessor(BaseOffice, { postProcessor });
+
+  // src/employees/Employee.ts
+  var BaseEmployee = types.model("Employee", {
+    id: types.optional(types.identifier, ""),
+    officeId: types.maybe(types.reference(Office)),
+    manager: types.optional(types.string, ""),
+    firstName: types.optional(types.string, ""),
+    lastName: types.optional(types.string, ""),
+    emailAddress: types.optional(types.string, ""),
+    extension: types.optional(types.string, ""),
+    jobTitle: types.optional(types.string, "")
+  }).actions((self2) => ({
+    setOffice(office) {
+      self2.officeId = office;
+    },
+    setManager(manager) {
+      self2.manager = manager;
+    },
+    setFirstName(firstName) {
+      self2.firstName = firstName;
+    },
+    setLastName(lastName) {
+      self2.lastName = lastName;
+    },
+    setEmailAddress(emailAddress) {
+      self2.emailAddress = emailAddress;
+    },
+    setExtension(extension) {
+      self2.extension = extension;
+    },
+    setJobTitle(jobTitle) {
+      self2.jobTitle = jobTitle;
+    }
+  }));
+  var postProcessSnapshot = (snapshot) => ({
+    ...snapshot,
+    id: snapshot.id || void 0,
+    officeId: snapshot.officeId
+  });
+  var Employee = types.snapshotProcessor(BaseEmployee, { postProcessor: postProcessSnapshot });
+
   // src/customers/Customer.ts
   var BaseCustomer = types.model("Customer", {
     id: types.optional(types.identifier, ""),
+    employeeId: types.maybe(types.reference(Employee)),
     firstName: types.optional(types.string, ""),
     lastName: types.optional(types.string, ""),
     deliveryAddress: types.optional(types.string, ""),
@@ -15338,6 +15421,9 @@
     emailAddress: types.optional(types.refinement(types.string, (e5) => /^$|\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi.test(e5)), ""),
     phoneNumber: types.optional(types.refinement(types.string, (p2) => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p2)), "")
   }).actions((self2) => ({
+    setEmployee(employee) {
+      self2.employeeId = employee;
+    },
     setFirstName(firstName) {
       self2.firstName = firstName;
     },
@@ -15411,12 +15497,12 @@
       self2.image = image;
     }
   }));
-  var postProcessSnapshot = (snapshot) => ({
+  var postProcessSnapshot2 = (snapshot) => ({
     ...snapshot,
     id: snapshot.id || void 0,
     categoryId: snapshot.categoryId
   });
-  var InventoryItem = types.snapshotProcessor(BaseInventoryItem, { postProcessor: postProcessSnapshot });
+  var InventoryItem = types.snapshotProcessor(BaseInventoryItem, { postProcessor: postProcessSnapshot2 });
 
   // src/orders/OrderItem.ts
   var BaseOrderItem = types.model("OrderItem", {
@@ -15450,12 +15536,12 @@
       return self2.buyPricePerUnit * self2.quantity * self2.tax + self2.buyPricePerUnit * self2.quantity;
     }
   }));
-  var postProcessSnapshot2 = (snapshot) => ({
+  var postProcessSnapshot3 = (snapshot) => ({
     ...snapshot,
     id: snapshot.id || void 0,
     inventoryItemId: snapshot.inventoryItemId
   });
-  var OrderItem = types.snapshotProcessor(BaseOrderItem, { postProcessor: postProcessSnapshot2 });
+  var OrderItem = types.snapshotProcessor(BaseOrderItem, { postProcessor: postProcessSnapshot3 });
 
   // src/orders/Order.ts
   var BaseOrder = types.model("Order", {
@@ -15485,12 +15571,12 @@
       return self2.items.reduce((total, item) => total === void 0 ? void 0 : self2.id === "" ? item?.totalPrice === void 0 ? total : total + item.totalPrice : item?.totalPriceOnDate === void 0 ? total : total + item.totalPriceOnDate, 0);
     }
   }));
-  var postProcessSnapshot3 = (snapshot) => ({
+  var postProcessSnapshot4 = (snapshot) => ({
     ...snapshot,
     id: snapshot.id || void 0,
     customerId: snapshot.customerId
   });
-  var Order = types.snapshotProcessor(BaseOrder, { postProcessor: postProcessSnapshot3 });
+  var Order = types.snapshotProcessor(BaseOrder, { postProcessor: postProcessSnapshot4 });
 
   // src/orders/ordersApi.ts
   var getOrders = async () => {

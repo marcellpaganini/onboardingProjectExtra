@@ -19,6 +19,7 @@ export const getOrder = async (id: string) => {
 export const saveOrder = async (order: IOrder) => {
 
     order.status = helperFunctions.getRandomStatus();
+    console.log(order);
 
     const response = await fetch(`${AppBasePath}/api/orders`, {
         method: 'POST',

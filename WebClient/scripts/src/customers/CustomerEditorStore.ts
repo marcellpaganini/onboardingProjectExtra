@@ -1,6 +1,8 @@
 import { flow, types } from 'mobx-state-tree';
 import { deleteCustomer, getCustomer, saveCustomer } from './customersApi';
 import { Customer } from './Customer';
+import { Employee } from '../employees/Employee';
+import { getEmployees } from '../employees/employeesApi';
 
 const defaultCustomer = {
     firstName: "",
@@ -16,10 +18,13 @@ const defaultCustomer = {
 
 export const CustomerEditorStore = types
     .model("CustomerEditorStore", {
-        customer: types.maybe(Customer)
+        customer: types.maybe(Customer),
+        employees: types.array(Employee)
     })
     .actions((self) => ({
         load: flow(function* (id?: string) {
+            self.employees = yield getEmployees();
+
             if (!id) {
                 self.customer = Customer.create(defaultCustomer);
                 return;
@@ -41,4 +46,9 @@ export const CustomerEditorStore = types
                 self.customer = yield deleteCustomer(self.customer!);
             }
         })
+    }))
+    .views(self => ({
+        get salespeople() {
+            return self.employees.filter(e => e.jobTitle === "Salesperson");
+        }
     }));

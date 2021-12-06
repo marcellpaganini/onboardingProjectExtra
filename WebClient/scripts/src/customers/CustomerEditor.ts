@@ -5,9 +5,10 @@ import { table, button, input } from '../common/componentStyle';
 import { handlePropChange, handleSubmit, states } from '../common/formTools';
 import { CustomerEditorStore } from './CustomerEditorStore';
 import { ICustomer } from './Customer';
+import { IEmployee } from '../employees/Employee';
 
 
-const customerEditor = (customer: ICustomer, onSave: () => {}, onDelete: () => {}) =>
+const customerEditor = (customer: ICustomer, employees: IEmployee[], onSave: () => {}, onDelete: () => {}) =>
     html`
     <form @submit=${handleSubmit(() => onSave())}>
         <label>
@@ -71,6 +72,21 @@ const customerEditor = (customer: ICustomer, onSave: () => {}, onDelete: () => {
             required />
         </label>
 
+        <label>
+            <p>Salesperson</p>
+            <select .value=${customer.employeeId?.id ?? ""} @change=${handlePropChange(customer, (customer, employeeId) => {
+                const matchingEmployee = employees.find(c => c.id === employeeId);
+                customer.setEmployee(matchingEmployee);
+                })} class="customer">
+                <option value="">--Choose a Salesperson--</option>
+                ${employees.map((employee) => 
+                    html`
+                    <option value=${employee.id}>${employee.firstName} ${employee.lastName}</option>
+                    `
+                )}
+            </select>
+        </label>
+
         <br /> <br />
 
         <button>Submit</button> <button type="button" @click=${onDelete} >Delete</button>
@@ -110,6 +126,6 @@ export class CustomerEditor extends MobxLitElement {
 
     render = () =>
         (this.store.customer)
-            ? customerEditor(this.store.customer, this.saveCustomer, this.deleteCustomer)
+            ? customerEditor(this.store.customer, this.store.salespeople, this.saveCustomer, this.deleteCustomer)
             : 'Now loading...';
 }

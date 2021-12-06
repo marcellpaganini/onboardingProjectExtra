@@ -1,9 +1,11 @@
 import { Instance, types } from 'mobx-state-tree';
 import { postProcessor } from '../common/recordPostProcessor';
+import { Employee, IEmployee } from '../employees/Employee';
 
 const BaseCustomer = types
     .model("Customer", {
         id: types.optional(types.identifier, ""),
+        employeeId: types.maybe(types.reference(Employee)),
         firstName: types.optional(types.string, ""),
         lastName: types.optional(types.string, ""),
         deliveryAddress: types.optional(types.string, ""),
@@ -16,6 +18,10 @@ const BaseCustomer = types
         phoneNumber: types.optional(types.refinement(types.string, p => /^$|(?:\d{1}\s)?\(?(\d{3})\)?-?\s?(\d{3})-?\s?(\d{4})/g.test(p)), "")
     })
     .actions(self => ({
+        setEmployee(employee: IEmployee | undefined) {
+            self.employeeId = employee;
+        },
+
         setFirstName(firstName: string) {
             self.firstName = firstName;
         },
