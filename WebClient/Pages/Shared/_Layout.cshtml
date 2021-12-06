@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
@@ -12,16 +13,35 @@
 </head>
 <body>
     <div class= "nav">
-        <ul>
-            <li><a href="~/" class="imgLink"><img class="logo" src="~/images/Logo Small-01.png"></a></li>
-            <li><a href="~/">Home</a></li> 
-            <li><a href="~/Customers">Customers</a></li>
-            <li><a href="~/Inventory">Products</a></li> 
-            <li><a href="~/Orders">Orders</a></li>
-            <li><a href="~/Categories">Categories</a></li>
-            <li><a href="~/Employees">Employees</a></li>
-            <li><a href="~/Offices">Offices</a></li>
-        </ul>
+            <a href="~/" class="imgLink"><img class="logo" src="~/images/Logo Small-01.png"></a>
+            <a href="~/">Home</a>
+            <div class="dropdown">
+                <button class="dropbtn">Inventory 
+                <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                <a href="~/Inventory">Products</a>
+                <a href="~/Categories">Categories</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Sales 
+                <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                <a href="~/Customers">Customers</a>
+                <a href="~/Orders">Orders</a>
+                </div>
+            </div> 
+            <div class="dropdown">
+                <button class="dropbtn">Company 
+                <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                <a href="~/Employees">Employees</a>
+                <a href="~/Offices">Offices</a>
+                </div>
+            </div> 
     </div>
     <main>
         @RenderBody()   
