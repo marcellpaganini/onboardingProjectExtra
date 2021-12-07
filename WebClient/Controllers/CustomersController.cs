@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using OrderManagement.Services.Customers;
 using OrderManagement.Types.Customers;
 using OrderManagement.Types.Wrappers;
+using System.Linq;
 
 namespace OrderManagement.WebClient.Controllers
 {
@@ -20,14 +21,23 @@ namespace OrderManagement.WebClient.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get() {
+        public async Task<IActionResult> Get([FromQuery] PaginationFilter filter) 
+        {
+            var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
             var customers = await customerService.Get();
-            return Ok(customers);
+            var pagedData = customers
+                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                .Take(validFilter.PageSize)
+                .ToList();
+
+            var totalRecords = customers.Count();
+            return Ok(new PagedResponse<List<Customer>>(pagedData, validFilter.PageNumber, validFilter.PageSize));
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> Get(Guid id) {
+        public async Task<IActionResult> Get(Guid id) 
+        {
             var customer = await customerService.Get(id);
             return Ok(new Response<Customer>(customer));
         }
