@@ -36,7 +36,7 @@ namespace OrderManagement.WebClient.Controllers
                 .ToList();
 
             var totalRecords = customers.Count();
-            var pagedResponse = PaginationHelper.CreatePagedReponse<Customer>(pagedData, validFilter, totalRecords, uriService, route);
+            var pagedResponse = PaginationHelper.CreatePagedReponse<Customer>(pagedData, validFilter, totalRecords, uriService, route!);
             return Ok(pagedResponse);
         }
 
@@ -45,7 +45,7 @@ namespace OrderManagement.WebClient.Controllers
         public async Task<IActionResult> Get(Guid id) 
         {
             var customer = await customerService.Get(id);
-            return Ok(new Response<Customer>(customer));
+            return Ok(new Response<Customer>(customer!));
         }
 
         [HttpPost]

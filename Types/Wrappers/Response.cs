@@ -17,7 +17,7 @@ namespace OrderManagement.Types.Wrappers
                 Data = data;
             }
             
-            public T Data { get; init; }
+            public T ?Data { get; init; }
             public bool Succeeded { get; init; } = true;
             public ICollection<string> ?Errors { get; init; }
             public string ?Message { get; init; }
