@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using OrderManagement.Services;
 
 namespace OrderManagement.WebClient
 {
@@ -25,7 +27,15 @@ namespace OrderManagement.WebClient
             services.AddDbContext<AppDbContext>(options => {
                 options.UseSqlite("Data Source=test.db", b => b.MigrationsAssembly("WebClient"));
             });
-
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IUriService>(o =>
+            {
+                var accessor = o.GetRequiredService<IHttpContextAccessor>();
+                var request = accessor.HttpContext.Request;
+                var uri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
+                return new UriService(uri);
+            });
+            services.AddControllers();
             services.RegisterDependencies();
         }
 

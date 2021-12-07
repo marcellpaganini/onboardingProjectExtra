@@ -6,6 +6,8 @@ using OrderManagement.Services.Customers;
 using OrderManagement.Types.Customers;
 using OrderManagement.Types.Wrappers;
 using System.Linq;
+using OrderManagement.Services;
+using OrderManagement.WebClient.Controllers.Helpers;
 
 namespace OrderManagement.WebClient.Controllers
 {
@@ -14,15 +16,18 @@ namespace OrderManagement.WebClient.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly CustomerService customerService;
+        private readonly IUriService uriService;
 
-        public CustomersController(CustomerService customerService)
+        public CustomersController(CustomerService customerService, IUriService uriService)
         {
             this.customerService = customerService;
+            this.uriService = uriService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationFilter filter) 
         {
+            var route = Request.Path.Value;
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
             var customers = await customerService.Get();
             var pagedData = customers
@@ -31,7 +36,8 @@ namespace OrderManagement.WebClient.Controllers
                 .ToList();
 
             var totalRecords = customers.Count();
-            return Ok(new PagedResponse<List<Customer>>(pagedData, validFilter.PageNumber, validFilter.PageSize));
+            var pagedResponse = PaginationHelper.CreatePagedReponse<Customer>(pagedData, validFilter, totalRecords, uriService, route);
+            return Ok(pagedResponse);
         }
 
         [HttpGet]
