@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OrderManagement.Services.Customers;
 using OrderManagement.Types.Customers;
+using OrderManagement.Types.Wrappers;
 
 namespace OrderManagement.WebClient.Controllers
 {
@@ -24,8 +25,10 @@ namespace OrderManagement.WebClient.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<Customer?> Get(Guid id) =>
-            await customerService.Get(id);
+        public async Task<IActionResult> Get(Guid id) {
+            var customer = await customerService.Get(id);
+            return Ok(new Response<Customer>(customer));
+        }
 
         [HttpPost]
         public async Task<Customer> Post(Customer customer) =>
