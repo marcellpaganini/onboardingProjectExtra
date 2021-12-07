@@ -20,8 +20,10 @@ namespace OrderManagement.WebClient.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Customer>> Get() =>
-            await customerService.Get();
+        public async Task<IActionResult> Get() {
+            var customers = await customerService.Get();
+            return Ok(customers);
+        }
 
         [HttpGet]
         [Route("{id}")]
