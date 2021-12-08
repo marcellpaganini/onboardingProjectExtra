@@ -1,10 +1,11 @@
 import { flow, types } from 'mobx-state-tree';
 import { getCustomers } from './customersApi';
 import { Customer } from './Customer';
+import { BaseModel } from '../BaseModel';
 
 export const CustomersListStore = types
     .model("CustomersListStore", {
-        customers: types.maybe(types.array(Customer)),
+        customers: types.maybeNull(types.array(BaseModel(Customer))),
         customer: types.maybe(Customer)
     })
     .actions((self) => ({

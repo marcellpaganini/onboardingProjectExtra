@@ -1,12 +1,12 @@
 import { getSnapshot, SnapshotIn } from 'mobx-state-tree';
 import { ICustomer, Customer } from './Customer';
+import { IBaseModel, BaseModel } from '../BaseModel';
 
 export const getCustomers = async () => {
     const response = await fetch(`${AppBasePath}/api/customers`);
 
-    const results = await response.json();
-
-    return results.map((i: SnapshotIn<ICustomer>) => Customer.create(i));
+    //return Customer.create(await response.json());
+    return BaseModel(Customer).create(await response.json());
 };
 
 export const getCustomer = async (id: string) => {

@@ -4,7 +4,6 @@ import { customElement } from 'lit/decorators.js';
 import { EmployeesListStore } from './EmployeeListStore';
 import { IEmployee } from './Employee';
 import { table, button } from '../common/componentStyle';
-import { helperFunctions } from '../common/formTools';
 
 
 const employeesRow = ({ id, officeId, manager, firstName, lastName, emailAddress,

@@ -1,19 +1,18 @@
-import { Instance, types } from 'mobx-state-tree';
-import { postProcessor } from './common/recordPostProcessor';
+import { IAnyType, IMSTArray, Instance, types } from 'mobx-state-tree';
 
-const BaseModel = (record: Record) =>
+export const BaseModel = <T extends IAnyType>(model: T) =>
     types.model("BaseModel", {
         pageNumber: types.optional(types.number, 1),
         pageSize: types.optional(types.number, 10),
-        firstPage: types.optional(types.string, ""),
-        lastPage: types.optional(types.string, ""),
+        firstPage: types.maybeNull(types.string),
+        lastPage: types.maybeNull(types.string),
         totalPages: types.optional(types.number, 1),
-        nextPage: types.optional(types.string, ""),
-        previousPage: types.optional(types.string, ""),
-        data: types.array(record),
+        nextPage: types.maybeNull(types.string),
+        previousPage: types.maybeNull(types.string),
+        data: types.array(model),
         succeeded: types.optional(types.boolean, true),
-        errors: types.array(types.string),
-        message: types.optional(types.string, "")
+        errors: types.maybeNull(types.array(types.string)),
+        message: types.maybeNull(types.string)
     }) 
     .actions(self => ({
         setPageNumber(pageNumber: number) {
@@ -40,7 +39,7 @@ const BaseModel = (record: Record) =>
             self.nextPage = nextPage;
         },
 
-        setData(data: Record[]) {
+        setData(data: IMSTArray<T>) {
             self.data = data;
         },
 
@@ -48,7 +47,7 @@ const BaseModel = (record: Record) =>
             self.succeeded = succeeded;
         },
 
-        setErrors(errors: string[]) {
+        setErrors(errors: IMSTArray<any>) {
             self.errors = errors;
         },
 
@@ -57,6 +56,4 @@ const BaseModel = (record: Record) =>
         }
     }));
 
-export const Customer = types.snapshotProcessor(BaseModel, { postProcessor })
-
-export type ICustomer = Instance<typeof Customer>
+export type IBaseModel = Instance<typeof BaseModel>

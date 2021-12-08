@@ -15637,11 +15637,56 @@
     return results.map((i4) => InventoryItem.create(i4));
   };
 
+  // src/BaseModel.ts
+  var BaseModel = (model2) => types.model("BaseModel", {
+    pageNumber: types.optional(types.number, 1),
+    pageSize: types.optional(types.number, 10),
+    firstPage: types.maybeNull(types.string),
+    lastPage: types.maybeNull(types.string),
+    totalPages: types.optional(types.number, 1),
+    nextPage: types.maybeNull(types.string),
+    previousPage: types.maybeNull(types.string),
+    data: types.array(model2),
+    succeeded: types.optional(types.boolean, true),
+    errors: types.maybeNull(types.array(types.string)),
+    message: types.maybeNull(types.string)
+  }).actions((self2) => ({
+    setPageNumber(pageNumber) {
+      self2.pageNumber = pageNumber;
+    },
+    setPageSize(pageSize) {
+      self2.pageSize = pageSize;
+    },
+    setFirstPage(firstPage) {
+      self2.firstPage = firstPage;
+    },
+    setLastPage(lastPage) {
+      self2.lastPage = lastPage;
+    },
+    setTotalPages(totalPages) {
+      self2.totalPages = totalPages;
+    },
+    setNextPage(nextPage) {
+      self2.nextPage = nextPage;
+    },
+    setData(data) {
+      self2.data = data;
+    },
+    setSucceeded(succeeded) {
+      self2.succeeded = succeeded;
+    },
+    setErrors(errors2) {
+      self2.errors = errors2;
+    },
+    setMessage(message) {
+      self2.message = message;
+    }
+  }));
+
   // src/customers/customersApi.ts
   var getCustomers = async () => {
     const response = await fetch(`${AppBasePath}/api/customers`);
-    const results = await response.json();
-    return results.map((i4) => Customer.create(i4));
+    return BaseModel(Customer).create(await response.json());
   };
 
   // src/orders/OrderEditorStore.ts

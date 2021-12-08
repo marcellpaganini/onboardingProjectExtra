@@ -2,8 +2,9 @@ import { MobxLitElement } from '@adobe/lit-mobx';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { CustomersListStore } from './CustomersListStore';
-import { ICustomer } from './Customer';
+import { Customer, ICustomer } from './Customer';
 import { table, button } from '../common/componentStyle';
+import { IBaseModel } from '../BaseModel';
 
 
 const customersRow = ({ id, firstName, lastName, deliveryAddress, city, state, 
@@ -24,7 +25,7 @@ const customersRow = ({ id, firstName, lastName, deliveryAddress, city, state,
     </tr>
     `;
 
-const customersTable = (customers: ICustomer[] = []) =>
+const customersTable = (customers: IBaseModel) =>
     html`
     <table class="long">
         <thead>
@@ -40,7 +41,7 @@ const customersTable = (customers: ICustomer[] = []) =>
         </thead>
     
         <tbody>
-            ${customers.map(customersRow)}
+            ${customers[Customer].map(customersRow)}
         </tbody>
     </table>
     <br /><br />
