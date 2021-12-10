@@ -2,7 +2,7 @@ import { MobxLitElement } from '@adobe/lit-mobx';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { CustomersListStore } from './CustomersListStore';
-import { Customer, ICustomer } from './Customer';
+import { ICustomer } from './Customer';
 import { table, button } from '../common/componentStyle';
 import { IBaseModel } from '../BaseModel';
 
@@ -25,7 +25,13 @@ const customersRow = ({ id, firstName, lastName, deliveryAddress, city, state,
     </tr>
     `;
 
-const customersTable = (customers: IBaseModel) =>
+const paginationLinks = ({ firstPage, previousPage, nextPage, lastPage }: IBaseModel) => 
+    html`
+        <a href="${firstPage}">⏮</a><a href="${previousPage}">⏪</a>
+        <a href="${nextPage}">⏩</a><a href="${lastPage}">⏭</a>
+    `;
+
+const customersTable = (customers: ICustomer[] = []) =>
     html`
     <table class="long">
         <thead>
@@ -41,10 +47,11 @@ const customersTable = (customers: IBaseModel) =>
         </thead>
     
         <tbody>
-            ${customers[Customer].map(customersRow)}
+            ${customers.map(customersRow)}
         </tbody>
     </table>
     <br /><br />
+    ${paginationLinks}    
     `;
 
 @customElement('customers-list')
@@ -61,7 +68,7 @@ export class CustomersList extends MobxLitElement {
     }
 
     render = () =>
-        (this.store.customers)
+        (this.store.paginatedCustomers)
             ? customersTable(this.store.customers)
             : 'Loading...';
 }

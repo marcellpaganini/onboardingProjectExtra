@@ -3,18 +3,23 @@ import { getCustomers } from './customersApi';
 import { Customer } from './Customer';
 import { BaseModel } from '../BaseModel';
 
+
 export const CustomersListStore = types
     .model("CustomersListStore", {
-        customers: types.maybeNull(types.array(BaseModel(Customer))),
+        paginatedCustomers: types.maybeNull(BaseModel(Customer)),
         customer: types.maybe(Customer)
     })
     .actions((self) => ({
         load: flow(function* () {
-            self.customers = yield getCustomers();
+            self.paginatedCustomers = yield getCustomers();
         })
     }))
     .views(self => ({
         get fullName() {
             return `${self.customer?.firstName} ${self.customer?.lastName}`;
+        },
+
+        get customers() {
+            return self.paginatedCustomers?.data;
         }
     }));
