@@ -1,12 +1,12 @@
-import { flow, types } from 'mobx-state-tree';
+import { flow, IAnyType, types } from 'mobx-state-tree';
 import { getCustomers } from './customersApi';
 import { Customer } from './Customer';
-import { BaseModel } from '../BaseModel';
+import { baseModelCustomer } from '../IBaseModel';
 
 
 export const CustomersListStore = types
     .model("CustomersListStore", {
-        paginatedCustomers: types.maybeNull(BaseModel(Customer)),
+        paginatedCustomers: types.maybeNull(baseModelCustomer),
         customer: types.maybe(Customer)
     })
     .actions((self) => ({

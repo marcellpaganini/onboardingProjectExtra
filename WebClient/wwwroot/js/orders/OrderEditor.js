@@ -15683,10 +15683,13 @@
     }
   }));
 
+  // src/IBaseModel.ts
+  var baseModelCustomer = BaseModel(Customer);
+
   // src/customers/customersApi.ts
   var getCustomers = async () => {
     const response = await fetch(`${AppBasePath}/api/customers`);
-    return BaseModel(Customer).create(await response.json());
+    return baseModelCustomer.create(await response.json());
   };
 
   // src/orders/OrderEditorStore.ts

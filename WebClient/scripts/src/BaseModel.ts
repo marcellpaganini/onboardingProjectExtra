@@ -56,4 +56,4 @@ export const BaseModel = <T extends IAnyType>(model: T) =>
         }
     }));
 
-export type IBaseModel = Instance<typeof BaseModel>
+export type IBaseModel = Instance<ReturnType<typeof BaseModel>>

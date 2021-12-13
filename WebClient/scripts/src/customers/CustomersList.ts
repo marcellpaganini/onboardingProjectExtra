@@ -27,8 +27,8 @@ const customersRow = ({ id, firstName, lastName, deliveryAddress, city, state,
 
 const paginationLinks = ({ firstPage, previousPage, nextPage, lastPage }: IBaseModel) => 
     html`
-        <a href="${firstPage}">⏮</a><a href="${previousPage}">⏪</a>
-        <a href="${nextPage}">⏩</a><a href="${lastPage}">⏭</a>
+        <a href="${firstPage!}">⏮</a><a href="${previousPage!}">⏪</a>
+        <a href="${nextPage!}">⏩</a><a href="${lastPage!}">⏭</a>
     `;
 
 const customersTable = (customers: ICustomer[] = []) =>
