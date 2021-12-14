@@ -16,4 +16,12 @@ export const EmployeesListStore = types
             self.offices = yield getOffices(); 
             self.paginatedEmployees = yield getPaginatedEmployees(pagination);
         })
+    }))
+    .views(self => ({
+        sortedEmployees(type?: string) {
+            if(type) {
+                return self.paginatedEmployees?.data?.slice().sort( (a, b) => a.firstName.localeCompare(b.firstName, undefined, { caseFirst: 'upper' })) ?? [];
+            }
+            return self.paginatedEmployees;
+        }
     }));

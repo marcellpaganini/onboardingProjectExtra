@@ -23,13 +23,14 @@ const employeesRow = ({ id, officeId, manager, firstName, lastName, emailAddress
     </tr>
     `;
 
-const employeesTable = (employees: IBaseModel, onReload: (pagination?: string) => any) =>
+const employeesTable = (employees: IBaseModel, onReload: (pagination?: string) => any, 
+                        onSort: (type?: string) => any) =>
     html`
     <table class="long">
         <thead>
             <th>Office</th>
             <th>Manager</th>
-            <th>Full Name</th>
+            <th><button type="button" class="btnPagination" @click=${() => onSort("name")}>Full Name</button></th>
             <th>Email Address</th>
             <th>Extension</th>
             <th>Job Title</th>
@@ -64,8 +65,12 @@ export class EmployeesList extends MobxLitElement {
         this.store.load(pagination);
     }
 
+    sort = async (type?:string) => {
+        this.store.sortedEmployees(type);
+    }
+
     render = () =>
         (this.store.paginatedEmployees)
-            ? employeesTable(this.store.paginatedEmployees, this.reload)
+            ? employeesTable(this.store.paginatedEmployees, this.reload, this.sort)
             : 'Loading...';
 }
