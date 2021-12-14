@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OrderManagement.Services.Customers;
 using OrderManagement.Types.Customers;
-using OrderManagement.Types.Wrappers;
 using System.Linq;
 using OrderManagement.Services;
 using OrderManagement.WebClient.Controllers.Helpers;
