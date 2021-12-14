@@ -25,7 +25,7 @@ const customersRow = ({ id, firstName, lastName, deliveryAddress, city, state,
     </tr>
     `;
 
-const customersTable = (customers: IBaseModel) =>
+const customersTable = (customers: IBaseModel, onReload: (pagination?: string) => any) =>
     html`
     <table class="long">
         <thead>
@@ -44,8 +44,10 @@ const customersTable = (customers: IBaseModel) =>
             ${customers.data.map(customersRow)}
         </tbody>
     </table>
-    <a href="${customers.firstPage ? customers.firstPage.replace("/api", "") : ""}">⏮</a><a href="${customers.previousPage ? customers.previousPage.replace("/api", "") : ""}">⏪</a>
-    <a href="${customers.nextPage ? customers.nextPage.replace("/api", "") : ""}">⏩</a><a href="${customers.lastPage ? customers.lastPage.replace("/api", "") : ""}">⏭</a> 
+    <button type="button" class="btnPagination" @click=${() => onReload(customers.firstPage!.substring(customers.firstPage!.indexOf("?")))}>⏮</button>
+    <button type="button" class="btnPagination" @click=${() => onReload(customers.previousPage!.substring(customers.previousPage!.indexOf("?")))}>⏪</button>
+    <button type="button" class="btnPagination" @click=${() => onReload(customers.nextPage!.substring(customers.nextPage!.indexOf("?")))}>⏩</button>
+    <button type="button" class="btnPagination" @click=${() => onReload(customers.lastPage!.substring(customers.lastPage!.indexOf("?")))}>⏭</button> 
     <br /><br />
     `;
 
@@ -62,8 +64,12 @@ export class CustomersList extends MobxLitElement {
         this.store.load();
     }
 
+    reload = async (pagination?: string) => {
+        this.store.load(pagination);
+    }
+
     render = () =>
         (this.store.paginatedCustomers)
-            ? customersTable(this.store.paginatedCustomers)
+            ? customersTable(this.store.paginatedCustomers, this.reload)
             : 'Loading...';
 }

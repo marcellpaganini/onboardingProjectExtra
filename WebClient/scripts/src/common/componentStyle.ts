@@ -54,6 +54,10 @@ export const button = css`
         background-color: white;
         padding: 0;
     }
+
+    .btnPagination {
+        background-color: transparent;
+    }
 `;
 
 export const input = css`

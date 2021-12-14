@@ -1,10 +1,9 @@
-import { getSnapshot, SnapshotIn } from 'mobx-state-tree';
+import { getSnapshot } from 'mobx-state-tree';
 import { ICustomer, Customer } from './Customer';
-import { IBaseModel, BaseModel } from '../BaseModel';
 import { baseModelCustomer } from '../IBaseModel';
 
-export const getCustomers = async () => {
-    const response = await fetch(`${AppBasePath}/api/customers`);
+export const getCustomers = async (pagination?: string) => {
+    const response = await fetch(`${AppBasePath}/api/customers${pagination === undefined ? "" : pagination}`);
 
     //return Customer.create(await response.json());
     return baseModelCustomer.create(await response.json());

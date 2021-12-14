@@ -4887,6 +4887,10 @@
         background-color: white;
         padding: 0;
     }
+
+    .btnPagination {
+        background-color: transparent;
+    }
 `;
   var input = r`
     input[type=text], input[type=number], textarea, select {

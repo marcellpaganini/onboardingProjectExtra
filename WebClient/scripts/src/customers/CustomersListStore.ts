@@ -10,8 +10,8 @@ export const CustomersListStore = types
         customer: types.maybe(Customer)
     })
     .actions((self) => ({
-        load: flow(function* () {
-            self.paginatedCustomers = yield getCustomers();
+        load: flow(function* (pagination?: string) {
+            self.paginatedCustomers = yield getCustomers(pagination);
         })
     }))
     .views(self => ({

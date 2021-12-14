@@ -15642,8 +15642,8 @@
   var baseModelCustomer = BaseModel(Customer);
 
   // src/customers/customersApi.ts
-  var getCustomers = async () => {
-    const response = await fetch(`${AppBasePath}/api/customers`);
+  var getCustomers = async (pagination) => {
+    const response = await fetch(`${AppBasePath}/api/customers${pagination === void 0 ? "" : pagination}`);
     return baseModelCustomer.create(await response.json());
   };
 
@@ -15717,6 +15717,10 @@
     .btnRemove {
         background-color: white;
         padding: 0;
+    }
+
+    .btnPagination {
+        background-color: transparent;
     }
 `;
   var input = r`
