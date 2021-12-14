@@ -15655,9 +15655,10 @@
   var baseModelCustomer = BaseModel(Customer);
 
   // src/customers/customersApi.ts
-  var getCustomers = async (pagination) => {
-    const response = await fetch(`${AppBasePath}/api/customers${pagination === void 0 ? "" : pagination}`);
-    return baseModelCustomer.create(await response.json());
+  var getOrderCustomers = async () => {
+    const response = await fetch(`${AppBasePath}/api/customers/flat`);
+    const results = await response.json();
+    return results.map((i4) => Customer.create(i4));
   };
 
   // src/orders/orderViewerStore.ts
@@ -15668,7 +15669,7 @@
   }).actions((self2) => ({
     load: flow3(function* (id) {
       self2.inventoryItems = yield getInventoryItems();
-      self2.customers = yield getCustomers();
+      self2.customers = yield getOrderCustomers();
       if (!id) {
         return;
       }

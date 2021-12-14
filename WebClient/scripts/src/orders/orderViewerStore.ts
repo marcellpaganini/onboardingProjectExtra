@@ -4,7 +4,7 @@ import { Order } from './Order';
 import { InventoryItem } from '../inventory/InventoryItem';
 import { Customer } from '../customers/Customer';
 import { getInventoryItems } from '../inventory/inventoryApi';
-import { getCustomers } from '../customers/customersApi';
+import { getOrderCustomers } from '../customers/customersApi';
 
 export const OrderViewerStore = types
     .model("OrderViwerStore", {
@@ -15,7 +15,7 @@ export const OrderViewerStore = types
     .actions((self) => ({
         load: flow(function* (id?: string) {
             self.inventoryItems = yield getInventoryItems();
-            self.customers = yield getCustomers();
+            self.customers = yield getOrderCustomers();
             
             if (!id) {
                 return;

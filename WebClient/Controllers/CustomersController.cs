@@ -41,6 +41,12 @@ namespace OrderManagement.WebClient.Controllers
         }
 
         [HttpGet]
+        [Route("flat/")]
+        public async Task<IEnumerable<Customer>> Get() => 
+            await customerService.Get();
+        
+
+        [HttpGet]
         [Route("{id}")]
         public async Task<Customer?> Get(Guid id) =>
             await customerService.Get(id);
