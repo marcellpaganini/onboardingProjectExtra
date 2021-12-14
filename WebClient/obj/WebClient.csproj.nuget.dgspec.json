@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\WebClient.csproj": {}
+    "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\webclient\\WebClient.csproj": {}
   },
   "projects": {
     "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj": {
@@ -184,14 +184,14 @@
         }
       }
     },
-    "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\WebClient.csproj": {
+    "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\webclient\\WebClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\WebClient.csproj",
+        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\webclient\\WebClient.csproj",
         "projectName": "WebClient",
-        "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\WebClient.csproj",
+        "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\webclient\\WebClient.csproj",
         "packagesPath": "C:\\Users\\mtanure\\.nuget\\packages\\",
-        "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\obj\\",
+        "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\webclient\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mtanure\\AppData\\Roaming\\NuGet\\NuGet.Config"

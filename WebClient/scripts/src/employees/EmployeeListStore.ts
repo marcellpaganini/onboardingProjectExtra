@@ -1,18 +1,19 @@
 import { flow, types } from 'mobx-state-tree';
 import { Office } from '../offices/Office';
 import { getOffices } from '../offices/officesApi';
-import { getEmployees } from './employeesApi';
+import { getPaginatedEmployees } from './employeesApi';
 import { Employee } from './Employee';
+import { baseModelEmployee } from '../IBaseModel';
 
 export const EmployeesListStore = types
     .model("EmployeesListStore", {
-        employees: types.maybe(types.array(Employee)),
+        paginatedEmployees: types.maybeNull(baseModelEmployee),
         employee: types.maybe(Employee),
         offices: types.maybe(types.array(Office))
     })
     .actions((self) => ({
-        load: flow(function* () {
+        load: flow(function* (pagination?: string) {
             self.offices = yield getOffices(); 
-            self.employees = yield getEmployees();
+            self.paginatedEmployees = yield getPaginatedEmployees(pagination);
         })
     }));

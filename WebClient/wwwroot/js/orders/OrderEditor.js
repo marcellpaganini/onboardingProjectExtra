@@ -15685,6 +15685,7 @@
 
   // src/IBaseModel.ts
   var baseModelCustomer = BaseModel(Customer);
+  var baseModelEmployee = BaseModel(Employee);
 
   // src/customers/customersApi.ts
   var getOrderCustomers = async () => {

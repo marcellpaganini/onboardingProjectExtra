@@ -4,6 +4,7 @@ import { customElement } from 'lit/decorators.js';
 import { EmployeesListStore } from './EmployeeListStore';
 import { IEmployee } from './Employee';
 import { table, button } from '../common/componentStyle';
+import { IBaseModel } from '../BaseModel';
 
 
 const employeesRow = ({ id, officeId, manager, firstName, lastName, emailAddress,
@@ -22,7 +23,7 @@ const employeesRow = ({ id, officeId, manager, firstName, lastName, emailAddress
     </tr>
     `;
 
-const employeesTable = (employees: IEmployee[] = []) =>
+const employeesTable = (employees: IBaseModel, onReload: (pagination?: string) => any) =>
     html`
     <table class="long">
         <thead>
@@ -36,9 +37,13 @@ const employeesTable = (employees: IEmployee[] = []) =>
         </thead>
     
         <tbody>
-            ${employees.map(employeesRow)}
+            ${employees.data.map(employeesRow)}
         </tbody>
     </table>
+    <button type="button" class="btnPagination" @click=${() => onReload(employees.firstPage!.substring(employees.firstPage!.indexOf("?")))}>⏮</button>
+    <button type="button" class="btnPagination" @click=${() => onReload(employees.previousPage!.substring(employees.previousPage!.indexOf("?")))}>⏪</button>
+    <button type="button" class="btnPagination" @click=${() => onReload(employees.nextPage!.substring(employees.nextPage!.indexOf("?")))}>⏩</button>
+    <button type="button" class="btnPagination" @click=${() => onReload(employees.lastPage!.substring(employees.lastPage!.indexOf("?")))}>⏭</button> 
     <br /><br />
     `;
 
@@ -55,8 +60,12 @@ export class EmployeesList extends MobxLitElement {
         this.store.load();
     }
 
+    reload = async (pagination?: string) => {
+        this.store.load(pagination);
+    }
+
     render = () =>
-        (this.store.employees)
-            ? employeesTable(this.store.employees)
+        (this.store.paginatedEmployees)
+            ? employeesTable(this.store.paginatedEmployees, this.reload)
             : 'Loading...';
 }
