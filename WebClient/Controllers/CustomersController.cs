@@ -42,11 +42,9 @@ namespace OrderManagement.WebClient.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> Get(Guid id) 
-        {
-            var customer = await customerService.Get(id);
-            return Ok(new Response<Customer>(customer!));
-        }
+        public async Task<Customer?> Get(Guid id) =>
+            await customerService.Get(id);
+        
 
         [HttpPost]
         public async Task<Customer> Post(Customer customer) =>
