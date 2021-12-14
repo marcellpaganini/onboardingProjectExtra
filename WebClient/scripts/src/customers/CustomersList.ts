@@ -25,13 +25,7 @@ const customersRow = ({ id, firstName, lastName, deliveryAddress, city, state,
     </tr>
     `;
 
-const paginationLinks = ({ firstPage, previousPage, nextPage, lastPage }: IBaseModel) => 
-    html`
-        <a href="${firstPage!}">⏮</a><a href="${previousPage!}">⏪</a>
-        <a href="${nextPage!}">⏩</a><a href="${lastPage!}">⏭</a>
-    `;
-
-const customersTable = (customers: ICustomer[] = []) =>
+const customersTable = (customers: IBaseModel) =>
     html`
     <table class="long">
         <thead>
@@ -47,11 +41,12 @@ const customersTable = (customers: ICustomer[] = []) =>
         </thead>
     
         <tbody>
-            ${customers.map(customersRow)}
+            ${customers.data.map(customersRow)}
         </tbody>
     </table>
+    <a href="${customers.firstPage ? customers.firstPage.replace("/api", "") : ""}">⏮</a><a href="${customers.previousPage ? customers.previousPage.replace("/api", "") : ""}">⏪</a>
+    <a href="${customers.nextPage ? customers.nextPage.replace("/api", "") : ""}">⏩</a><a href="${customers.lastPage ? customers.lastPage.replace("/api", "") : ""}">⏭</a> 
     <br /><br />
-    ${paginationLinks}    
     `;
 
 @customElement('customers-list')
@@ -69,6 +64,6 @@ export class CustomersList extends MobxLitElement {
 
     render = () =>
         (this.store.paginatedCustomers)
-            ? customersTable(this.store.customers)
+            ? customersTable(this.store.paginatedCustomers)
             : 'Loading...';
 }
