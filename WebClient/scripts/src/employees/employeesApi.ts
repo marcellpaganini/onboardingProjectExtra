@@ -1,12 +1,19 @@
 import { getSnapshot, SnapshotIn } from 'mobx-state-tree';
+import { baseModelEmployee } from '../IBaseModel';
 import { IEmployee, Employee } from './Employee';
 
 export const getEmployees = async () => {
-    const response = await fetch(`${AppBasePath}/api/employees`);
+    const response = await fetch(`${AppBasePath}/api/employees/flat`);
 
     const results = await response.json();
 
     return results.map((i: SnapshotIn<IEmployee>) => Employee.create(i));
+};
+
+export const getPaginatedEmployees = async (pagination?: string) => {
+    const response = await fetch(`${AppBasePath}/api/employees${pagination === undefined ? "" : pagination}`);
+
+    return baseModelEmployee.create(await response.json());
 };
 
 export const getEmployee = async (id: string) => {
