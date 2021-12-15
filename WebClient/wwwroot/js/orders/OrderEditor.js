@@ -15860,6 +15860,13 @@
     .btnPagination {
         background-color: transparent;
     }
+
+    .btnTableHeader {
+        background-color: transparent;
+        color: #2F4F4F;
+        font-size: small;
+        font-weight: bold;
+    }
 `;
   var input = r`
     input[type=text], input[type=number], textarea, select {

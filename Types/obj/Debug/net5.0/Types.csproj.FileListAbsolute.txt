@@ -26,7 +26,6 @@ C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\bin\Debug\net5.0\Type
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\bin\Debug\net5.0\Types.dll
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\bin\Debug\net5.0\ref\Types.dll
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\bin\Debug\net5.0\Types.pdb
-C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\obj\Debug\net5.0\Types.csproj.AssemblyReference.cache
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\obj\Debug\net5.0\Types.GeneratedMSBuildEditorConfig.editorconfig
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\obj\Debug\net5.0\Types.AssemblyInfoInputs.cache
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\obj\Debug\net5.0\Types.AssemblyInfo.cs
@@ -34,3 +33,4 @@ C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\obj\Debug\net5.0\Type
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\obj\Debug\net5.0\Types.dll
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\obj\Debug\net5.0\ref\Types.dll
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\obj\Debug\net5.0\Types.pdb
+C:\src\OnboardingProjectExtra\onboardingProjectExtra\Types\obj\Debug\net5.0\Types.csproj.AssemblyReference.cache

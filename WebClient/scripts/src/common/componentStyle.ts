@@ -58,6 +58,13 @@ export const button = css`
     .btnPagination {
         background-color: transparent;
     }
+
+    .btnTableHeader {
+        background-color: transparent;
+        color: #2F4F4F;
+        font-size: small;
+        font-weight: bold;
+    }
 `;
 
 export const input = css`
