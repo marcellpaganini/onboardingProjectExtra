@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj": {}
+    "C:\\src\\OnboardingProjectExtra\\OnboardingProjectExtra\\Data\\Data.csproj": {}
   },
   "projects": {
-    "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj": {
+    "C:\\src\\OnboardingProjectExtra\\OnboardingProjectExtra\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj",
+        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\OnboardingProjectExtra\\Data\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj",
+        "projectPath": "C:\\src\\OnboardingProjectExtra\\OnboardingProjectExtra\\Data\\Data.csproj",
         "packagesPath": "C:\\Users\\mtanure\\.nuget\\packages\\",
-        "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\obj\\",
+        "outputPath": "C:\\src\\OnboardingProjectExtra\\OnboardingProjectExtra\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mtanure\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,8 +26,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj": {
-                "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj"
+              "C:\\src\\OnboardingProjectExtra\\OnboardingProjectExtra\\Types\\Types.csproj": {
+                "projectPath": "C:\\src\\OnboardingProjectExtra\\OnboardingProjectExtra\\Types\\Types.csproj"
               }
             }
           }
@@ -66,14 +66,14 @@
         }
       }
     },
-    "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj": {
+    "C:\\src\\OnboardingProjectExtra\\OnboardingProjectExtra\\Types\\Types.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj",
+        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\OnboardingProjectExtra\\Types\\Types.csproj",
         "projectName": "Types",
-        "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj",
+        "projectPath": "C:\\src\\OnboardingProjectExtra\\OnboardingProjectExtra\\Types\\Types.csproj",
         "packagesPath": "C:\\Users\\mtanure\\.nuget\\packages\\",
-        "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\obj\\",
+        "outputPath": "C:\\src\\OnboardingProjectExtra\\OnboardingProjectExtra\\Types\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mtanure\\AppData\\Roaming\\NuGet\\NuGet.Config"

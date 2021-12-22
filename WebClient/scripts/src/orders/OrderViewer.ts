@@ -79,7 +79,7 @@ const orderViewer = (
                     <strong>Total:</strong> ${helperFunctions.priceToCurrency(order.totalPrice)}</td>
             </tr>
         </tbody>
-    </table>
+    </table> <br /> <br />
     `;
 
 @customElement('order-viewer')

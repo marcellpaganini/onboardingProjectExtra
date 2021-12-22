@@ -15835,7 +15835,7 @@
                     <strong>Total:</strong> ${helperFunctions.priceToCurrency(order.totalPrice)}</td>
             </tr>
         </tbody>
-    </table>
+    </table> <br /> <br />
     `;
   var OrderViewer = class extends MobxLitElement {
     orderId = "";

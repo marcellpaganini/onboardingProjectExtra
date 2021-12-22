@@ -15901,7 +15901,7 @@
         <br /><br />
 
         <button>Submit</button> <button type="button" @click=${onDelete} >Delete</button>
-    </form>
+    </form> <br /><br />
         `;
   var OrderEditor = class extends MobxLitElement {
     orderId = "";

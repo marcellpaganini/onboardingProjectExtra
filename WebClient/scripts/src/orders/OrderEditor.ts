@@ -10,6 +10,7 @@ import { orderItemsEditor } from './orderItemEditor';
 import { button, input } from '../common/componentStyle';
 import { ICustomer } from '../customers/Customer';
 
+
 const orderEditor = (
     order: IOrder,
     customers: ICustomer[],
@@ -28,7 +29,7 @@ const orderEditor = (
         <br /><br />
 
         <button>Submit</button> <button type="button" @click=${onDelete} >Delete</button>
-    </form>
+    </form> <br /><br />
         `;
 
 
