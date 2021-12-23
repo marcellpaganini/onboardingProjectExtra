@@ -1,6 +1,5 @@
 import { Chart, registerables } from 'chart.js';
 
-//This is called here to ensure that it's only called once.
 Chart.register(...registerables);
 
 export const defaultChartDataStyle = {
