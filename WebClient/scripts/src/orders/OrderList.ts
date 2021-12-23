@@ -1,7 +1,7 @@
 import { MobxLitElement } from '@adobe/lit-mobx';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { OrderListStore } from './OrderListStore';
+import { IOrderListStore, OrderListStore } from './OrderListStore';
 import { IOrder } from './Order';
 import { table, button } from '../common/componentStyle';
 import {helperFunctions } from '../common/formTools';
@@ -19,8 +19,8 @@ interface ChartInfo {
 
 const doughnutChart = ({title, data}: ChartInfo) => {
     const canvas = document.createElement('canvas');
-    canvas.height = 300;
-    canvas.width = 400;
+    canvas.height = 40;
+    canvas.width = 100;
 
     const barData = {
         labels: data.map(d => d.label),
@@ -76,7 +76,7 @@ const ordersRow = ({id, customerId, totalPrice, status, orderDate}: IOrder) =>
     </tr>
     `;
 
-const ordersTable = (orders: IOrder[] = [], doughnutChart: any) =>
+const ordersTable = (orders: IOrder[] = [], doughnutChart: any, orderListStore: IOrderListStore) =>
     html`
     <table>
         <thead>
@@ -96,7 +96,7 @@ const ordersTable = (orders: IOrder[] = [], doughnutChart: any) =>
     </table> <br /><br />
     ${doughnutChart({
             title: 'Orders by Customers',
-            data: [{ label: 'asdf', value: 3 }, { label: 'ccfff', value: 5 }, { label: 'aa', value: 1 }]
+            data: [...orderListStore.ordersPerCustomer]
     })}
     
     `;
@@ -119,7 +119,7 @@ export class OrderList extends MobxLitElement {
 
     render = () =>
         (this.store.orders)
-            ? ordersTable(this.store.sortedOrders, doughnutChart)
+            ? ordersTable(this.store.sortedOrders, doughnutChart, this.store)
             : 'Loading...';
 
     createRenderRoot() {

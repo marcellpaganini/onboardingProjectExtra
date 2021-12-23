@@ -15663,6 +15663,14 @@
   })).views((self2) => ({
     get sortedOrders() {
       return self2.orders?.slice().sort((a2, b2) => a2.customerId.firstName.localeCompare(b2.customerId.firstName, void 0, { caseFirst: "upper" })) ?? [];
+    },
+    get ordersPerCustomer() {
+      const newList = [{}];
+      self2.customers.map(({ id, fullName }) => {
+        const total = self2.orders?.filter((o6) => o6.customerId?.id === id).length;
+        newList.unshift({ label: fullName, value: total });
+      });
+      return newList;
     }
   }));
 
@@ -28502,29 +28510,21 @@
   Chart.register(...registerables);
   var defaultChartDataStyle = {
     backgroundColor: [
-      "rgba(255, 99, 132, 0.2)",
-      "rgba(54, 162, 235, 0.2)",
-      "rgba(255, 206, 86, 0.2)",
-      "rgba(75, 192, 192, 0.2)",
-      "rgba(153, 102, 255, 0.2)",
-      "rgba(255, 159, 64, 0.2)"
+      "rgba(26, 100, 156, 0.5)",
+      "rgba(26, 100, 156, 0.2)"
     ],
     borderColor: [
-      "rgba(255, 99, 132, 1)",
-      "rgba(54, 162, 235, 1)",
-      "rgba(255, 206, 86, 1)",
-      "rgba(75, 192, 192, 1)",
-      "rgba(153, 102, 255, 1)",
-      "rgba(255, 159, 64, 1)"
+      "rgba(26, 100, 156, 1)",
+      "rgba(26, 100, 156, 1)"
     ],
-    borderWidth: 1
+    borderWidth: 1.5
   };
 
   // src/orders/OrderList.ts
   var doughnutChart = ({ title, data }) => {
     const canvas = document.createElement("canvas");
-    canvas.height = 300;
-    canvas.width = 400;
+    canvas.height = 40;
+    canvas.width = 100;
     const barData = {
       labels: data.map((d2) => d2.label),
       datasets: [{
@@ -28572,7 +28572,7 @@
         </td>
     </tr>
     `;
-  var ordersTable = (orders = [], doughnutChart2) => p`
+  var ordersTable = (orders = [], doughnutChart2, orderListStore) => p`
     <table>
         <thead>
             <tr>
@@ -28591,7 +28591,7 @@
     </table> <br /><br />
     ${doughnutChart2({
     title: "Orders by Customers",
-    data: [{ label: "asdf", value: 3 }, { label: "ccfff", value: 5 }, { label: "aa", value: 1 }]
+    data: [...orderListStore.ordersPerCustomer]
   })}
     
     `;
@@ -28600,7 +28600,7 @@
     firstUpdated = async () => {
       await this.store.load();
     };
-    render = () => this.store.orders ? ordersTable(this.store.sortedOrders, doughnutChart) : "Loading...";
+    render = () => this.store.orders ? ordersTable(this.store.sortedOrders, doughnutChart, this.store) : "Loading...";
     createRenderRoot() {
       return this;
     }
