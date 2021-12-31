@@ -39,7 +39,7 @@ export const OrderListStore = types
             const newList = [{ label: "", value: 0}];
             
             self.orders?.map(({ status }) => {
-                const total = self.orders?.filter(o => o.status).length
+                const total = self.orders?.filter(o => o.status === status).length
                 newList.unshift({ label: helperFunctions.getStatus(status).toString(), value: total! })
             });
 

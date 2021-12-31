@@ -15675,7 +15675,7 @@
     get ordersPerStatuses() {
       const newList = [{ label: "", value: 0 }];
       self2.orders?.map(({ status }) => {
-        const total = self2.orders?.filter((o6) => o6.status).length;
+        const total = self2.orders?.filter((o6) => o6.status === status).length;
         newList.unshift({ label: helperFunctions.getStatus(status).toString(), value: total });
       });
       const statuses = newList.filter((value, index, self3) => index === self3.findIndex((o6) => o6.label === value.label));
