@@ -2,6 +2,16 @@
 
 # Summary
 
-SqlLite / 
-ASP.NET Core / 
-Mobx-State-Tree and Lit practice using Adobe Lit-Mobx in Typescript.
+SqlLite  
+C#  
+ASP.NET Core  
+Entity Framework  
+Mobx-State-Tree  
+Lit   
+Typescript    
+
+# Other libraries/tools used  
+  
+Chart.js  
+Xunit  
+Jest  
