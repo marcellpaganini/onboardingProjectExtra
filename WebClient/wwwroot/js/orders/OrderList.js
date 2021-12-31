@@ -15671,6 +15671,16 @@
         newList.unshift({ label: fullName, value: total });
       });
       return newList;
+    },
+    get ordersPerStatuses() {
+      const newList = [{ label: "", value: 0 }];
+      self2.orders?.map(({ status }) => {
+        const total = self2.orders?.filter((o6) => o6.status).length;
+        newList.unshift({ label: helperFunctions.getStatus(status).toString(), value: total });
+      });
+      const statuses = newList.filter((value, index, self3) => index === self3.findIndex((o6) => o6.label === value.label));
+      statuses.pop();
+      return statuses;
     }
   }));
 
@@ -28558,6 +28568,43 @@
     new Chart(canvas, barConfig);
     return canvas;
   };
+  var doughnutChart = ({ title, data }) => {
+    const canvas = document.createElement("canvas");
+    canvas.height = 40;
+    canvas.width = 100;
+    const barData = {
+      labels: data.map((d2) => d2.label),
+      datasets: [{
+        data: data.map((d2) => d2.value),
+        ...defaultChartDataStyle
+      }]
+    };
+    const barConfig = {
+      type: "doughnut",
+      data: barData,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: title,
+            font: {
+              size: 24
+            }
+          },
+          legend: {
+            display: true
+          }
+        }
+      }
+    };
+    new Chart(canvas, barConfig);
+    return canvas;
+  };
   var ordersRow = ({ id, customerId, totalPrice, status, orderDate }) => p`
     <tr>
         <td>${customerId?.fullName}</td>
@@ -28572,7 +28619,7 @@
         </td>
     </tr>
     `;
-  var ordersTable = (orders = [], doughnutChart, orderListStore) => p`
+  var ordersTable = (orders = [], barChart2, doughnutChart2, orderListStore) => p`
     <table>
         <thead>
             <tr>
@@ -28589,9 +28636,13 @@
             ${orders.map(ordersRow)}
         </tbody>
     </table> <br /><br />
-    ${barChart({
+    ${barChart2({
     title: "Orders by Customers",
     data: [...orderListStore.ordersPerCustomer]
+  })} <br /><br />
+    ${doughnutChart2({
+    title: "Orders by Status",
+    data: [...orderListStore.ordersPerStatuses]
   })}
     
     `;
@@ -28600,7 +28651,7 @@
     firstUpdated = async () => {
       await this.store.load();
     };
-    render = () => this.store.orders ? ordersTable(this.store.sortedOrders, barChart, this.store) : "Loading...";
+    render = () => this.store.orders ? ordersTable(this.store.sortedOrders, barChart, doughnutChart, this.store) : "Loading...";
     createRenderRoot() {
       return this;
     }

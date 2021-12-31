@@ -59,6 +59,48 @@ const barChart = ({title, data}: ChartInfo) => {
     return canvas;
 }
 
+const doughnutChart = ({title, data}: ChartInfo) => {
+    const canvas = document.createElement('canvas');
+    canvas.height = 40;
+    canvas.width = 100;
+
+    const barData = {
+        labels: data.map(d => d.label),
+        datasets: [{
+            data: data.map(d => d.value),
+            ...defaultChartDataStyle
+        }]
+    };
+
+    const barConfig: ChartConfiguration = {
+        type: 'doughnut',
+        data: barData,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: title,
+                    font: {
+                        size: 24
+                    }
+                },
+                legend: {
+                    display: true
+                }
+            }
+        }
+    }
+
+    new Chart(canvas, barConfig);
+
+    return canvas;
+}
+
 
 const ordersRow = ({id, customerId, totalPrice, status, orderDate}: IOrder) =>
     html`
@@ -76,7 +118,7 @@ const ordersRow = ({id, customerId, totalPrice, status, orderDate}: IOrder) =>
     </tr>
     `;
 
-const ordersTable = (orders: IOrder[] = [], doughnutChart: any, orderListStore: IOrderListStore) =>
+const ordersTable = (orders: IOrder[] = [], barChart: any, doughnutChart: any, orderListStore: IOrderListStore) =>
     html`
     <table>
         <thead>
@@ -97,6 +139,10 @@ const ordersTable = (orders: IOrder[] = [], doughnutChart: any, orderListStore: 
     ${barChart({
             title: 'Orders by Customers',
             data: [...orderListStore.ordersPerCustomer]
+    })} <br /><br />
+    ${doughnutChart({
+            title: 'Orders by Status',
+            data: [...orderListStore.ordersPerStatuses]
     })}
     
     `;
@@ -119,7 +165,7 @@ export class OrderList extends MobxLitElement {
 
     render = () =>
         (this.store.orders)
-            ? ordersTable(this.store.sortedOrders, barChart, this.store)
+            ? ordersTable(this.store.sortedOrders, barChart, doughnutChart, this.store)
             : 'Loading...';
 
     createRenderRoot() {
