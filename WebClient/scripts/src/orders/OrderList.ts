@@ -17,7 +17,7 @@ interface ChartInfo {
     }[]
 }
 
-const doughnutChart = ({title, data}: ChartInfo) => {
+const barChart = ({title, data}: ChartInfo) => {
     const canvas = document.createElement('canvas');
     canvas.height = 40;
     canvas.width = 100;
@@ -94,7 +94,7 @@ const ordersTable = (orders: IOrder[] = [], doughnutChart: any, orderListStore: 
             ${orders.map(ordersRow)}
         </tbody>
     </table> <br /><br />
-    ${doughnutChart({
+    ${barChart({
             title: 'Orders by Customers',
             data: [...orderListStore.ordersPerCustomer]
     })}
@@ -119,7 +119,7 @@ export class OrderList extends MobxLitElement {
 
     render = () =>
         (this.store.orders)
-            ? ordersTable(this.store.sortedOrders, doughnutChart, this.store)
+            ? ordersTable(this.store.sortedOrders, barChart, this.store)
             : 'Loading...';
 
     createRenderRoot() {

@@ -28521,7 +28521,7 @@
   };
 
   // src/orders/OrderList.ts
-  var doughnutChart = ({ title, data }) => {
+  var barChart = ({ title, data }) => {
     const canvas = document.createElement("canvas");
     canvas.height = 40;
     canvas.width = 100;
@@ -28572,7 +28572,7 @@
         </td>
     </tr>
     `;
-  var ordersTable = (orders = [], doughnutChart2, orderListStore) => p`
+  var ordersTable = (orders = [], doughnutChart, orderListStore) => p`
     <table>
         <thead>
             <tr>
@@ -28589,7 +28589,7 @@
             ${orders.map(ordersRow)}
         </tbody>
     </table> <br /><br />
-    ${doughnutChart2({
+    ${barChart({
     title: "Orders by Customers",
     data: [...orderListStore.ordersPerCustomer]
   })}
@@ -28600,7 +28600,7 @@
     firstUpdated = async () => {
       await this.store.load();
     };
-    render = () => this.store.orders ? ordersTable(this.store.sortedOrders, doughnutChart, this.store) : "Loading...";
+    render = () => this.store.orders ? ordersTable(this.store.sortedOrders, barChart, this.store) : "Loading...";
     createRenderRoot() {
       return this;
     }

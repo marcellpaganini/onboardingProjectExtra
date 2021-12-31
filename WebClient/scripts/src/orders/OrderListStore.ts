@@ -5,6 +5,7 @@ import { InventoryItem } from '../inventory/InventoryItem';
 import { Customer } from '../customers/Customer';
 import { getInventoryItems } from '../inventory/inventoryApi';
 import { getOrderCustomers } from '../customers/customersApi';
+import { helperFunctions } from '../common/formTools';
 
 export const OrderListStore = types
     .model("OrderListStore", {
@@ -32,6 +33,23 @@ export const OrderListStore = types
             })
             
             return newList;
+        },
+
+        get ordersPerStatuses(): any {
+            const newList = [{ label: "", value: 0}];
+            
+            self.orders?.map(({ status }) => {
+                const total = self.orders?.filter(o => o.status).length
+                newList.unshift({ label: helperFunctions.getStatus(status).toString(), value: total! })
+            });
+
+            //Removes default value and repeated objects from list
+            const statuses = newList.filter((value, index, self) =>
+                index === self.findIndex((o) => (o.label === value.label)));
+            
+            statuses.pop();
+
+            return statuses;
         }
     }));
 
