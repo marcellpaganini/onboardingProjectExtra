@@ -1,0 +1,198 @@
+{
+  "canvas": {
+    "version": "2.2.11",
+    "width": 2000,
+    "height": 2000,
+    "scrollTop": -1.2000000286102477,
+    "scrollLeft": -75.20000179290776,
+    "zoomLevel": 0.9,
+    "show": {
+      "tableComment": true,
+      "columnComment": true,
+      "columnDataType": true,
+      "columnDefault": true,
+      "columnAutoIncrement": false,
+      "columnPrimaryKey": true,
+      "columnUnique": false,
+      "columnNotNull": true,
+      "relationship": true
+    },
+    "database": "SQLite",
+    "databaseName": "",
+    "canvasType": "ERD",
+    "language": "GraphQL",
+    "tableCase": "pascalCase",
+    "columnCase": "camelCase",
+    "highlightTheme": "VS2015",
+    "bracketType": "none",
+    "setting": {
+      "relationshipDataTypeSync": true,
+      "relationshipOptimization": false,
+      "columnOrder": [
+        "columnName",
+        "columnDataType",
+        "columnNotNull",
+        "columnUnique",
+        "columnAutoIncrement",
+        "columnDefault",
+        "columnComment"
+      ]
+    },
+    "pluginSerializationMap": {}
+  },
+  "table": {
+    "tables": [
+      {
+        "name": "Product",
+        "comment": "",
+        "columns": [],
+        "ui": {
+          "active": false,
+          "left": 550.4,
+          "top": 44.8,
+          "zIndex": 1,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "d87ae8a1-88b8-4adf-a496-0e75cbab3819"
+      },
+      {
+        "name": "Category",
+        "comment": "",
+        "columns": [],
+        "ui": {
+          "active": false,
+          "left": 74,
+          "top": 44.8,
+          "zIndex": 6,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "34745c28-5915-4edb-aff3-274c82ec377d"
+      },
+      {
+        "name": "Employee",
+        "comment": "",
+        "columns": [],
+        "ui": {
+          "active": false,
+          "left": 71.6,
+          "top": 322,
+          "zIndex": 2,
+          "widthName": 61.63092041015625,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "7f75f2ec-f900-4b68-96a0-9a09c5037a81"
+      },
+      {
+        "name": "Office",
+        "comment": "",
+        "columns": [
+          {
+            "name": "Id",
+            "comment": "",
+            "dataType": "TEXT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "385346a5-f401-4aeb-aa0a-e0966ea26b77"
+          }
+        ],
+        "ui": {
+          "active": true,
+          "left": 72.8,
+          "top": 620.8,
+          "zIndex": 7,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "79b668f3-c965-42a4-afdb-e530f31b5dd9"
+      },
+      {
+        "name": "Customer",
+        "comment": "",
+        "columns": [],
+        "ui": {
+          "active": false,
+          "left": 555.2,
+          "top": 318.4,
+          "zIndex": 5,
+          "widthName": 61.89093017578125,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "a59430a0-f85a-4ce4-89b5-581ec59080b0"
+      },
+      {
+        "name": "OrderProduct",
+        "comment": "",
+        "columns": [],
+        "ui": {
+          "active": false,
+          "left": 1090.4,
+          "top": 44.8,
+          "zIndex": 3,
+          "widthName": 85.75888061523438,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "04b561c8-9acf-448d-83f8-ec7d97625b95"
+      },
+      {
+        "name": "Order",
+        "comment": "",
+        "columns": [],
+        "ui": {
+          "active": false,
+          "left": 1091.6,
+          "top": 316,
+          "zIndex": 4,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "3b28a21b-efce-4a05-a679-4916fcaed5a0"
+      }
+    ],
+    "indexes": [
+      {
+        "name": "Id",
+        "columns": [],
+        "unique": false,
+        "id": "295cc243-9433-4b4a-9789-debb4ea9b1b8",
+        "tableId": "79b668f3-c965-42a4-afdb-e530f31b5dd9"
+      },
+      {
+        "name": "",
+        "columns": [],
+        "unique": false,
+        "id": "5d56b2cd-b780-4e9f-a8bb-b4254d723e4e",
+        "tableId": "79b668f3-c965-42a4-afdb-e530f31b5dd9"
+      }
+    ]
+  },
+  "memo": {
+    "memos": []
+  },
+  "relationship": {
+    "relationships": []
+  }
+}

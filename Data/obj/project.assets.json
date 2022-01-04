@@ -543,42 +543,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\pagan\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\mtanure\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\src\\MissingLink\\onboardingProjectExtra\\Data\\Data.csproj",
+      "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj",
       "projectName": "Data",
-      "projectPath": "C:\\src\\MissingLink\\onboardingProjectExtra\\Data\\Data.csproj",
-      "packagesPath": "C:\\Users\\pagan\\.nuget\\packages\\",
-      "outputPath": "C:\\src\\MissingLink\\onboardingProjectExtra\\Data\\obj\\",
+      "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj",
+      "packagesPath": "C:\\Users\\mtanure\\.nuget\\packages\\",
+      "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\pagan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\mtanure\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\src\\MissingLink\\onboardingProjectExtra\\Types\\Types.csproj": {
-              "projectPath": "C:\\src\\MissingLink\\onboardingProjectExtra\\Types\\Types.csproj"
+            "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj": {
+              "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj"
             }
           }
         }
@@ -613,7 +603,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.210\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
       }
     }
   }
