@@ -28539,6 +28539,25 @@
     ],
     borderWidth: 1.5
   };
+  var defaultRoundChartDataStyle = {
+    backgroundColor: [
+      "rgba(26, 100, 156, 0.5)",
+      "rgba(26, 100, 156, 0.2)",
+      "rgba(255,127,80, 0.5)",
+      "rgba(255,127,80, 0.2)",
+      "rgba(255,215,0, 0.5)",
+      "rgba(255,215,0, 0.2)"
+    ],
+    borderColor: [
+      "rgba(26, 100, 156, 1)",
+      "rgba(26, 100, 156, 1)",
+      "rgba(255,127,80, 1)",
+      "rgba(255,127,80, 1)",
+      "rgba(255,215,0, 1)",
+      "rgba(255,215,0, 1)"
+    ],
+    borderWidth: 1.5
+  };
 
   // src/orders/OrderList.ts
   var barChart = ({ title, data }) => {
@@ -28586,10 +28605,10 @@
       labels: data.map((d2) => d2.label),
       datasets: [{
         data: data.map((d2) => d2.value),
-        ...defaultChartDataStyle
+        ...defaultRoundChartDataStyle
       }]
     };
-    const barConfig = {
+    const doghnutConfig = {
       type: "doughnut",
       data: doghnutData,
       options: {
@@ -28612,7 +28631,7 @@
         }
       }
     };
-    new Chart(canvas, barConfig);
+    new Chart(canvas, doghnutConfig);
     return canvas;
   };
   var pieChart = ({ title, data }) => {
@@ -28623,10 +28642,10 @@
       labels: data.map((d2) => d2.label),
       datasets: [{
         data: data.map((d2) => d2.value),
-        ...defaultChartDataStyle
+        ...defaultRoundChartDataStyle
       }]
     };
-    const barConfig = {
+    const pieConfig = {
       type: "pie",
       data: pieData,
       options: {
@@ -28649,7 +28668,7 @@
         }
       }
     };
-    new Chart(canvas, barConfig);
+    new Chart(canvas, pieConfig);
     return canvas;
   };
   var ordersRow = ({ id, customerId, totalPrice, status, orderDate }) => p`
@@ -28687,14 +28706,20 @@
     title: "Orders by Customers",
     data: [...orderListStore.ordersPerCustomer]
   })} <br /><br />
-    ${doughnutChart2({
+    <section style: "width: 100%;"">
+        <div style="width:50%; float: left;">
+            ${doughnutChart2({
     title: "Orders by Status",
     data: [...orderListStore.ordersPerStatuses]
-  })} <br /><br />
-    ${pieChart2({
+  })}
+        </div> 
+        <div style="width:50%; float: right; ">
+            ${pieChart2({
     title: "Top 5 Customers",
     data: [...orderListStore.totalByTop5Customers]
   })}
+        </div>
+    </section>
     
     `;
   var OrderList = class extends MobxLitElement {

@@ -6,7 +6,7 @@ import { IOrder } from './Order';
 import { table, button } from '../common/componentStyle';
 import {helperFunctions } from '../common/formTools';
 import { Chart, ChartConfiguration } from 'chart.js';
-import { defaultChartDataStyle } from '../common/chartDefaults';
+import { defaultChartDataStyle, defaultRoundChartDataStyle } from '../common/chartDefaults';
 
 
 interface ChartInfo {
@@ -68,11 +68,11 @@ const doughnutChart = ({title, data}: ChartInfo) => {
         labels: data.map(d => d.label),
         datasets: [{
             data: data.map(d => d.value),
-            ...defaultChartDataStyle
+            ...defaultRoundChartDataStyle
         }]
     };
 
-    const barConfig: ChartConfiguration = {
+    const doghnutConfig: ChartConfiguration = {
         type: 'doughnut',
         data: doghnutData,
         options: {
@@ -96,7 +96,7 @@ const doughnutChart = ({title, data}: ChartInfo) => {
         }
     }
 
-    new Chart(canvas, barConfig);
+    new Chart(canvas, doghnutConfig);
 
     return canvas;
 }
@@ -110,11 +110,11 @@ const pieChart = ({title, data}: ChartInfo) => {
         labels: data.map(d => d.label),
         datasets: [{
             data: data.map(d => d.value),
-            ...defaultChartDataStyle
+            ...defaultRoundChartDataStyle
         }]
     };
 
-    const barConfig: ChartConfiguration = {
+    const pieConfig: ChartConfiguration = {
         type: 'pie',
         data: pieData,
         options: {
@@ -138,7 +138,7 @@ const pieChart = ({title, data}: ChartInfo) => {
         }
     }
 
-    new Chart(canvas, barConfig);
+    new Chart(canvas, pieConfig);
 
     return canvas;
 }
@@ -182,14 +182,20 @@ const ordersTable = (orders: IOrder[] = [], barChart: any, doughnutChart: any, p
             title: 'Orders by Customers',
             data: [...orderListStore.ordersPerCustomer]
     })} <br /><br />
-    ${doughnutChart({
-            title: 'Orders by Status',
-            data: [...orderListStore.ordersPerStatuses]
-    })} <br /><br />
-    ${pieChart({
-            title: 'Top 5 Customers',
-            data: [...orderListStore.totalByTop5Customers]
-    })}
+    <section style: "width: 100%;"">
+        <div style="width:50%; float: left;">
+            ${doughnutChart({
+                    title: 'Orders by Status',
+                    data: [...orderListStore.ordersPerStatuses]
+            })}
+        </div> 
+        <div style="width:50%; float: right; ">
+            ${pieChart({
+                    title: 'Top 5 Customers',
+                    data: [...orderListStore.totalByTop5Customers]
+            })}
+        </div>
+    </section>
     
     `;
 
