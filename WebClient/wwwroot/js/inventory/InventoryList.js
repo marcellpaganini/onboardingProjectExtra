@@ -10467,7 +10467,10 @@
     categoryId: types.maybe(types.reference(Category)),
     name: types.string,
     price: types.number,
-    image: types.optional(types.string, "")
+    image: types.optional(types.string, ""),
+    categoryCheck: false,
+    priceCheck: false,
+    nameCheck: false
   }).actions((self2) => ({
     setCategory(category) {
       self2.categoryId = category;
@@ -10480,6 +10483,15 @@
     },
     setImage(image) {
       self2.image = image;
+    },
+    setCategoryCheck() {
+      self2.categoryCheck = !self2.categoryCheck;
+    },
+    setPriceCheck() {
+      self2.priceCheck = !self2.priceCheck;
+    },
+    setNameCheck() {
+      self2.nameCheck = !self2.nameCheck;
     }
   }));
   var postProcessSnapshot = (snapshot) => ({
@@ -10506,6 +10518,21 @@
       self2.categories = yield getCategories();
       self2.items = yield getInventoryItems();
     })
+  })).views((self2) => ({
+    get orderedCategories() {
+      const view = self2.items?.sort((a2, b2) => {
+        var catA = a2.categoryId?.name.toUpperCase();
+        var catB = b2.categoryId?.name.toUpperCase();
+        if (catA < catB) {
+          return -1;
+        }
+        if (catA > catB) {
+          return 1;
+        }
+        return 0;
+      });
+      return view;
+    }
   }));
 
   // src/common/componentStyle.ts
