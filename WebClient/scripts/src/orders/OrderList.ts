@@ -72,7 +72,7 @@ const doughnutChart = ({title, data}: ChartInfo) => {
         }]
     };
 
-    const doghnutConfig: ChartConfiguration = {
+    const doughnutConfig: ChartConfiguration = {
         type: 'doughnut',
         data: doghnutData,
         options: {
@@ -96,7 +96,7 @@ const doughnutChart = ({title, data}: ChartInfo) => {
         }
     }
 
-    new Chart(canvas, doghnutConfig);
+    new Chart(canvas, doughnutConfig);
 
     return canvas;
 }
@@ -175,7 +175,7 @@ const ordersTable = (orders: IOrder[] = [], barChart: any, doughnutChart: any, p
         </thead>
     
         <tbody>
-            ${orders.map(ordersRow)}
+            ${orders.slice(-10).map(ordersRow)}
         </tbody>
     </table> <br /><br />
     ${barChart({

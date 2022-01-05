@@ -28543,16 +28543,20 @@
     backgroundColor: [
       "rgba(26, 100, 156, 0.5)",
       "rgba(26, 100, 156, 0.2)",
-      "rgba(255,127,80, 0.5)",
-      "rgba(255,127,80, 0.2)",
-      "rgba(255,215,0, 0.5)",
-      "rgba(255,215,0, 0.2)"
+      "rgba(255, 127, 80, 0.5)",
+      "rgba(255, 127, 80, 0.2)",
+      "rgba(80, 80, 80, 0.5)",
+      "rgba(80, 80, 80, 0.2)",
+      "rgba(255, 215, 0, 0.5)",
+      "rgba(255, 215, 0, 0.2)"
     ],
     borderColor: [
       "rgba(26, 100, 156, 1)",
       "rgba(26, 100, 156, 1)",
       "rgba(255,127,80, 1)",
       "rgba(255,127,80, 1)",
+      "rgba(80, 80, 80, 1)",
+      "rgba(80, 80, 80, 1)",
       "rgba(255,215,0, 1)",
       "rgba(255,215,0, 1)"
     ],
@@ -28608,7 +28612,7 @@
         ...defaultRoundChartDataStyle
       }]
     };
-    const doghnutConfig = {
+    const doughnutConfig = {
       type: "doughnut",
       data: doghnutData,
       options: {
@@ -28631,7 +28635,7 @@
         }
       }
     };
-    new Chart(canvas, doghnutConfig);
+    new Chart(canvas, doughnutConfig);
     return canvas;
   };
   var pieChart = ({ title, data }) => {
@@ -28699,7 +28703,7 @@
         </thead>
     
         <tbody>
-            ${orders.map(ordersRow)}
+            ${orders.slice(-10).map(ordersRow)}
         </tbody>
     </table> <br /><br />
     ${barChart2({

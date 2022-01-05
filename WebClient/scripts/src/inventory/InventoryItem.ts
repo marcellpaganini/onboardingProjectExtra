@@ -8,7 +8,10 @@ const BaseInventoryItem = types
         categoryId: types.maybe(types.reference(Category)),
         name: types.string,
         price: types.number,
-        image: types.optional(types.string, "")
+        image: types.optional(types.string, ""),
+        categoryCheck: false,
+        priceCheck: false,
+        nameCheck: false
     })
     .actions(self => ({
         setCategory(category: ICategory | undefined) {
@@ -25,6 +28,18 @@ const BaseInventoryItem = types
 
         setImage(image: string) {
             self.image = image;
+        },
+
+        setCategoryCheck() {
+            self.categoryCheck = !self.categoryCheck
+        },
+
+        setPriceCheck() {
+            self.priceCheck = !self.priceCheck;
+        },
+
+        setNameCheck() {
+            self.nameCheck = !self.nameCheck;
         }
     }));
 

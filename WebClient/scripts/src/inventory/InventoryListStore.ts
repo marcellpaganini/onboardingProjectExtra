@@ -15,4 +15,20 @@ export const InventoryListStore = types
             self.categories = yield getCategories(); 
             self.items = yield getInventoryItems();
         })
+    }))
+    .views((self) => ({
+        get orderedCategories(): any {
+            const view = self.items?.sort((a, b) => {
+            var catA = a.categoryId?.name.toUpperCase();
+            var catB = b.categoryId?.name.toUpperCase();
+            if (catA! < catB!) {
+                return -1;
+            }
+            if (catA! > catB!) {
+                return 1;
+            }
+            return 0;
+            })
+            return view;
+        }
     }));
