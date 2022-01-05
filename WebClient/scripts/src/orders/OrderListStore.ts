@@ -50,6 +50,22 @@ export const OrderListStore = types
             statuses.pop();
 
             return statuses;
+        },
+
+        get totalByTop5Customers(): any {
+            const newList = [{ label: "", value: 0}];
+
+            self.customers.map(({ id, fullName }) => {
+                const totalOrderValue = self.orders?.reduce((total, order) =>
+                order.customerId?.id === id ? total + order.totalPrice! : total + 0, 0);
+
+                newList.unshift({ label: fullName, value: totalOrderValue! })
+            })
+
+            newList.pop();
+            newList.sort((a, b) => a.value - b.value);
+
+            return newList.slice(-5);
         }
     }));
 

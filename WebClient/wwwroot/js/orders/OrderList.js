@@ -15681,6 +15681,16 @@
       const statuses = newList.filter((value, index, self3) => index === self3.findIndex((o6) => o6.label === value.label));
       statuses.pop();
       return statuses;
+    },
+    get totalByTop5Customers() {
+      const newList = [{ label: "", value: 0 }];
+      self2.customers.map(({ id, fullName }) => {
+        const totalOrderValue = self2.orders?.reduce((total, order) => order.customerId?.id === id ? total + order.totalPrice : total + 0, 0);
+        newList.unshift({ label: fullName, value: totalOrderValue });
+      });
+      newList.pop();
+      newList.sort((a2, b2) => a2.value - b2.value);
+      return newList.slice(-5);
     }
   }));
 
@@ -28571,8 +28581,8 @@
   var doughnutChart = ({ title, data }) => {
     const canvas = document.createElement("canvas");
     canvas.height = 40;
-    canvas.width = 100;
-    const barData = {
+    canvas.width = 40;
+    const doghnutData = {
       labels: data.map((d2) => d2.label),
       datasets: [{
         data: data.map((d2) => d2.value),
@@ -28581,7 +28591,44 @@
     };
     const barConfig = {
       type: "doughnut",
-      data: barData,
+      data: doghnutData,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: title,
+            font: {
+              size: 24
+            }
+          },
+          legend: {
+            display: true
+          }
+        }
+      }
+    };
+    new Chart(canvas, barConfig);
+    return canvas;
+  };
+  var pieChart = ({ title, data }) => {
+    const canvas = document.createElement("canvas");
+    canvas.height = 40;
+    canvas.width = 40;
+    const pieData = {
+      labels: data.map((d2) => d2.label),
+      datasets: [{
+        data: data.map((d2) => d2.value),
+        ...defaultChartDataStyle
+      }]
+    };
+    const barConfig = {
+      type: "pie",
+      data: pieData,
       options: {
         scales: {
           y: {
@@ -28619,7 +28666,7 @@
         </td>
     </tr>
     `;
-  var ordersTable = (orders = [], barChart2, doughnutChart2, orderListStore) => p`
+  var ordersTable = (orders = [], barChart2, doughnutChart2, pieChart2, orderListStore) => p`
     <table>
         <thead>
             <tr>
@@ -28643,6 +28690,10 @@
     ${doughnutChart2({
     title: "Orders by Status",
     data: [...orderListStore.ordersPerStatuses]
+  })} <br /><br />
+    ${pieChart2({
+    title: "Top 5 Customers",
+    data: [...orderListStore.totalByTop5Customers]
   })}
     
     `;
@@ -28651,7 +28702,7 @@
     firstUpdated = async () => {
       await this.store.load();
     };
-    render = () => this.store.orders ? ordersTable(this.store.sortedOrders, barChart, doughnutChart, this.store) : "Loading...";
+    render = () => this.store.orders ? ordersTable(this.store.sortedOrders, barChart, doughnutChart, pieChart, this.store) : "Loading...";
     createRenderRoot() {
       return this;
     }

@@ -62,9 +62,9 @@ const barChart = ({title, data}: ChartInfo) => {
 const doughnutChart = ({title, data}: ChartInfo) => {
     const canvas = document.createElement('canvas');
     canvas.height = 40;
-    canvas.width = 100;
+    canvas.width = 40;
 
-    const barData = {
+    const doghnutData = {
         labels: data.map(d => d.label),
         datasets: [{
             data: data.map(d => d.value),
@@ -74,7 +74,49 @@ const doughnutChart = ({title, data}: ChartInfo) => {
 
     const barConfig: ChartConfiguration = {
         type: 'doughnut',
-        data: barData,
+        data: doghnutData,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: title,
+                    font: {
+                        size: 24
+                    }
+                },
+                legend: {
+                    display: true
+                }
+            }
+        }
+    }
+
+    new Chart(canvas, barConfig);
+
+    return canvas;
+}
+
+const pieChart = ({title, data}: ChartInfo) => {
+    const canvas = document.createElement('canvas');
+    canvas.height = 40;
+    canvas.width = 40;
+
+    const pieData = {
+        labels: data.map(d => d.label),
+        datasets: [{
+            data: data.map(d => d.value),
+            ...defaultChartDataStyle
+        }]
+    };
+
+    const barConfig: ChartConfiguration = {
+        type: 'pie',
+        data: pieData,
         options: {
             scales: {
                 y: {
@@ -118,7 +160,7 @@ const ordersRow = ({id, customerId, totalPrice, status, orderDate}: IOrder) =>
     </tr>
     `;
 
-const ordersTable = (orders: IOrder[] = [], barChart: any, doughnutChart: any, orderListStore: IOrderListStore) =>
+const ordersTable = (orders: IOrder[] = [], barChart: any, doughnutChart: any, pieChart: any, orderListStore: IOrderListStore) =>
     html`
     <table>
         <thead>
@@ -143,6 +185,10 @@ const ordersTable = (orders: IOrder[] = [], barChart: any, doughnutChart: any, o
     ${doughnutChart({
             title: 'Orders by Status',
             data: [...orderListStore.ordersPerStatuses]
+    })} <br /><br />
+    ${pieChart({
+            title: 'Top 5 Customers',
+            data: [...orderListStore.totalByTop5Customers]
     })}
     
     `;
@@ -165,7 +211,7 @@ export class OrderList extends MobxLitElement {
 
     render = () =>
         (this.store.orders)
-            ? ordersTable(this.store.sortedOrders, barChart, doughnutChart, this.store)
+            ? ordersTable(this.store.sortedOrders, barChart, doughnutChart, pieChart, this.store)
             : 'Loading...';
 
     createRenderRoot() {
