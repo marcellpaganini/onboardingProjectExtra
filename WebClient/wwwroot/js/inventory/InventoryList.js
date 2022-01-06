@@ -10467,10 +10467,7 @@
     categoryId: types.maybe(types.reference(Category)),
     name: types.string,
     price: types.number,
-    image: types.optional(types.string, ""),
-    categoryCheck: false,
-    priceCheck: false,
-    nameCheck: false
+    image: types.optional(types.string, "")
   }).actions((self2) => ({
     setCategory(category) {
       self2.categoryId = category;
@@ -10483,15 +10480,6 @@
     },
     setImage(image) {
       self2.image = image;
-    },
-    setCategoryCheck() {
-      self2.categoryCheck = !self2.categoryCheck;
-    },
-    setPriceCheck() {
-      self2.priceCheck = !self2.priceCheck;
-    },
-    setNameCheck() {
-      self2.nameCheck = !self2.nameCheck;
     }
   }));
   var postProcessSnapshot = (snapshot) => ({
@@ -10512,26 +10500,40 @@
   var InventoryListStore = types.model("InventoryListStore", {
     items: types.maybe(types.array(InventoryItem)),
     item: types.maybe(InventoryItem),
-    categories: types.maybe(types.array(Category))
+    categories: types.maybe(types.array(Category)),
+    categoryCheck: false,
+    priceCheck: false,
+    nameCheck: false
   }).actions((self2) => ({
     load: flow3(function* () {
       self2.categories = yield getCategories();
       self2.items = yield getInventoryItems();
-    })
+    }),
+    setCategoryCheck() {
+      self2.categoryCheck = !self2.categoryCheck;
+    },
+    setPriceCheck() {
+      self2.priceCheck = !self2.priceCheck;
+    },
+    setNameCheck() {
+      self2.nameCheck = !self2.nameCheck;
+    }
   })).views((self2) => ({
     get orderedCategories() {
-      const view = self2.items?.sort((a2, b2) => {
-        var catA = a2.categoryId?.name.toUpperCase();
-        var catB = b2.categoryId?.name.toUpperCase();
-        if (catA < catB) {
-          return -1;
-        }
-        if (catA > catB) {
-          return 1;
-        }
-        return 0;
-      });
-      return view;
+      if (self2.categoryCheck) {
+        const view = self2.items?.slice().sort((a2, b2) => {
+          var catA = a2.categoryId?.name.toUpperCase();
+          var catB = b2.categoryId?.name.toUpperCase();
+          if (catA < catB) {
+            return -1;
+          }
+          if (catA > catB) {
+            return 1;
+          }
+          return 0;
+        });
+        return view;
+      }
     }
   }));
 
@@ -10623,6 +10625,11 @@
 `;
 
   // src/common/formTools.ts
+  var handlePropChange = (item, handler) => (e5) => {
+    const target = e5.currentTarget;
+    const newVal = target.value;
+    handler(item, newVal);
+  };
   var helperFunctions = {
     priceToCurrency: (price) => {
       return price?.toLocaleString("en-CA", { style: "currency", currency: "CAD" }) ?? "";
@@ -10667,19 +10674,23 @@
         </td>
     </tr>
     `;
-  var inventoryTable = (items = []) => p`
+  var inventoryTable = (items = [], inventoryListStore) => p`
     <div style='overflow-x: auto;'>
         <table>
             <thead>
                 <th>Item</th>
-                <th>Category</th>
+                <th>Category<button value=${inventoryListStore.categoryCheck} type="button" id="catButton" class="btnTableHeader" @click=${handlePropChange(inventoryListStore, (inventoryListStore2, val) => {
+    const button2 = document.getElementById("catButton");
+    val = button2?.innerText;
+    inventoryListStore2.setCategoryCheck();
+  })}>${inventoryListStore.categoryCheck ? "\u2796" : "\u{1F53B}"}</button></th>
                 <th>Name</th>
                 <th>Price</th>
                 <th></th>
             </thead>
         
             <tbody>
-                ${items.map(inventoryRow)}
+                ${inventoryListStore.categoryCheck ? inventoryListStore.orderedCategories.map(inventoryRow) : items.map(inventoryRow)}
             </tbody>
         </table>
     </div>
@@ -10690,7 +10701,7 @@
     firstUpdated = async () => {
       this.store.load();
     };
-    render = () => this.store.items ? inventoryTable(this.store.items) : "Loading...";
+    render = () => this.store.items ? inventoryTable(this.store.items, this.store) : "Loading...";
   };
   __publicField(InventoryList, "styles", r`
         ${table}

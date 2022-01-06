@@ -9,7 +9,7 @@ export const handlePropChange = <T>(item: T, handler: (obj: T, val: string) => v
     handler(item, newVal);
 }
 
-export const handleSubmit = (f: Function) => (e: Event) => {
+export const handleSubmit = (f: Function) => (e: Event) => {    
     e.preventDefault();
 
     f();

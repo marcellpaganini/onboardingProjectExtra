@@ -10580,10 +10580,7 @@
     categoryId: types.maybe(types.reference(Category)),
     name: types.string,
     price: types.number,
-    image: types.optional(types.string, ""),
-    categoryCheck: false,
-    priceCheck: false,
-    nameCheck: false
+    image: types.optional(types.string, "")
   }).actions((self2) => ({
     setCategory(category) {
       self2.categoryId = category;
@@ -10596,15 +10593,6 @@
     },
     setImage(image) {
       self2.image = image;
-    },
-    setCategoryCheck() {
-      self2.categoryCheck = !self2.categoryCheck;
-    },
-    setPriceCheck() {
-      self2.priceCheck = !self2.priceCheck;
-    },
-    setNameCheck() {
-      self2.nameCheck = !self2.nameCheck;
     }
   }));
   var postProcessSnapshot = (snapshot) => ({

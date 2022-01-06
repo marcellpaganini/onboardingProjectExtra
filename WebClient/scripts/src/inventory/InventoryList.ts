@@ -1,10 +1,10 @@
 import { MobxLitElement } from '@adobe/lit-mobx';
 import { css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { InventoryListStore } from './InventoryListStore';
+import { IInventoryListStore, InventoryListStore } from './InventoryListStore';
 import { IInventoryItem } from './InventoryItem';
 import { table, button } from '../common/componentStyle';
-import { helperFunctions } from '../common/formTools';
+import { handlePropChange, helperFunctions } from '../common/formTools';
 
 
 const inventoryRow = ({ id, categoryId, name, price, image }: IInventoryItem) =>
@@ -20,20 +20,24 @@ const inventoryRow = ({ id, categoryId, name, price, image }: IInventoryItem) =>
     </tr>
     `;
 
-const inventoryTable = (items: IInventoryItem[] = []) =>
+const inventoryTable = (items: IInventoryItem[] = [], inventoryListStore: IInventoryListStore) =>
     html`
     <div style='overflow-x: auto;'>
         <table>
             <thead>
                 <th>Item</th>
-                <th>Category</th>
+                <th>Category<button value=${inventoryListStore.categoryCheck} type="button" id="catButton" class="btnTableHeader" @click=${handlePropChange(inventoryListStore, (inventoryListStore, val) => {
+                        const button: HTMLElement | null = document.getElementById("catButton");
+                        val = button?.innerText!;
+                        inventoryListStore.setCategoryCheck()
+                })}>${inventoryListStore.categoryCheck ? '➖' : '🔻'}</button></th>
                 <th>Name</th>
                 <th>Price</th>
                 <th></th>
             </thead>
         
             <tbody>
-                ${items.map(inventoryRow)}
+                ${inventoryListStore.categoryCheck ? inventoryListStore.orderedCategories.map(inventoryRow) : items.map(inventoryRow)}
             </tbody>
         </table>
     </div>
@@ -55,6 +59,7 @@ export class InventoryList extends MobxLitElement {
 
     render = () =>
         (this.store.items)
-            ? inventoryTable(this.store.items)
+            ? inventoryTable(this.store.items, this.store)
             : 'Loading...';
 }
+
