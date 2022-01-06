@@ -27,23 +27,25 @@ const customersRow = ({ id, firstName, lastName, deliveryAddress, city, state,
 
 const customersTable = (customers: IBaseModel, onReload: (pagination?: string) => any) =>
     html`
-    <table class="long">
-        <thead>
-            <th>Full Name</th>
-            <th>Delivery Address</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Postal Code</th>
-            <th>Country</th>
-            <th>Email Address</th>
-            <th>Phone Number</th>
-            <th></th>
-        </thead>
-    
-        <tbody>
-            ${customers.data.map(customersRow)}
-        </tbody>
-    </table>
+    <div style='overflow-x: auto;'>
+        <table class="long">
+            <thead>
+                <th>Full Name</th>
+                <th>Delivery Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Postal Code</th>
+                <th>Country</th>
+                <th>Email Address</th>
+                <th>Phone Number</th>
+                <th></th>
+            </thead>
+        
+            <tbody>
+                ${customers.data.map(customersRow)}
+            </tbody>
+        </table>
+    </div>
     <button type="button" class="btnPagination" @click=${() => onReload(customers.firstPage!.substring(customers.firstPage!.indexOf("?")))}>⏮</button>
     <button type="button" class="btnPagination" @click=${() => onReload(customers.previousPage!.substring(customers.previousPage!.indexOf("?")))}>⏪</button>
     <button type="button" class="btnPagination" @click=${() => onReload(customers.nextPage!.substring(customers.nextPage!.indexOf("?")))}>⏩</button>

@@ -22,19 +22,21 @@ const inventoryRow = ({ id, categoryId, name, price, image }: IInventoryItem) =>
 
 const inventoryTable = (items: IInventoryItem[] = []) =>
     html`
-    <table>
-        <thead>
-            <th>Item</th>
-            <th>Category</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th></th>
-        </thead>
-    
-        <tbody>
-            ${items.map(inventoryRow)}
-        </tbody>
-    </table>
+    <div style='overflow-x: auto;'>
+        <table>
+            <thead>
+                <th>Item</th>
+                <th>Category</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th></th>
+            </thead>
+        
+            <tbody>
+                ${items.map(inventoryRow)}
+            </tbody>
+        </table>
+    </div>
     <br /><br />
     `;
 

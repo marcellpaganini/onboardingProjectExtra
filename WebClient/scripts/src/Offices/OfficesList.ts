@@ -24,21 +24,23 @@ const officesRow = ({ id, city, phone, address, state,
 
 const officesTable = (offices: IOffice[] = []) =>
     html`
-    <table>
-        <thead>
-            <th>Address</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Postal Code</th>
-            <th>Country</th>
-            <th>Phone Number</th>
-            <th></th>
-        </thead>
-    
-        <tbody>
-            ${offices.map(officesRow)}
-        </tbody>
-    </table>
+    <div style='overflow-x: auto;'>
+        <table>
+            <thead>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Postal Code</th>
+                <th>Country</th>
+                <th>Phone Number</th>
+                <th></th>
+            </thead>
+        
+            <tbody>
+                ${offices.map(officesRow)}
+            </tbody>
+        </table>
+    </div>
     <br /><br />
     `;
 

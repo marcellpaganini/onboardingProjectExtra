@@ -26,21 +26,23 @@ const employeesRow = ({ id, officeId, manager, firstName, lastName, emailAddress
 const employeesTable = (paginatedEmployees: IBaseModel, store: IEmployeeListStore, onReload: (pagination?: string) => any, 
                         onSort: (type?: string) => any) =>
     html`
-    <table class="long">
-        <thead>
-            <th>Office</th>
-            <th>Manager</th>
-            <th><button type="button" class="btnTableHeader" @click=${() => onSort("name")}>Full Name</button></th>
-            <th>Email Address</th>
-            <th>Extension</th>
-            <th>Job Title</th>
-            <th></th>
-        </thead>
-    
-        <tbody>
-            ${store.sortedEmployees ? store.sortedEmployees.map(employeesRow) : paginatedEmployees.data.map(employeesRow)}
-        </tbody>
-    </table>
+    <div style='overflow-x: auto;'>
+        <table class="long">
+            <thead>
+                <th>Office</th>
+                <th>Manager</th>
+                <th><button type="button" class="btnTableHeader" @click=${() => onSort("name")}>Full Name</button></th>
+                <th>Email Address</th>
+                <th>Extension</th>
+                <th>Job Title</th>
+                <th></th>
+            </thead>
+        
+            <tbody>
+                ${store.sortedEmployees ? store.sortedEmployees.map(employeesRow) : paginatedEmployees.data.map(employeesRow)}
+            </tbody>
+        </table>
+    </div>
     <button type="button" class="btnPagination" @click=${() => onReload(paginatedEmployees.firstPage!.substring(paginatedEmployees.firstPage!.indexOf("?")))}>⏮</button>
     <button type="button" class="btnPagination" @click=${() => onReload(paginatedEmployees.previousPage!.substring(paginatedEmployees.previousPage!.indexOf("?")))}>⏪</button>
     <button type="button" class="btnPagination" @click=${() => onReload(paginatedEmployees.nextPage!.substring(paginatedEmployees.nextPage!.indexOf("?")))}>⏩</button>

@@ -162,22 +162,25 @@ const ordersRow = ({id, customerId, totalPrice, status, orderDate}: IOrder) =>
 
 const ordersTable = (orders: IOrder[] = [], barChart: any, doughnutChart: any, pieChart: any, orderListStore: IOrderListStore) =>
     html`
-    <table>
-        <thead>
-            <tr>
-            <th>Customer Name</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th>Total</th>
-            <th></th>
-            <th></th>
-            </tr>
-        </thead>
-    
-        <tbody>
-            ${orders.slice(-10).map(ordersRow)}
-        </tbody>
-    </table> <br /><br />
+    <div style='overflow-x: auto;'>
+        <table>
+            <thead>
+                <tr>
+                <th>Customer Name</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th></th>
+                <th></th>
+                </tr>
+            </thead>
+        
+            <tbody>
+                ${orders.slice(-10).map(ordersRow)}
+            </tbody>
+        </table>
+    </div>
+     <br /><br />
     ${barChart({
             title: 'Orders by Customers',
             data: [...orderListStore.ordersPerCustomer]

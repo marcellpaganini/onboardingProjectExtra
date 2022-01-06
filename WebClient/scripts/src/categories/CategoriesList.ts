@@ -19,17 +19,19 @@ const categoriesRow = ({ id, name, image }: ICategory) =>
 
 const categoriesTable = (categories: ICategory[] = []) =>
     html`
-    <table>
-        <thead>
-            <th>Name</th>
-            <th>Image</th>
-            <th></th>
-        </thead>
-    
-        <tbody>
-            ${categories.map(categoriesRow)}
-        </tbody>
-    </table>
+    <div style='overflow-x: auto;'>
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Image</th>
+                <th></th>
+            </thead>
+        
+            <tbody>
+                ${categories.map(categoriesRow)}
+            </tbody>
+        </table>    
+    </div>
     <br /><br />
     `;
 
