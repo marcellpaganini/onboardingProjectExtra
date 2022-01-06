@@ -10501,38 +10501,27 @@
     items: types.maybe(types.array(InventoryItem)),
     item: types.maybe(InventoryItem),
     categories: types.maybe(types.array(Category)),
-    categoryCheck: false,
-    priceCheck: false,
-    nameCheck: false
+    orderCheck: ""
   }).actions((self2) => ({
     load: flow3(function* () {
       self2.categories = yield getCategories();
       self2.items = yield getInventoryItems();
     }),
-    setCategoryCheck() {
-      self2.categoryCheck = !self2.categoryCheck;
-    },
-    setPriceCheck() {
-      self2.priceCheck = !self2.priceCheck;
-    },
-    setNameCheck() {
-      self2.nameCheck = !self2.nameCheck;
+    setOrderCheck(check) {
+      self2.orderCheck = check;
     }
   })).views((self2) => ({
-    get orderedCategories() {
-      if (self2.categoryCheck) {
-        const view = self2.items?.slice().sort((a2, b2) => {
-          var catA = a2.categoryId?.name.toUpperCase();
-          var catB = b2.categoryId?.name.toUpperCase();
-          if (catA < catB) {
-            return -1;
-          }
-          if (catA > catB) {
-            return 1;
-          }
-          return 0;
-        });
-        return view;
+    orderedList(value) {
+      if (value === "category") {
+        return self2.items?.slice().sort((a2, b2) => a2.categoryId.name.localeCompare(b2.categoryId.name, void 0, { caseFirst: "upper" })) ?? [];
+      } else if (value === "price") {
+        return self2.items?.slice().sort((a2, b2) => a2.price - b2.price);
+      } else if (value === "name") {
+        return self2.items?.slice().sort((a2, b2) => a2.name.localeCompare(b2.name, void 0, { caseFirst: "upper" })) ?? [];
+      } else {
+        if (value === void 0) {
+          return self2.items;
+        }
       }
     }
   }));
@@ -10663,6 +10652,7 @@
   };
 
   // src/inventory/InventoryList.ts
+  var orderButton;
   var inventoryRow = ({ id, categoryId, name, price, image }) => p`
     <tr>
         <td><img src="${image}" width="50" height="50"></td>
@@ -10679,18 +10669,29 @@
         <table>
             <thead>
                 <th>Item</th>
-                <th>Category<button value=${inventoryListStore.categoryCheck} type="button" id="catButton" class="btnTableHeader" @click=${handlePropChange(inventoryListStore, (inventoryListStore2, val) => {
-    const button2 = document.getElementById("catButton");
-    val = button2?.innerText;
-    inventoryListStore2.setCategoryCheck();
-  })}>${inventoryListStore.categoryCheck ? "\u2796" : "\u{1F53B}"}</button></th>
-                <th>Name</th>
-                <th>Price</th>
+                <th>Category<button value="category" type="button" id="catButton" class="btnTableHeader" @click=${handlePropChange(inventoryListStore, (inventoryListStore2, val) => {
+    orderButton = "category";
+    val = orderButton;
+    inventoryListStore2.setOrderCheck(val);
+    inventoryListStore2.orderedList(val);
+  })}>${inventoryListStore.orderCheck === "category" ? "\u2796" : "\u{1F53B}"}</button></th>
+                <th>Name<button value="name" type="button" id="nameButton" class="btnTableHeader" @click=${handlePropChange(inventoryListStore, (inventoryListStore2, val) => {
+    orderButton = "name";
+    val = orderButton;
+    inventoryListStore2.setOrderCheck(val);
+    inventoryListStore2.orderedList(val);
+  })}>${inventoryListStore.orderCheck === "name" ? "\u2796" : "\u{1F53B}"}</button></th>
+                <th>Price<button value="price" type="button" id="priceButton" class="btnTableHeader" @click=${handlePropChange(inventoryListStore, (inventoryListStore2, val) => {
+    orderButton = "price";
+    val = orderButton;
+    inventoryListStore2.setOrderCheck(val);
+    inventoryListStore2.orderedList(val);
+  })}>${inventoryListStore.orderCheck === "price" ? "\u2796" : "\u{1F53B}"}</button></th>
                 <th></th>
             </thead>
         
             <tbody>
-                ${inventoryListStore.categoryCheck ? inventoryListStore.orderedCategories.map(inventoryRow) : items.map(inventoryRow)}
+                ${inventoryListStore.orderCheck != "" ? inventoryListStore.orderedList(orderButton).map(inventoryRow) : items.map(inventoryRow)}
             </tbody>
         </table>
     </div>

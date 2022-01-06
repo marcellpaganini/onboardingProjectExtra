@@ -6,6 +6,7 @@ import { IInventoryItem } from './InventoryItem';
 import { table, button } from '../common/componentStyle';
 import { handlePropChange, helperFunctions } from '../common/formTools';
 
+var orderButton: string | undefined;
 
 const inventoryRow = ({ id, categoryId, name, price, image }: IInventoryItem) =>
     html`
@@ -26,18 +27,29 @@ const inventoryTable = (items: IInventoryItem[] = [], inventoryListStore: IInven
         <table>
             <thead>
                 <th>Item</th>
-                <th>Category<button value=${inventoryListStore.categoryCheck} type="button" id="catButton" class="btnTableHeader" @click=${handlePropChange(inventoryListStore, (inventoryListStore, val) => {
-                        const button: HTMLElement | null = document.getElementById("catButton");
-                        val = button?.innerText!;
-                        inventoryListStore.setCategoryCheck()
-                })}>${inventoryListStore.categoryCheck ? '➖' : '🔻'}</button></th>
-                <th>Name</th>
-                <th>Price</th>
+                <th>Category<button value="category" type="button" id="catButton" class="btnTableHeader" @click=${handlePropChange(inventoryListStore, (inventoryListStore, val) => {
+                        orderButton = 'category';
+                        val = orderButton;
+                        inventoryListStore.setOrderCheck(val);
+                        inventoryListStore.orderedList(val);
+                })}>${inventoryListStore.orderCheck === 'category' ? '➖' : '🔻'}</button></th>
+                <th>Name<button value="name" type="button" id="nameButton" class="btnTableHeader" @click=${handlePropChange(inventoryListStore, (inventoryListStore, val) => {
+                        orderButton = 'name';
+                        val = orderButton;
+                        inventoryListStore.setOrderCheck(val);
+                        inventoryListStore.orderedList(val);
+                })}>${inventoryListStore.orderCheck === 'name' ? '➖' : '🔻'}</button></th>
+                <th>Price<button value="price" type="button" id="priceButton" class="btnTableHeader" @click=${handlePropChange(inventoryListStore, (inventoryListStore, val) => {
+                        orderButton = 'price';
+                        val = orderButton;
+                        inventoryListStore.setOrderCheck(val);
+                        inventoryListStore.orderedList(val);
+                })}>${inventoryListStore.orderCheck === 'price' ? '➖' : '🔻'}</button></th>
                 <th></th>
             </thead>
         
             <tbody>
-                ${inventoryListStore.categoryCheck ? inventoryListStore.orderedCategories.map(inventoryRow) : items.map(inventoryRow)}
+                ${inventoryListStore.orderCheck != '' ? inventoryListStore.orderedList(orderButton).map(inventoryRow) : items.map(inventoryRow)}
             </tbody>
         </table>
     </div>
