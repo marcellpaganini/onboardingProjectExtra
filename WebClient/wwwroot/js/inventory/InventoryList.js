@@ -10512,17 +10512,21 @@
     }
   })).views((self2) => ({
     orderedList(value) {
-      if (value === "category") {
-        return self2.items?.slice().sort((a2, b2) => a2.categoryId.name.localeCompare(b2.categoryId.name, void 0, { caseFirst: "upper" })) ?? [];
-      } else if (value === "price") {
-        return self2.items?.slice().sort((a2, b2) => a2.price - b2.price);
-      } else if (value === "name") {
-        return self2.items?.slice().sort((a2, b2) => a2.name.localeCompare(b2.name, void 0, { caseFirst: "upper" })) ?? [];
-      } else {
-        if (value === void 0) {
-          return self2.items;
-        }
+      if (value === void 0) {
+        return self2.items;
       }
+      const sortTable = {
+        category: () => {
+          return self2.items?.slice().sort((a2, b2) => a2.categoryId.name.localeCompare(b2.categoryId.name, void 0, { caseFirst: "upper" })) ?? [];
+        },
+        price: () => {
+          return self2.items?.slice().sort((a2, b2) => a2.price - b2.price);
+        },
+        name: () => {
+          return self2.items?.slice().sort((a2, b2) => a2.name.localeCompare(b2.name, void 0, { caseFirst: "upper" })) ?? [];
+        }
+      };
+      return sortTable[value]();
     }
   }));
 
