@@ -1,6 +1,6 @@
 # onboardingProjectExtra
 
-# Summary
+## Summary
 
 SqlLite  
 C#  
@@ -10,7 +10,7 @@ Mobx-State-Tree
 Lit   
 Typescript    
 
-# Other libraries/tools used  
+## Other libraries/tools used  
   
 Chart.js  
 Xunit  
