@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\webclient\\WebClient.csproj": {}
+    "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\webclient\\WebClient.csproj": {}
   },
   "projects": {
-    "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Data\\Data.csproj": {
+    "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Data\\Data.csproj",
+        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Data\\Data.csproj",
+        "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj",
         "packagesPath": "C:\\Users\\mtanure\\.nuget\\packages\\",
-        "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Data\\obj\\",
+        "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mtanure\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,8 +26,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Types\\Types.csproj": {
-                "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Types\\Types.csproj"
+              "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj": {
+                "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj"
               }
             }
           }
@@ -62,18 +62,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Services\\Services.csproj": {
+    "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Services\\Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Services\\Services.csproj",
+        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Services\\Services.csproj",
         "projectName": "Services",
-        "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Services\\Services.csproj",
+        "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Services\\Services.csproj",
         "packagesPath": "C:\\Users\\mtanure\\.nuget\\packages\\",
-        "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Services\\obj\\",
+        "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mtanure\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -88,8 +88,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Types\\Types.csproj": {
-                "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Types\\Types.csproj"
+              "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj": {
+                "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj"
               }
             }
           }
@@ -128,18 +128,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Types\\Types.csproj": {
+    "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Types\\Types.csproj",
+        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj",
         "projectName": "Types",
-        "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Types\\Types.csproj",
+        "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj",
         "packagesPath": "C:\\Users\\mtanure\\.nuget\\packages\\",
-        "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Types\\obj\\",
+        "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mtanure\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -180,18 +180,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\webclient\\WebClient.csproj": {
+    "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\webclient\\WebClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\webclient\\WebClient.csproj",
+        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\webclient\\WebClient.csproj",
         "projectName": "WebClient",
-        "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\webclient\\WebClient.csproj",
+        "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\webclient\\WebClient.csproj",
         "packagesPath": "C:\\Users\\mtanure\\.nuget\\packages\\",
-        "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\webclient\\obj\\",
+        "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\webclient\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mtanure\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -206,14 +206,14 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Data\\Data.csproj": {
-                "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Data\\Data.csproj"
+              "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj": {
+                "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj"
               },
-              "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Services\\Services.csproj": {
-                "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Services\\Services.csproj"
+              "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Services\\Services.csproj": {
+                "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Services\\Services.csproj"
               },
-              "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Types\\Types.csproj": {
-                "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Types\\Types.csproj"
+              "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj": {
+                "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj"
               }
             }
           }
@@ -232,6 +232,14 @@
               "target": "Package",
               "version": "[2.2.0, )"
             },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.9, )"
@@ -240,11 +248,25 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.9, )"
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[5.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [
@@ -265,7 +287,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
