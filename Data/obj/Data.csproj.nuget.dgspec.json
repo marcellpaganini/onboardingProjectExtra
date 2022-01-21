@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj": {}
+    "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Data\\Data.csproj": {}
   },
   "projects": {
-    "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj": {
+    "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj",
+        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Data\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\Data.csproj",
+        "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Data\\Data.csproj",
         "packagesPath": "C:\\Users\\mtanure\\.nuget\\packages\\",
-        "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Data\\obj\\",
+        "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mtanure\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,8 +26,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj": {
-                "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj"
+              "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Types\\Types.csproj": {
+                "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Types\\Types.csproj"
               }
             }
           }
@@ -62,18 +62,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj": {
+    "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Types\\Types.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj",
+        "projectUniqueName": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Types\\Types.csproj",
         "projectName": "Types",
-        "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\Types.csproj",
+        "projectPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Types\\Types.csproj",
         "packagesPath": "C:\\Users\\mtanure\\.nuget\\packages\\",
-        "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\Types\\obj\\",
+        "outputPath": "C:\\src\\OnboardingProjectExtra\\onboardingprojectextra\\Types\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mtanure\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -114,7 +114,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }

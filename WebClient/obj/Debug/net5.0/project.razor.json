@@ -15659,21 +15659,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "c:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
-      "TargetPath": "Areas\\Identity\\Pages\\_ViewStart.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\Pages\\Shared\\_LoginPartial.cshtml",
-      "TargetPath": "Pages\\Shared\\_LoginPartial.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "c:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
-      "TargetPath": "Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "c:\\src\\OnboardingProjectExtra\\onboardingProjectExtra\\WebClient\\Pages\\Categories\\Edit.cshtml",
       "TargetPath": "Pages\\Categories\\Edit.cshtml",
       "FileKind": "mvc"
