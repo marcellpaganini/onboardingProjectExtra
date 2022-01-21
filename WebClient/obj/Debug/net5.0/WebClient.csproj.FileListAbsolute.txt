@@ -221,7 +221,6 @@ C:\src\OnboardingProjectExtra\onboardingProjectExtra\webclient\obj\Debug\net5.0\
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\webclient\obj\Debug\net5.0\WebClient.RazorAssemblyInfo.cache
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\webclient\obj\Debug\net5.0\WebClient.RazorAssemblyInfo.cs
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\webclient\obj\Debug\net5.0\staticwebassets\WebClient.StaticWebAssets.Manifest.cache
-C:\src\OnboardingProjectExtra\onboardingProjectExtra\webclient\obj\Debug\net5.0\staticwebassets\WebClient.StaticWebAssets.xml
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\webclient\obj\Debug\net5.0\scopedcss\bundle\WebClient.styles.css
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\webclient\obj\Debug\net5.0\WebClient.TagHelpers.input.cache
 C:\src\OnboardingProjectExtra\onboardingProjectExtra\webclient\obj\Debug\net5.0\WebClient.TagHelpers.output.cache

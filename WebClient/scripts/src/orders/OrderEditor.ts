@@ -4,7 +4,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { handleSubmit } from '../common/formTools';
 import { IOrder } from './Order';
 import { IInventoryItem } from '../inventory/InventoryItem';
-import { OrderEditorStore } from './OrderEditorStore';
+import { IOrderEditorStore, OrderEditorStore } from './OrderEditorStore';
 import { orderDetailsEditor } from './orderDetailsEditor';
 import { orderItemsEditor } from './orderItemEditor';
 import { button, input } from '../common/componentStyle';
@@ -12,6 +12,7 @@ import { ICustomer } from '../customers/Customer';
 
 
 const orderEditor = (
+    orderEditorStore: IOrderEditorStore,
     order: IOrder,
     customers: ICustomer[],
     items: IInventoryItem[],
@@ -30,6 +31,9 @@ const orderEditor = (
 
         <button>Submit</button> <button type="button" @click=${onDelete} >Delete</button>
     </form> <br /><br />
+    <div align="center">
+        <progress id="bar" max="100" value="${orderEditorStore.bar?.width ?? 0}" style="visibility: ${orderEditorStore.bar?.visibility ?? "hidden"};">${orderEditorStore.bar!.width}</progress>
+    </div>
         `;
 
 
@@ -43,7 +47,9 @@ export class OrderEditor extends MobxLitElement {
     @property({ attribute: "order-id" })
     orderId: string = "";
 
-    store = OrderEditorStore.create();
+    store = OrderEditorStore.create({
+        bar: { width: 0, visibility: "hidden" }
+    });
 
     firstUpdated = async () => {
         await this.store.load(this.orderId);
@@ -66,9 +72,12 @@ export class OrderEditor extends MobxLitElement {
         this.orderId === "" ? redirect = `.` : redirect = `..`;
         
         await this.store.save();
-        alert('Order saved successfully.');
-        location.assign(`${redirect}/view/${this.store.order.id}`);
-    
+        
+        const confirm = () => {
+            alert('Order saved successfully.')
+            location.assign(`${redirect}/view/${this.store.order.id}`);
+        }
+        setTimeout(confirm, 1000);
     }
 
     deleteOrder = async () => {
@@ -77,10 +86,10 @@ export class OrderEditor extends MobxLitElement {
         location.assign('../../');
         alert('Item deleted successfully.');
     }
-
+    
     public render() {
         return (this.store.inventoryItems)
-            ? orderEditor(this.store.order, this.store.customers, this.store.inventoryItems, this.saveOrder, this.deleteOrder)
+            ? orderEditor(this.store, this.store.order, this.store.customers, this.store.inventoryItems, this.saveOrder, this.deleteOrder)
             : html`Now loading...`;
     }
 }

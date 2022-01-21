@@ -15698,10 +15698,24 @@
   var defaultOrder = {
     status: 1
   };
+  var ProgressBar = types.model("progressBar", {
+    width: 0,
+    visibility: "hidden"
+  }).actions((self2) => ({
+    increase(clearFunction, done) {
+      if (self2.width >= 100) {
+        clearInterval(clearFunction);
+        done = false;
+      } else {
+        self2.width++;
+      }
+    }
+  }));
   var OrderEditorStore = types.model("OrderEditorStore", {
     order: types.optional(Order, () => Order.create({})),
     inventoryItems: types.array(InventoryItem),
-    customers: types.array(Customer)
+    customers: types.array(Customer),
+    bar: types.maybe(ProgressBar)
   }).actions((self2) => ({
     load: flow3(function* (id) {
       self2.inventoryItems = yield getInventoryItems();
@@ -15713,11 +15727,37 @@
       const order = yield getOrder(id);
       self2.order = order;
     }),
+    setBarWidth(width) {
+      self2.bar.width = width;
+    },
+    setBarVisibility(visibility) {
+      self2.bar.visibility = visibility;
+    },
     save: flow3(function* () {
+      self2.bar.visibility = "visible";
+      var done = false;
+      if (done === false) {
+        done = true;
+        self2.bar.width = 1;
+        var id = setInterval(() => {
+          self2.bar?.increase(id, done);
+        }, 10);
+      }
       if (self2.order) {
         self2.order = yield saveOrder(self2.order);
       }
     }),
+    moveProgressBar() {
+      self2.bar.visibility = "visible";
+      var done = false;
+      if (done === false) {
+        done = true;
+        self2.bar.width = 1;
+        var id = setInterval(() => {
+          self2.bar?.increase(id, done);
+        }, 10);
+      }
+    },
     delete: flow3(function* () {
       if (Order) {
         self2.order = yield deleteOrder(self2.order);
@@ -15890,7 +15930,7 @@
 `;
 
   // src/orders/OrderEditor.ts
-  var orderEditor = (order, customers, items, onSave, onDelete) => p`
+  var orderEditor = (orderEditorStore, order, customers, items, onSave, onDelete) => p`
     <form @submit=${handleSubmit(() => onSave())}>
         ${orderDetailsEditor(order, customers)}
     
@@ -15902,10 +15942,15 @@
 
         <button>Submit</button> <button type="button" @click=${onDelete} >Delete</button>
     </form> <br /><br />
+    <div align="center">
+        <progress id="bar" max="100" value="${orderEditorStore.bar?.width ?? 0}" style="visibility: ${orderEditorStore.bar?.visibility ?? "hidden"};">${orderEditorStore.bar.width}</progress>
+    </div>
         `;
   var OrderEditor = class extends MobxLitElement {
     orderId = "";
-    store = OrderEditorStore.create();
+    store = OrderEditorStore.create({
+      bar: { width: 0, visibility: "hidden" }
+    });
     firstUpdated = async () => {
       await this.store.load(this.orderId);
     };
@@ -15923,8 +15968,11 @@
       var redirect = "";
       this.orderId === "" ? redirect = `.` : redirect = `..`;
       await this.store.save();
-      alert("Order saved successfully.");
-      location.assign(`${redirect}/view/${this.store.order.id}`);
+      const confirm2 = () => {
+        alert("Order saved successfully.");
+        location.assign(`${redirect}/view/${this.store.order.id}`);
+      };
+      setTimeout(confirm2, 1e3);
     };
     deleteOrder = async () => {
       await this.store.delete();
@@ -15933,7 +15981,7 @@
       alert("Item deleted successfully.");
     };
     render() {
-      return this.store.inventoryItems ? orderEditor(this.store.order, this.store.customers, this.store.inventoryItems, this.saveOrder, this.deleteOrder) : p`Now loading...`;
+      return this.store.inventoryItems ? orderEditor(this.store, this.store.order, this.store.customers, this.store.inventoryItems, this.saveOrder, this.deleteOrder) : p`Now loading...`;
     }
   };
   __publicField(OrderEditor, "styles", r`
